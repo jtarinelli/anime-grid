@@ -33,6 +33,7 @@ const clueOptions: Record<ClueType, any[]> = {
         { max: 2020 },
         { max: 2010 },
         { max: 2000 }, // this will not work with most popular voice actors...
+        // also some studios (mappa, trigger are new)
     ],
     [ClueType.MOVIE]: [undefined], // can't be combined with episode counts
     [ClueType.ORIGINAL]: [undefined],
