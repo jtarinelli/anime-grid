@@ -10,7 +10,7 @@ export enum ClueType {
 
 export interface Clue {
     type: ClueType,
-    data: any, // idk what to call this but just like the VA name/year/boolean maybe. diff depending on type
+    data?: any, // idk what to call this but just like the VA name/year/boolean maybe. diff depending on type
 }
 
 export type ClueQueryInfo = {
