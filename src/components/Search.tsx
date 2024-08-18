@@ -9,11 +9,12 @@ type SearchProps = {
     clues: Clue[];
     setShowSearch: Function;
     setCorrectGuess: Function;
+    addGuess: Function;
 }
 
-const Search: FC<SearchProps> = ({ clues, setShowSearch, setCorrectGuess }) => {
+const Search: FC<SearchProps> = ({ clues, setShowSearch, setCorrectGuess, addGuess }) => {
     const [searchTerm, setSearchTerm] = useState<string>("");
-    const [selectedAnime, setSelectedAnime] = useState<Anime | null>(null); // maybe should be ref
+    const [selection, setSelection] = useState<Anime | null>(null); // maybe should be ref
 
     const { data } = useQuery({
         queryKey: ['search', searchTerm],
@@ -26,30 +27,33 @@ const Search: FC<SearchProps> = ({ clues, setShowSearch, setCorrectGuess }) => {
     }
 
     const onType = debounce((event) => setSearchTerm(event.target.value), 500)
-    
+
     // this gets called on typing and selecting, which is a problem
     // should be on select/click only since if only typing we don't know the id
-    const onSelect = (event: any) => { 
+    const onSelect = (event: any) => {
         if (data) {
             const romajiTitle = event.target.value;
             const guess = data.data.Page.media.find(anime => anime.title.romaji === romajiTitle);
             if (!guess) {
-                setSelectedAnime(null);
+                setSelection(null);
                 return;
             }
-            setSelectedAnime(guess)
+            setSelection(guess)
         }
     };
 
     const onSubmit = async () => {
-        if (selectedAnime) {
-            const isCorrectGuess = await checkGuess(selectedAnime.id, clues);
-            if (isCorrectGuess) {
-                setCorrectGuess(selectedAnime);
-                setShowSearch(false);
-            } else {
-                setSelectedAnime(null);
-                setSearchTerm("");
+        if (selection) {
+            const guessAdded = addGuess(selection);
+            if (guessAdded) {
+                const isCorrectGuess = await checkGuess(selection.id, clues);
+                if (isCorrectGuess) {
+                    setCorrectGuess(selection);
+                    setShowSearch(false);
+                } else {
+                    setSelection(null);
+                    setSearchTerm("");
+                }
             }
         }
     }
