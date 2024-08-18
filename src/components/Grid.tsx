@@ -54,7 +54,7 @@ const Grid: FC<GridProps> = ({ correctGuesses, clues, isAlreadyGuessed, addGuess
     }
 
     const threeByThreeGrid = "grid-cols-[15%_42.5%_42.5%] grid-rows-[10%_45%_45%]";
-    const fourByFourGrid = "grid-cols-[10%_30%_30%_30%] grid-rows-[10%_30%_30%_30%]";
+    const fourByFourGrid = "grid-cols-[19%_27%_27%_27%] grid-rows-[7%_31%_31%_31%]";
 
     return (
         <div className={`h-5/6 aspect-[230/300] grid ${cellsPerSide === 4 ? fourByFourGrid : threeByThreeGrid} gap-2 place-items-center text-center`}>
