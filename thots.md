@@ -25,6 +25,8 @@ clue ideas
 - genres
 - tags (careful bout spoilers)
 - theme song artists
+- number of words in title
+- starting letter
 
 stacc
 - maybe try something besides react
@@ -33,7 +35,7 @@ stacc
 - basic version of this def doesn't need a database, but to have a different daily puzzle for everyone and see stats on how many people guessed each thing like movie grid it is needed
 
 required operations
-- generate puzzle
+- generate puzzle/clues
     - start off hardcoded?
 - search for anime
 - check guess corrrectness
@@ -55,3 +57,4 @@ advanced functionality
     - share/download grid image
     - see percentage of people that did each guess
     - see most and least common guesses
+    - streak/personal stats
