@@ -54,14 +54,16 @@ const Search: FC<SearchProps> = ({ clues, setShowSearch, setCorrectGuess }) => {
         }
     }
 
+    const uniqueId = clues.map(clue => JSON.stringify(clue.data)).join("-");
+
     // might look nicer/be easier to do own thing instead of datalist
     // need to make list/datalist id unique across searches for it to work
     // although should probably just change the search to be a popup instead of in the box cause its weird
     return (
         <div className="h-full p-10 flex flex-col justify-evenly bg-slate-100">
             <button onClick={onClose} className="border-2 hover:bg-slate-200" >X</button>
-            <input type="text" list="guess" onChange={onType} onInput={onSelect} className="border-2" />
-            {data ? (<datalist id="guess">
+            <input type="text" list={`guess-${uniqueId}`} onChange={onType} onInput={onSelect} className="border-2" />
+            {data ? (<datalist id={`guess-${uniqueId}`}>
                 {data.data.Page.media.map((anime: any) =>
                     <option value={anime.title.romaji} key={anime.id}>{anime.title.english}</option>
                 )}
