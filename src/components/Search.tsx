@@ -1,9 +1,9 @@
 import { FC, useState } from "react";
-import { Clue } from "../clues";
 import { useQuery } from "@tanstack/react-query";
 import { Anime, animeSearchQuery } from "../queries/animeSearch";
 import debounce from "lodash/debounce";
-import { checkGuess } from "../checkGuess";
+import { checkGuess } from "../clues/checkGuess";
+import { Clue } from "../clues/types";
 
 type SearchProps = {
     clues: Clue[];

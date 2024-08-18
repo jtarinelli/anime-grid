@@ -1,19 +1,6 @@
-export enum ClueType {
-    VOICE_ACTOR,
-    STUDIO,
-    YEAR,
-    GENRE,
-    ORIGINAL,
-    EPISODES,
-    MOVIE,
-}
+import { Clue, ClueType } from "./types";
 
-export interface Clue {
-    type: ClueType,
-    data: any, // idk what to call this but just like the VA name/year/boolean maybe. diff depending on type
-}
-
-export const getClueString = (clue: Clue): string => {
+const getClueString = (clue: Clue): string => {
     switch(clue.type) {
         case ClueType.VOICE_ACTOR:
         case ClueType.STUDIO:
@@ -46,3 +33,5 @@ export const getClueString = (clue: Clue): string => {
             throw Error ("Bad clue type! CRINGE!!!")
     }
 }
+
+export default getClueString;

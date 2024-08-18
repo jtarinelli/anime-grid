@@ -1,7 +1,7 @@
 import { FC, useState } from "react"
-import { Clue } from "../clues";
 import Search from "./Search";
 import { Anime } from "../queries/animeSearch";
+import { Clue } from "../clues/types";
 
 type CellProps = {
     clues: Clue[];

@@ -1,4 +1,4 @@
-import { ClueQueryInfo } from "../checkGuess"
+import { ClueQueryInfo } from "../clues/types"
 
 export const buildAnimeInfoQuery = (clueQueryInfo: ClueQueryInfo, id: number) => {
     return {

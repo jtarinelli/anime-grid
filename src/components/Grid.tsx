@@ -1,6 +1,7 @@
 import { FC } from "react"
 import Cell from "./Cell";
-import { ClueType, getClueString } from "../clues";
+import { ClueType } from "../clues/types";
+import getClueString from "../clues/getClueString";
 
 const Grid: FC = () => {
     const clues = [
