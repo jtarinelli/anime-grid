@@ -41,7 +41,7 @@ const Cell: FC<CellProps> = ({
             onClick={onClick}
         >
             {correctedlyGuessedAnime && data ?
-                <img src={data.data.Media.coverImage.large} className="h-full"></img>
+                <img src={data.data.Media.coverImage.large} className="w-full h-full"></img>
                 : null}
             {(showSearch && !isGameOver) ?
                 <Search
