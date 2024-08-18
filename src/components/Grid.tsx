@@ -12,7 +12,7 @@ const Grid: FC = () => {
         {
             type: ClueType.YEAR,
             data: {
-                start: 2010,
+                max: 2020,
             }
         },
         {

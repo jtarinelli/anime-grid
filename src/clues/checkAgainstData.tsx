@@ -14,16 +14,17 @@ const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
         case ClueType.VOICE_ACTOR:
             console.log(animeData);
             return animeData.characters.edges.some(edge => edge.voiceActors.some(voiceActor => voiceActor.name.full === data))
-        case ClueType.YEAR:
-            const { start, end } = data;
+        case ClueType.YEAR: {
+            const { min, max } = data;
             // feel like this logic could be simplified
-            if (start && end) {
-                return animeData.seasonYear > start && animeData.seasonYear < end;
-            } else if (start) {
-                return animeData.seasonYear > start
+            if (min && max) {
+                return animeData.seasonYear > min && animeData.seasonYear < max;
+            } else if (min) {
+                return animeData.seasonYear > min
             }
-            return animeData.seasonYear < end;
-        case ClueType.EPISODES:
+            return animeData.seasonYear < max;
+        }
+        case ClueType.EPISODES: {
             const { min, max } = data;
             // feel like this logic could be simplified
             if (min && max) {
@@ -32,6 +33,7 @@ const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
                 return animeData.episodes > min;
             }
             return animeData.episodes < max;
+        }
         case ClueType.MOVIE:
             return animeData.format === "MOVIE";
         default:
