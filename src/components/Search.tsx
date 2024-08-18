@@ -4,15 +4,17 @@ import { Anime, animeSearchQuery } from "../queries/animeSearch";
 import debounce from "lodash/debounce";
 import { checkGuess } from "../clues/checkGuess";
 import { Clue } from "../clues/types";
+import { CellCoordinates, Guess } from "../App";
 
 type SearchProps = {
+    cellCoordinates: CellCoordinates;
     clues: Clue[];
     setShowSearch: Function;
-    setCorrectGuess: Function;
-    addGuess: Function;
+    isAlreadyGuessed: (animeId: number) => boolean;
+    addGuess: (newGuess: Guess) => void;
 }
 
-const Search: FC<SearchProps> = ({ clues, setShowSearch, setCorrectGuess, addGuess }) => {
+const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, addGuess, isAlreadyGuessed }) => {
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [selection, setSelection] = useState<Anime | null>(null); // maybe should be ref
 
@@ -44,11 +46,10 @@ const Search: FC<SearchProps> = ({ clues, setShowSearch, setCorrectGuess, addGue
 
     const onSubmit = async () => {
         if (selection) {
-            const guessAdded = addGuess(selection);
-            if (guessAdded) {
+            if (!isAlreadyGuessed(selection.id)) {
                 const isCorrectGuess = await checkGuess(selection.id, clues);
+                addGuess({anime: selection, isCorrect: isCorrectGuess, clues, cellCoordinates});
                 if (isCorrectGuess) {
-                    setCorrectGuess(selection);
                     setShowSearch(false);
                 } else {
                     setSelection(null);
