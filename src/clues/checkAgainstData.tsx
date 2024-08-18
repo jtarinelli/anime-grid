@@ -12,7 +12,6 @@ const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
         case ClueType.STUDIO:
             return animeData.studios.nodes.some((node: any) => node.name === data);
         case ClueType.VOICE_ACTOR:
-            console.log(animeData);
             return animeData.characters.edges.some((edge: any) => edge.voiceActors.some((voiceActor: any) => voiceActor.name.full === data))
         case ClueType.YEAR: {
             const { min, max } = data;
