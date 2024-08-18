@@ -42,12 +42,19 @@ export type Guess = {
 
 function App() {
   const [guesses, setGuesses] = useState<Guess[]>([]);
+  const [isGameOver, setIsGameOver] = useState<boolean>(false);
 
+  // is it better to define these here for use by children, 
+  // or just pass guesses/setGuesses and have them use directly?
   const isAlreadyGuessed = (animeId: number) => guesses.some(guess => guess.anime.id === animeId);
   const addGuess = (newGuess: Guess) => setGuesses([...guesses, newGuess])
 
   const guessesLeft = ((clues.length / 2) ** 2) - guesses.length;
-  const isGameOver = guessesLeft === 0;
+
+  if (!isGameOver && guessesLeft === 0) {
+    setIsGameOver(true);
+  }
+  
   const resetGuesses = () => setGuesses([]);
 
   const correctGuesses = guesses.filter(guess => guess.isCorrect);
@@ -62,7 +69,7 @@ function App() {
           addGuess={addGuess}
           isGameOver={isGameOver}
         />
-        <Guesses guessesLeft={guessesLeft} resetGuesses={resetGuesses} />
+        <Guesses guessesLeft={guessesLeft} resetGuesses={resetGuesses} setIsGameOver={setIsGameOver} />
       </QueryClientProvider>
     </div>
   )

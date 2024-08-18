@@ -25,9 +25,12 @@ const Grid: FC<GridProps> = ({ correctGuesses, clues, isAlreadyGuessed, addGuess
 
     for (let row = 0; row < cellsPerSide; row++) {
         for (let col = 0; col < cellsPerSide; col++) {
+            const coordinates = { row, col };
+            const key = JSON.stringify(coordinates);
+
             const horizontalClueIndex = col - 1;
             const verticalClueIndex = (cellsPerSide - 1) + (row - 1);
-            const key = `row-${row}-col-${col}`;
+            
             if (col === 0 && row === 0) {
                 cells.push(<div key={key}></div>)
             } else if (row === 0) {
@@ -37,8 +40,8 @@ const Grid: FC<GridProps> = ({ correctGuesses, clues, isAlreadyGuessed, addGuess
             } else {
                 cells.push(
                     <Cell
-                        coordinates={{ row, col }}
-                        correctedlyGuessedAnime={getAnimeForCell({ row, col })}
+                        coordinates={coordinates}
+                        correctedlyGuessedAnime={getAnimeForCell(coordinates)}
                         clues={[clues[horizontalClueIndex], clues[verticalClueIndex]]}
                         isAlreadyGuessed={isAlreadyGuessed}
                         addGuess={addGuess}
@@ -47,6 +50,7 @@ const Grid: FC<GridProps> = ({ correctGuesses, clues, isAlreadyGuessed, addGuess
                     />
                 )
             }
+            
         }
     }
 

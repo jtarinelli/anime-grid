@@ -59,7 +59,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, addGue
         }
     }
 
-    const uniqueId = clues.map(clue => JSON.stringify(clue.data)).join("-");
+    const uniqueId = `search-${JSON.stringify(cellCoordinates)}`;
 
     // might look nicer/be easier to do own thing instead of datalist
     // need to make list/datalist id unique across searches for it to work
@@ -69,12 +69,12 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, addGue
             <button onClick={onClose} className="border-2 hover:bg-slate-200" >X</button>
             <input
                 type="text"
-                list={`guess-${uniqueId}`}
+                list={uniqueId}
                 onChange={onType}
                 onInput={onSelect}
                 className="border-2"
             />
-            {data ? (<datalist id={`guess-${uniqueId}`}>
+            {data ? (<datalist id={uniqueId}>
                 {data.data.Page.media.map((anime: any) =>
                     <option value={anime.title.romaji} key={anime.id}>{anime.title.english}</option>
                 )}

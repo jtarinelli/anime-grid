@@ -58,3 +58,5 @@ advanced functionality
     - see percentage of people that did each guess
     - see most and least common guesses
     - streak/personal stats
+- give up
+    - how to show answers if not based on what other people guessed?
