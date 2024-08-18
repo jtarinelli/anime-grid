@@ -1,0 +1,43 @@
+query anime_info($id: Int!) {
+  Media(id: $id) {
+    id
+    title {
+      english
+      romaji
+    }
+    format
+    source
+    seasonYear
+    episodes
+    genres
+    staff(sort: RELEVANCE, page: 1, perPage: 3) {
+      edges {
+        role
+        node {
+          name {
+            full
+          }
+        }
+      }
+    }
+    studios(sort: NAME, isMain: true) {
+      nodes {
+        name
+      }
+    }
+    characters(sort: RELEVANCE, role: MAIN, page: 1, perPage: 10) {
+      edges {
+        voiceActors(language: JAPANESE, sort: RELEVANCE) {
+          name {
+            full
+          }
+        }
+        node {
+          name {
+            full
+          }
+        }
+      }
+    }
+  }
+}
