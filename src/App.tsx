@@ -36,16 +36,11 @@ export type CellCoordinates = {
 
 export type Guess = {
   anime: Anime;
-  clues: Clue[];
   isCorrect: boolean;
   cellCoordinates: CellCoordinates;
 }
 
 function App() {
-  // maybe make it so guesses controls whole board state
-  // ie can load whole game from partway through from it alone
-  // or reset just by clearing the array
-  // need info on which clues/cell each guess goes with
   const [guesses, setGuesses] = useState<Guess[]>([]); 
 
   const isAlreadyGuessed = (animeId: number) => guesses.some(guess => guess.anime.id === animeId);

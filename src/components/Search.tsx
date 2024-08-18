@@ -48,7 +48,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, addGue
         if (selection) {
             if (!isAlreadyGuessed(selection.id)) {
                 const isCorrectGuess = await checkGuess(selection.id, clues);
-                addGuess({anime: selection, isCorrect: isCorrectGuess, clues, cellCoordinates});
+                addGuess({anime: selection, isCorrect: isCorrectGuess, cellCoordinates});
                 if (isCorrectGuess) {
                     setShowSearch(false);
                 } else {
