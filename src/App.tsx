@@ -10,22 +10,22 @@ const client = new QueryClient();
 
 const clues = [
   {
-      type: ClueType.STUDIO,
-      data: "MAPPA",
+    type: ClueType.STUDIO,
+    data: "MAPPA",
   },
   {
-      type: ClueType.YEAR,
-      data: {
-          max: 2020,
-      }
+    type: ClueType.YEAR,
+    data: {
+      max: 2020,
+    }
   },
   {
-      type: ClueType.VOICE_ACTOR,
-      data: "Yuuki Kaji",
+    type: ClueType.VOICE_ACTOR,
+    data: "Yuuki Kaji",
   },
   {
-      type: ClueType.VOICE_ACTOR,
-      data: "Kana Hanazawa",
+    type: ClueType.VOICE_ACTOR,
+    data: "Kana Hanazawa",
   },
 ];
 
@@ -41,7 +41,7 @@ export type Guess = {
 }
 
 function App() {
-  const [guesses, setGuesses] = useState<Guess[]>([]); 
+  const [guesses, setGuesses] = useState<Guess[]>([]);
 
   const isAlreadyGuessed = (animeId: number) => guesses.some(guess => guess.anime.id === animeId);
   const addGuess = (newGuess: Guess) => setGuesses([...guesses, newGuess])
@@ -51,12 +51,18 @@ function App() {
   const resetGuesses = () => setGuesses([]);
 
   const correctGuesses = guesses.filter(guess => guess.isCorrect);
-  
+
   return (
     <div className="h-screen flex items-center justify-center">
       <QueryClientProvider client={client}>
-        <Grid correctGuesses={correctGuesses} clues={clues} isAlreadyGuessed={isAlreadyGuessed} addGuess={addGuess} isGameOver={isGameOver}/>
-        <Guesses guessesLeft={guessesLeft} resetGuesses={resetGuesses}/>
+        <Grid
+          correctGuesses={correctGuesses}
+          clues={clues}
+          isAlreadyGuessed={isAlreadyGuessed}
+          addGuess={addGuess}
+          isGameOver={isGameOver}
+        />
+        <Guesses guessesLeft={guessesLeft} resetGuesses={resetGuesses} />
       </QueryClientProvider>
     </div>
   )

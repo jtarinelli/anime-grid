@@ -48,7 +48,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, addGue
         if (selection) {
             if (!isAlreadyGuessed(selection.id)) {
                 const isCorrectGuess = await checkGuess(selection.id, clues);
-                addGuess({anime: selection, isCorrect: isCorrectGuess, cellCoordinates});
+                addGuess({ anime: selection, isCorrect: isCorrectGuess, cellCoordinates });
                 if (isCorrectGuess) {
                     setShowSearch(false);
                 } else {
@@ -67,7 +67,13 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, addGue
     return (
         <div className="h-full p-10 flex flex-col justify-evenly bg-slate-100">
             <button onClick={onClose} className="border-2 hover:bg-slate-200" >X</button>
-            <input type="text" list={`guess-${uniqueId}`} onChange={onType} onInput={onSelect} className="border-2" />
+            <input
+                type="text"
+                list={`guess-${uniqueId}`}
+                onChange={onType}
+                onInput={onSelect}
+                className="border-2"
+            />
             {data ? (<datalist id={`guess-${uniqueId}`}>
                 {data.data.Page.media.map((anime: any) =>
                     <option value={anime.title.romaji} key={anime.id}>{anime.title.english}</option>

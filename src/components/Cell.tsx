@@ -15,10 +15,17 @@ type CellProps = {
     isGameOver: boolean;
 }
 
-const Cell: FC<CellProps> = ({ coordinates, clues, correctedlyGuessedAnime, isAlreadyGuessed, addGuess, isGameOver }) => {
+const Cell: FC<CellProps> = ({
+    coordinates,
+    clues,
+    correctedlyGuessedAnime,
+    isAlreadyGuessed,
+    addGuess,
+    isGameOver
+}) => {
     const [showSearch, setShowSearch] = useState<boolean>(false);
 
-    const onClick = () => {!correctedlyGuessedAnime && setShowSearch(true)}
+    const onClick = () => { !correctedlyGuessedAnime && setShowSearch(true) }
 
     const { data } = useQuery({
         queryKey: ['poster', correctedlyGuessedAnime?.id],
@@ -29,9 +36,22 @@ const Cell: FC<CellProps> = ({ coordinates, clues, correctedlyGuessedAnime, isAl
     // images don't fit nice in the cells (get squished horizontally but don't expand either)
     // would like background-image cover but they're not background images...
     return (
-        <div className={`h-full w-full min-w-0 border-2 ${(!correctedlyGuessedAnime && !isGameOver) && 'hover:bg-slate-100'}`} onClick={onClick}>
-            {correctedlyGuessedAnime && data ? <img src={data.data.Media.coverImage.large} className="h-full"></img> : null}
-            {(showSearch && !isGameOver) ? <Search cellCoordinates={coordinates} clues={clues} setShowSearch={setShowSearch} addGuess={addGuess} isAlreadyGuessed={isAlreadyGuessed}/> : null}
+        <div
+            className={`h-full w-full min-w-0 border-2 ${(!correctedlyGuessedAnime && !isGameOver) && 'hover:bg-slate-100'}`}
+            onClick={onClick}
+        >
+            {correctedlyGuessedAnime && data ?
+                <img src={data.data.Media.coverImage.large} className="h-full"></img>
+                : null}
+            {(showSearch && !isGameOver) ?
+                <Search
+                    cellCoordinates={coordinates}
+                    clues={clues}
+                    setShowSearch={setShowSearch}
+                    addGuess={addGuess}
+                    isAlreadyGuessed={isAlreadyGuessed}
+                />
+                : null}
         </div>
     )
 }
