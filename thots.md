@@ -52,5 +52,6 @@ advanced functionality
     - oldies
     - manga
 - results
+    - share/download grid image
     - see percentage of people that did each guess
     - see most and least common guesses
