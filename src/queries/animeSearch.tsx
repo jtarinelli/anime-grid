@@ -29,9 +29,9 @@ const query = `query anime_search($searchTerm: String!) {
 }
 `
 
-export const animeSearchQuery = async (searchTerm: string): Promise<AnimeSearchResponse | undefined> => {
+export const animeSearchQuery = async (searchTerm: string): Promise<AnimeSearchResponse | null> => {
   if (searchTerm === "") {
-    return;
+    return null;
   }
 
     return makeGraphQlQuery(query, { searchTerm })

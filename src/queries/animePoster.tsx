@@ -10,7 +10,7 @@ const query = `query anime_poster($id: Int!) {
 
 export const animePosterQuery = async (id?: number): Promise<any> => {
     if (!id) {
-        return;
+        return null;
     }
     return makeGraphQlQuery(query, { id })
 }
