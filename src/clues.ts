@@ -4,6 +4,8 @@ export enum ClueType {
     YEAR,
     GENRE,
     ORIGINAL,
+    EPISODES,
+    MOVIE,
 }
 
 export interface Clue {
@@ -17,6 +19,8 @@ export const getClueString = (clue: Clue): string => {
         case ClueType.STUDIO:
         case ClueType.GENRE:
             return clue.data;
+        case ClueType.MOVIE:
+            return "Movie";
         case ClueType.YEAR:
             const { start, end } = clue.data;
             if (start && end) {
@@ -27,6 +31,17 @@ export const getClueString = (clue: Clue): string => {
             return `Started after ${end}`
         case ClueType.ORIGINAL:
             return "Is original anime (not adapted)"
+        case ClueType.EPISODES:
+            const { min, max } = clue.data;
+            if (!min) {
+                return `Under ${max} episodes`;
+            } else if (!max) {
+                return `Over ${min} episodes`;
+            } else if (min === 11 && max === 13) {
+                return "Single cour";
+            } else {
+                return `Between ${min} and ${max} episodes`;
+            }
         default:
             throw Error ("Bad clue type! CRINGE!!!")
     }

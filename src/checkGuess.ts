@@ -64,11 +64,22 @@ const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
             const { start, end } = data;
             // feel like this logic could be simplified
             if (start && end) {
-                return animeData.seasonYear > start && guessData.seasonYear < end;
+                return animeData.seasonYear > start && animeData.seasonYear < end;
             } else if (start) {
                 return animeData.seasonYear > start
             }
             return animeData.seasonYear < end;
+        case ClueType.EPISODES:
+            const { min, max } = data;
+            // feel like this logic could be simplified
+            if (min && max) {
+                return animeData.episodes > min && animeData.episodes < max;
+            } else if (min) {
+                return animeData.episodes > min;
+            }
+            return animeData.episodes < max;
+        case ClueType.MOVIE:
+            return animeData.format === "MOVIE";
         default:
             throw new Error("Bad clue type! CRINGE!!!")
     }
@@ -99,6 +110,14 @@ const clueQueries: Record<ClueType, ClueQueryInfo> = {
     },
     [ClueType.YEAR]: {
         fields: `seasonYear`,
+        isPaginated: false,
+    },
+    [ClueType.EPISODES]: {
+        fields: `episodes`,
+        isPaginated: false,
+    },
+    [ClueType.MOVIE]: {
+        fields: `format`,
         isPaginated: false,
     },
     [ClueType.VOICE_ACTOR]: { 
