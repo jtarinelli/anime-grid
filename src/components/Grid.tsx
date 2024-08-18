@@ -12,8 +12,7 @@ type GridProps = {
     isGameOver: boolean;
 }
 
-// in theory code works for any size grid
-// but will have to update grid css to display anything besides 2x2/4 clues
+// only works for 4 or 6 clues (2x2 or 3x3)
 const Grid: FC<GridProps> = ({ correctGuesses, clues, isAlreadyGuessed, addGuess, isGameOver }) => {
     const getAnimeForCell = (coordinates: CellCoordinates) =>
         correctGuesses.find(guess =>
@@ -50,12 +49,15 @@ const Grid: FC<GridProps> = ({ correctGuesses, clues, isAlreadyGuessed, addGuess
                     />
                 )
             }
-            
+
         }
     }
 
+    const threeByThreeGrid = "grid-cols-[15%_42.5%_42.5%] grid-rows-[10%_45%_45%]";
+    const fourByFourGrid = "grid-cols-[10%_30%_30%_30%] grid-rows-[10%_30%_30%_30%]";
+
     return (
-        <div className="h-5/6 w-5/6 md:w-1/2 grid grid-cols-[15%_42.5%_42.5%] grid-rows-[10%_45%_45%] gap-2 place-items-center text-center">
+        <div className={`h-5/6 w-5/6 md:w-1/2 grid ${cellsPerSide === 4 ? fourByFourGrid : threeByThreeGrid} gap-2 place-items-center text-center`}>
             {cells}
         </div>
     )
