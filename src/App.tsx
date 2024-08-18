@@ -1,8 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import './App.css'
 import Grid from './components/Grid'
 import { useState } from 'react';
-import { Clue, ClueType } from './clues/types';
 import { Guesses } from './components/Guesses';
 import { Anime } from './queries/animeSearch';
 import generateClues from './clues/generateClues';
