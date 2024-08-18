@@ -104,7 +104,7 @@ const clueQueries: Record<ClueType, ClueQueryInfo> = {
     [ClueType.VOICE_ACTOR]: { // idk if perPage needs to be a variable too, dep on what the diff paginated things are ig
         // how to get rid of node? don't need character name????
         // can only pick 1 role, ideally would want main and supporting but guess we're getting EVERYONE
-        fields: `characters(sort: RELEVANCE, page: $page, perPage: 10) {
+        fields: `characters(sort: RELEVANCE, page: $page, perPage: 50) {
             edges {
               voiceActors(language: JAPANESE, sort: RELEVANCE) {
                 name {
