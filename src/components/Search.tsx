@@ -1,18 +1,19 @@
 import { FC, useState } from "react";
 import { Clue } from "../clues";
 import { useQuery } from "@tanstack/react-query";
-import { animeSearchQuery } from "../queries/animeSearch";
+import { Anime, animeSearchQuery } from "../queries/animeSearch";
 import debounce from "lodash/debounce";
 import { checkGuess } from "../checkGuess";
 
 type SearchProps = {
     clues: Clue[];
     setShowSearch: Function;
+    setCorrectGuess: Function;
 }
 
-const Search: FC<SearchProps> = ({ clues, setShowSearch }) => {
+const Search: FC<SearchProps> = ({ clues, setShowSearch, setCorrectGuess }) => {
     const [searchTerm, setSearchTerm] = useState<string>("");
-    const [selectedAnimeId, setSelectedAnimeId] = useState<number | null>(null); // maybe should be ref
+    const [selectedAnime, setSelectedAnime] = useState<Anime | null>(null); // maybe should be ref
 
     const { data } = useQuery({
         queryKey: ['search', searchTerm],
@@ -23,28 +24,38 @@ const Search: FC<SearchProps> = ({ clues, setShowSearch }) => {
         event.stopPropagation();
         setShowSearch(false);
     }
-    const onType = debounce((event) => setSearchTerm(event.target.value), 500);
-    const onSelect = (event: any) => {
+
+    const onType = debounce((event) => setSearchTerm(event.target.value), 500)
+    
+    // this gets called on typing and selecting, which is a problem
+    // should be on select/click only since if only typing we don't know the id
+    const onSelect = (event: any) => { 
         if (data) {
             const romajiTitle = event.target.value;
-            const selectedAnime = data.data.Page.media.find(anime => anime.title.romaji === romajiTitle);
-            if (!selectedAnime) {
-                setSelectedAnimeId(null);
+            const guess = data.data.Page.media.find(anime => anime.title.romaji === romajiTitle);
+            if (!guess) {
+                setSelectedAnime(null);
                 return;
             }
-            setSelectedAnimeId(selectedAnime.id)
+            setSelectedAnime(guess)
         }
     };
 
     const onSubmit = async () => {
-        if (selectedAnimeId) {
-            const correctGuess = await checkGuess(selectedAnimeId, clues);
-            alert(`Guess is ${correctGuess ? '' : 'not '}correct`);
+        if (selectedAnime) {
+            const isCorrectGuess = await checkGuess(selectedAnime.id, clues);
+            if (isCorrectGuess) {
+                setCorrectGuess(selectedAnime);
+                setShowSearch(false);
+            } else {
+                setSelectedAnime(null);
+                setSearchTerm("");
+            }
         }
     }
 
     // might look nicer/be easier to do own thing instead of datalist
-    // need to make list/datalist id unqiue across searches for it to work
+    // need to make list/datalist id unique across searches for it to work
     // although should probably just change the search to be a popup instead of in the box cause its weird
     return (
         <div className="h-full p-10 flex flex-col justify-evenly bg-slate-100">
