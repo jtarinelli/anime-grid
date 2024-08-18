@@ -8,11 +8,11 @@ const clueOptions: Record<ClueType, any[]> = {
     [ClueType.GENRE]: [
         "Action",
         "Romance",
-        "Sports",
+        "Sports", // may not go with some studios or even female VAs ( :( )
         "Slice of Life",
         "Drama",
         "Fantasy",
-        "Comedy"
+        "Comedy",
     ],
     [ClueType.STUDIO]: [
         "Trigger",
@@ -22,12 +22,12 @@ const clueOptions: Record<ClueType, any[]> = {
         "MADHOUSE",
         "MAPPA",
         "Shaft",
-        "Studio Ghibli" // only make movies can't be combined with episode counts
+        "Studio Ghibli", // only make movies can't be combined with episode counts
     ],
     [ClueType.VOICE_ACTOR]: [
         "Yuuki Kaji",
         "Kenjirou Tsuda",
-        "Mamoru Miyano"
+        "Mamoru Miyano",
     ],
     [ClueType.YEAR]: [
         { max: 2020 },
