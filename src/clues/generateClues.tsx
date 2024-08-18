@@ -14,9 +14,6 @@ const generateClues = (number: number): Clue[] => {
         const data = sample(clueOptions[type])
         clues.push({type, data});
     }
-
-    console.log(clues);
-
     return clues;
 }
 
