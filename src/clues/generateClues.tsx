@@ -2,12 +2,15 @@ import sample from "lodash/sample";
 import { Clue, ClueType } from "./types";
 import clueOptions from "./clueOptions";
 
-const generateClues = (): Clue[] => {
+const generateClues = (number: number): Clue[] => {
     const clues: Clue[] = [];
 
-    for (let i = 0; i < 4; i++) {
+    let clueTypeOptions = Object.values(ClueType).filter(value => value && typeof value === "number");
+
+    for (let i = 0; i < number; i++) {
         // need to make sure same clue isn't picked multiple times
-        const type = sample(Object.values(ClueType).filter(value => value && typeof value === "number"));
+        const type = sample(clueTypeOptions);
+        clueTypeOptions = clueTypeOptions.filter(option => option !== type);
         const data = sample(clueOptions[type])
         clues.push({type, data});
     }
