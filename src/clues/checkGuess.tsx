@@ -1,11 +1,17 @@
-import { buildAnimeInfoQuery, buildPaginatedAnimeInfoQuery } from "../queries/animeInfo";
+import { buildAnimeInfoQuery, buildBatchedAnimeInfoQuery, buildPaginatedAnimeInfoQuery } from "../queries/animeInfo";
 import { makeGraphQlQuery } from "../queries/graphQlQuery";
 import { Clue, ClueQueryInfo } from "./types";
 import checkClueAgainstData from "./checkAgainstData";
 import clueQueries from "./clueQueries";
 
 export const checkGuess = async (guessId: number, clues: Clue[]): Promise<boolean> => {
-    for(const clue of clues) {
+    if (clues.every(clue => !clueQueries[clue.type].isPaginated)) {
+        const batchedQuery = buildBatchedAnimeInfoQuery(clues.map(clue => clueQueries[clue.type]), guessId);
+        const batchedData = await makeGraphQlQuery(batchedQuery.query, batchedQuery.variables);
+        return checkBatchedClues(clues, batchedData);
+    }
+
+    for (const clue of clues) {
         const clueCorrect = await checkClue(guessId, clue);
         if (!clueCorrect) {
             return false;
@@ -27,6 +33,10 @@ const checkClue = async (guessId: number, clue: Clue): Promise<boolean> => {
     const queryData = await makeGraphQlQuery(query.query, query.variables);
 
     return checkClueAgainstData(clue, queryData);
+}
+
+const checkBatchedClues = (clues: Clue[], queryData: any) => {
+    return clues.every(clue => checkClueAgainstData(clue, queryData));
 }
 
 const checkPaginatedClue = async (clue: Clue, guessId: number, clueQueryInfo: ClueQueryInfo): Promise<boolean> => {
