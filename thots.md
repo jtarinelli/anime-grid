@@ -35,15 +35,10 @@ stacc
 required operations
 - generate puzzle
     - start off hardcoded?
-    - ADVANCED: 
-    - ADVANCED: generate automatically
-    - ADVACANED
 - search for anime
 - check guess corrrectness
 - keep track of guesses
 - show final result
-- ADVANCED
-    - percent of people that chose each guess
 
 advanced functionality
 - generate puzzle

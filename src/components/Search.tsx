@@ -43,6 +43,7 @@ const Search: FC<SearchProps> = ({ clues, setShowSearch }) => {
         }
     }
 
+    // might look nicer/be easier to do own thing instead of datalist
     return (
         <div className="h-full p-10 flex flex-col justify-evenly bg-slate-100">
             <button onClick={onClose} className="border-2 hover:bg-slate-200" >X</button>
