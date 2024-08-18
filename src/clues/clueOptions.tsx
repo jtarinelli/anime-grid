@@ -22,7 +22,7 @@ const clueOptions: Record<ClueType, any[]> = {
         "MADHOUSE",
         "MAPPA",
         "Shaft",
-        "Studio Ghibli"
+        "Studio Ghibli" // only make movies can't be combined with episode counts
     ],
     [ClueType.VOICE_ACTOR]: [
         "Yuuki Kaji",
