@@ -5,29 +5,30 @@ import { useState } from 'react';
 import { Clue, ClueType } from './clues/types';
 import { Guesses } from './components/Guesses';
 import { Anime } from './queries/animeSearch';
+import generateClues from './clues/generateClues';
 
 const client = new QueryClient();
 
-const clues = [
+/* const clues = [
+  {
+    type: ClueType.GENRE,
+    data: "Sports",
+  },
   {
     type: ClueType.STUDIO,
-    data: "MAPPA",
-  },
-  {
-    type: ClueType.YEAR,
-    data: {
-      max: 2020,
-    }
+    data: "Kyoto Animation",
   },
   {
     type: ClueType.VOICE_ACTOR,
-    data: "Yuuki Kaji",
+    data: "Yoshimasa Hosoya",
   },
   {
-    type: ClueType.VOICE_ACTOR,
-    data: "Kana Hanazawa",
+    type: ClueType.MOVIE,
   },
 ];
+ */
+
+const clues = generateClues();
 
 export type CellCoordinates = {
   row: number;
