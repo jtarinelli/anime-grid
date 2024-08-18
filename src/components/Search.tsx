@@ -28,7 +28,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, addGue
         setShowSearch(false);
     }
 
-    const onType = debounce((event) => setSearchTerm(event.target.value), 500)
+    const onType = debounce((event) => setSearchTerm(event.target.value), 600)
 
     // this gets called on typing and selecting, which is a problem
     // should be on select/click only since if only typing we don't know the id
