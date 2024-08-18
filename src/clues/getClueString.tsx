@@ -18,15 +18,13 @@ const getClueString = (clue: Clue): string => {
             return `Started before ${max}`
         }
         case ClueType.ORIGINAL:
-            return "Is original anime (not adapted)"
+            return "Anime original"
         case ClueType.EPISODES: {
             const { min, max } = clue.data;
             if (!min) {
                 return `Under ${max} episodes`;
             } else if (!max) {
                 return `Over ${min} episodes`;
-            } else if (min === 11 && max === 13) {
-                return "Single cour";
             } else {
                 return `Between ${min} and ${max} episodes`;
             }
