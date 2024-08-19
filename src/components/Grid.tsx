@@ -53,11 +53,9 @@ const Grid: FC<GridProps> = ({ correctGuesses, clues, isAlreadyGuessed, addGuess
         }
     }
 
-    const threeByThreeGrid = "grid-cols-[15%_42.5%_42.5%] grid-rows-[10%_45%_45%]";
-    const fourByFourGrid = "grid-cols-[19%_27%_27%_27%] grid-rows-[7%_31%_31%_31%]";
-
+    // text/rem gets big on small screens so labels make the rest of the grid shrink
     return (
-        <div className={`h-5/6 aspect-[230/300] grid ${cellsPerSide === 4 ? fourByFourGrid : threeByThreeGrid} gap-2 place-items-center text-center`}>
+        <div className={`h-full md:aspect-[230/300] grid grid-cols-[7rem_repeat(${cellsPerSide-1},_1fr)] grid-rows-[2rem_repeat(${cellsPerSide-1},_1fr)] gap-2 place-items-center text-center`}>
             {cells}
         </div>
     )

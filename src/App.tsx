@@ -53,22 +53,25 @@ function App() {
   if (!isGameOver && guessesLeft === 0) {
     setIsGameOver(true);
   }
-  
+
   const resetGuesses = () => setGuesses([]);
 
   const correctGuesses = guesses.filter(guess => guess.isCorrect);
 
+  // want the guesses to wrap to the bottom when screen gets narrows
   return (
-    <div className="h-screen flex items-center justify-center">
+    <div className="h-screen w-full box-border m-0 p-0">
       <QueryClientProvider client={client}>
-        <Grid
-          correctGuesses={correctGuesses}
-          clues={clues}
-          isAlreadyGuessed={isAlreadyGuessed}
-          addGuess={addGuess}
-          isGameOver={isGameOver}
-        />
-        <Guesses guessesLeft={guessesLeft} resetGuesses={resetGuesses} setIsGameOver={setIsGameOver} />
+        <div className="h-full min-w-50% flex justify-center items-center p-10">
+          <Grid
+            correctGuesses={correctGuesses}
+            clues={clues}
+            isAlreadyGuessed={isAlreadyGuessed}
+            addGuess={addGuess}
+            isGameOver={isGameOver}
+          />
+          <Guesses guessesLeft={guessesLeft} resetGuesses={resetGuesses} setIsGameOver={setIsGameOver} />
+        </div>
       </QueryClientProvider>
     </div>
   )
