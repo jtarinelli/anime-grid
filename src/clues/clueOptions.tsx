@@ -45,6 +45,10 @@ const clueOptions: Record<ClueType, any[]> = {
         { max: 2000 }, // this will not work with most popular voice actors...
         // also some studios (mappa, trigger are new)
     ],
+    [ClueType.WORDS_IN_TITLE]: [
+        { number: 1 },
+        { min: 3 },
+    ],
     [ClueType.MOVIE]: [undefined], // can't be combined with episode counts
     [ClueType.ORIGINAL]: [undefined],
 }

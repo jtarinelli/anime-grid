@@ -22,11 +22,22 @@ const getClueString = (clue: Clue): string => {
         case ClueType.EPISODES: {
             const { min, max } = clue.data;
             if (!min) {
-                return `Under ${max} episodes`;
+                return `${max} or less episodes`;
             } else if (!max) {
-                return `Over ${min} episodes`;
+                return `${min} or more episodes`;
             } else {
                 return `Between ${min} and ${max} episodes`;
+            }
+        }
+        case ClueType.WORDS_IN_TITLE: {
+            const { number, min, max } = clue.data;
+
+            if (number) {
+                return `${number} word${number !== 1 ? 's' : ''} in title`
+            } else if (min) {
+                return `${min} or more words in title`
+            } else {
+                return `${max} or less words in title`
             }
         }
         default:

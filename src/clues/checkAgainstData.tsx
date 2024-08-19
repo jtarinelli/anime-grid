@@ -35,6 +35,17 @@ const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
         }
         case ClueType.MOVIE:
             return animeData.format === "MOVIE";
+        case ClueType.WORDS_IN_TITLE:
+            const { number, min, max } = data;
+            const romajiTitleLength = animeData.title.romaji.split(" ").length;
+            const englishTitleLength = animeData.title.english.split(" ").length;
+            if (number) {
+                return romajiTitleLength === number || englishTitleLength === number;
+            } else if (min) {
+                return romajiTitleLength >= min || englishTitleLength >= min;
+            } else {
+                return romajiTitleLength <= max || englishTitleLength <= max;
+            }
         default:
             throw new Error("Bad clue type! CRINGE!!!")
     }

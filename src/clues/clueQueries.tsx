@@ -31,7 +31,14 @@ const clueQueries: Record<ClueType, ClueQueryInfo> = {
         fields: `format`,
         isPaginated: false,
     },
-    [ClueType.VOICE_ACTOR]: { 
+    [ClueType.WORDS_IN_TITLE]: {
+        fields: `title {
+            english
+            romaji
+            }`,
+        isPaginated: false,
+    },
+    [ClueType.VOICE_ACTOR]: {
         // idk if perPage needs to be a variable too, dep on what the diff paginated things are ig
         // how to get rid of node? don't need character name????
         // can only pick 1 role, ideally would want main and supporting but guess we're getting EVERYONE

@@ -61,6 +61,8 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, addGue
 
     const uniqueId = `search-${JSON.stringify(cellCoordinates)}`;
 
+    // sometimes the request returns data but dropdown doesn't show up? why?
+
     // might look nicer/be easier to do own thing instead of datalist
     // need to make list/datalist id unique across searches for it to work
     // although should probably just change the search to be a popup instead of in the box cause its weird

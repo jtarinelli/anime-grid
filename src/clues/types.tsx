@@ -6,6 +6,7 @@ export enum ClueType {
     ORIGINAL,
     EPISODES,
     MOVIE,
+    WORDS_IN_TITLE,
 }
 
 export interface Clue {
