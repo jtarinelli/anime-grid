@@ -13,13 +13,19 @@ export const Guesses: FC<GuessesProps> = ({guessesLeft, resetGuesses, setIsGameO
         setIsGameOver(false);
     }
 
+    const onGiveUp = () => {
+        setIsGameOver(true)
+    }
+
+    const buttonClass = "border-2 p-2";
+
     return (
-        <div>
+        <div className="m-20 p-5 border-2 text-center">
             {guessesLeft} guesses left!!! 
-            <br/>
-            <button onClick={onReset}>Reset (teehee)</button>
-            <br/>
-            <button onClick={() => setIsGameOver(true)}>Give up :(</button>
+            <br/><br/>
+            <button onClick={onReset} className={buttonClass}>Reset (teehee)</button>
+            <br/><br/>
+            <button onClick={onGiveUp} className={buttonClass}>Give up :(</button>
         </div>
     )
 }
