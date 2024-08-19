@@ -26,7 +26,7 @@ const client = new QueryClient();
 ];
  */
 
-const clues = generateClues(6);
+const clues = generateClues(6, true);
 
 export type CellCoordinates = {
   row: number;
