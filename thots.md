@@ -12,6 +12,8 @@ anime version of movie grid
         - could just make it count for either english or romaji
 - could make dub and sub version hehe
 - probably filter out some formats, just do tv/movies?
+- need to mitigate and/or handle rate limits
+    - maybe change the search to have to finish typing and press enter instead of auto loading? :/
 
 clue ideas
 - vas
