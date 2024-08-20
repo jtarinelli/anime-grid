@@ -67,7 +67,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, addGue
     // need to make list/datalist id unique across searches for it to work
     // although should probably just change the search to be a popup instead of in the box cause its weird
     return (
-        <div className="h-full p-10 flex flex-col justify-evenly bg-slate-100">
+        <div className="h-full p-1 flex flex-col justify-evenly bg-slate-100">
             <button onClick={onClose} className="border-2 hover:bg-slate-200" >X</button>
             <input
                 type="text"

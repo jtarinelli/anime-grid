@@ -20,7 +20,7 @@ export const Guesses: FC<GuessesProps> = ({guessesLeft, resetGuesses, setIsGameO
     const buttonClass = "border-2 p-2";
 
     return (
-        <div className="m-20 p-5 border-2 text-center">
+        <div className="m-4 text-center">
             {guessesLeft} guesses left!!! 
             <br/><br/>
             <button onClick={onReset} className={buttonClass}>Reset (teehee)</button>

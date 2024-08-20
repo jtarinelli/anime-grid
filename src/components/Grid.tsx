@@ -12,7 +12,7 @@ type GridProps = {
     isGameOver: boolean;
 }
 
-// only works for 4 or 6 clues (2x2 or 3x3)
+// only works for 4 or 6 clues (2x2 or 3x3) cause of grid css
 const Grid: FC<GridProps> = ({ correctGuesses, clues, isAlreadyGuessed, addGuess, isGameOver }) => {
     const getAnimeForCell = (coordinates: CellCoordinates) =>
         correctGuesses.find(guess =>
@@ -54,8 +54,11 @@ const Grid: FC<GridProps> = ({ correctGuesses, clues, isAlreadyGuessed, addGuess
     }
 
     // text/rem gets big on small screens so labels make the rest of the grid shrink
+    const threeByThreeGrid = `h-full md:aspect-[230/300] grid grid-cols-[5rem_repeat(2,_1fr)] grid-rows-[3rem_repeat(2,_1fr)] gap-2 place-items-center text-center`;
+    const fourByFourGrid = `h-full md:aspect-[230/300] grid grid-cols-[5rem_repeat(3,_1fr)] grid-rows-[3rem_repeat(3,_1fr)] gap-2 place-items-center text-center`;
+
     return (
-        <div className={`h-full md:aspect-[230/300] grid grid-cols-[7rem_repeat(${cellsPerSide-1},_1fr)] grid-rows-[2rem_repeat(${cellsPerSide-1},_1fr)] gap-2 place-items-center text-center`}>
+        <div className={cellsPerSide == 4 ? fourByFourGrid : threeByThreeGrid}>
             {cells}
         </div>
     )
