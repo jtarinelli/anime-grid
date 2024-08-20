@@ -55,6 +55,7 @@ advanced functionality
     - sub and dub
     - oldies
     - manga
+    - no sequels/second+ seasons mode
 - results
     - share/download grid image
     - see percentage of people that did each guess
