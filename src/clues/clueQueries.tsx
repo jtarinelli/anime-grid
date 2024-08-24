@@ -3,7 +3,7 @@ import { ClueType, ClueQueryInfo } from "./types";
 // idk if this should stay here or go into queries
 // think here at least for now, if adding a new clue type want to just go to this folder
 const clueQueries: Record<ClueType, ClueQueryInfo> = {
-  [ClueType.ORIGINAL]: {
+  [ClueType.SOURCE]: {
     fields: `source`,
     isPaginated: false,
   },
@@ -27,7 +27,7 @@ const clueQueries: Record<ClueType, ClueQueryInfo> = {
     fields: `episodes`,
     isPaginated: false,
   },
-  [ClueType.MOVIE]: {
+  [ClueType.FORMAT]: {
     fields: `format`,
     isPaginated: false,
   },

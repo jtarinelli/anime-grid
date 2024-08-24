@@ -56,8 +56,12 @@ const clueOptions: Record<ClueType, any[]> = {
         "Josei",
         "Seinen",
     ],
-    [ClueType.MOVIE]: [undefined], // can't be combined with episode counts
-    [ClueType.ORIGINAL]: [undefined],
+    [ClueType.FORMAT]: [
+        "MOVIE" // can't be combined with episode counts, unless want to count as 1 ep
+    ], 
+    [ClueType.SOURCE]: [
+        "ORIGINAL"
+    ],
 }
 
 export default clueOptions;

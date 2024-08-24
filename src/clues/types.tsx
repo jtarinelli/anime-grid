@@ -3,9 +3,9 @@ export enum ClueType {
     STUDIO,
     YEAR,
     GENRE,
-    ORIGINAL, // should this just be source?
+    SOURCE,
     EPISODES,
-    MOVIE, // should this be changed to just format?
+    FORMAT,
     WORDS_IN_TITLE,
     TAG,
 }

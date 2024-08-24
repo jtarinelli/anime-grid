@@ -7,8 +7,10 @@ const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
     switch (type) {
         case ClueType.GENRE:
             return animeData.genres.includes(data)
-        case ClueType.ORIGINAL:
-            return animeData.source === "ORIGINAL";
+        case ClueType.SOURCE:
+            return animeData.source === data;
+        case ClueType.FORMAT:
+            return animeData.format === data;
         case ClueType.STUDIO:
             return animeData.studios.nodes.some((node: any) => node.name === data);
         case ClueType.VOICE_ACTOR:
@@ -33,8 +35,7 @@ const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
             }
             return animeData.episodes <= max;
         }
-        case ClueType.MOVIE:
-            return animeData.format === "MOVIE";
+
         case ClueType.WORDS_IN_TITLE:
             const { number, min, max } = data;
             const romajiTitleLength = animeData.title.romaji.split(" ").length;

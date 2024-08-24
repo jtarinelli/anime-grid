@@ -1,5 +1,9 @@
 import { Clue, ClueType } from "./types";
 
+const getSentenceCaseString = (string: string) => {
+    return string[0].toUpperCase().concat(string.slice(1).toLowerCase());
+}
+
 const getClueString = (clue: Clue): string => {
     switch (clue.type) {
         case ClueType.VOICE_ACTOR:
@@ -7,8 +11,9 @@ const getClueString = (clue: Clue): string => {
         case ClueType.GENRE:
         case ClueType.TAG:
             return clue.data;
-        case ClueType.MOVIE:
-            return "Movie";
+        case ClueType.SOURCE:
+        case ClueType.FORMAT:
+            return getSentenceCaseString(clue.data);
         case ClueType.YEAR: {
             const { min, max } = clue.data;
             if (min && max) {
@@ -18,8 +23,6 @@ const getClueString = (clue: Clue): string => {
             }
             return `Started before ${max}`
         }
-        case ClueType.ORIGINAL:
-            return "Anime original"
         case ClueType.EPISODES: {
             const { min, max } = clue.data;
             if (!min) {
