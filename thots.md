@@ -10,6 +10,10 @@ anime version of movie grid
         - however will def bias possible results towards more recent and popular shows. also might not play well with some clues (before 2000 + some VAs will be impossible)
 	- title clues could be hard cause of different titles in english/japanese 
         - could just make it count for either english or romaji
+    - give them different difficulty/specificness ratings to calibrate the difficulty
+        - VAs/studios = more specific, formats = less specific
+        - or just based on number of anime on anilist that qualify
+    - add field to clue types for other types they can't be combined with (ex movie or ghibli/ep count, )
 - could make dub and sub version hehe
 - probably filter out some formats, just do tv/movies?
 - need to mitigate and/or handle rate limits
@@ -29,6 +33,7 @@ clue ideas
 - theme song artists
 - number of words in title
 - starting letter
+- demographics (shonen/shojo etc)
 
 stacc
 - maybe try something besides react
