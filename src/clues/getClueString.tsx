@@ -5,6 +5,7 @@ const getClueString = (clue: Clue): string => {
         case ClueType.VOICE_ACTOR:
         case ClueType.STUDIO:
         case ClueType.GENRE:
+        case ClueType.TAG:
             return clue.data;
         case ClueType.MOVIE:
             return "Movie";

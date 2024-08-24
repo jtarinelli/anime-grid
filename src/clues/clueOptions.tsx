@@ -13,6 +13,7 @@ const clueOptions: Record<ClueType, any[]> = {
         "Drama",
         "Fantasy",
         "Comedy",
+        "Music",
     ],
     [ClueType.STUDIO]: [
         "Trigger",
@@ -48,6 +49,12 @@ const clueOptions: Record<ClueType, any[]> = {
     [ClueType.WORDS_IN_TITLE]: [
         { number: 1 },
         { min: 3 },
+    ],
+    [ClueType.TAG]: [
+        "Shoujo",
+        "Shounen",
+        "Josei",
+        "Seinen",
     ],
     [ClueType.MOVIE]: [undefined], // can't be combined with episode counts
     [ClueType.ORIGINAL]: [undefined],

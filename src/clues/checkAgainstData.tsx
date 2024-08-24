@@ -46,6 +46,9 @@ const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
             } else {
                 return romajiTitleLength <= max || englishTitleLength <= max;
             }
+        case ClueType.TAG:
+            // might also want to add tag rank filter idk
+            return animeData.tags.filter((tag: any) => !tag.isMediaSpoiler).some((tag: any) => tag.name === data);
         default:
             throw new Error("Bad clue type! CRINGE!!!")
     }
