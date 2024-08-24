@@ -10,6 +10,12 @@ query anime_info($id: Int!) {
     seasonYear
     episodes
     genres
+    tags {
+      name
+      category
+      rank
+      isMediaSpoiler
+    }
     staff(sort: RELEVANCE, page: 1, perPage: 3) {
       edges {
         role
