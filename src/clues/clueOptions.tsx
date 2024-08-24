@@ -24,6 +24,11 @@ const clueOptions: Record<ClueType, any[]> = {
         "MAPPA",
         "Shaft",
         "Studio Ghibli", // only make movies can't be combined with episode counts
+        "Gainax",
+        "A-1 Pictures",
+        "P.A. Works",
+        "Sunrise",
+        "Toei Animation"
     ],
     [ClueType.VOICE_ACTOR]: [
         "Yuuki Kaji",
@@ -45,13 +50,15 @@ const clueOptions: Record<ClueType, any[]> = {
         { max: 2010 },
         { max: 2000 }, // this will not work with most popular voice actors...
         // also some studios (mappa, trigger are new)
+        { min: 2010 },
     ],
     [ClueType.WORDS_IN_TITLE]: [
         { number: 1 },
         { min: 3 },
+        { max: 3 },
     ],
     [ClueType.TAG]: [
-        "Shoujo",
+        "Shoujo", // demographics are based off manga magazines mostly so don't go with original
         "Shounen",
         "Josei",
         "Seinen",
