@@ -47,8 +47,6 @@ function App() {
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [showResults, setShowResults] = useState<boolean>(false);
 
-  // is it better to define these here for use by children, 
-  // or just pass guesses/setGuesses and have them use directly?
   const isAlreadyGuessed = (animeId: number) => guesses.some(guess => guess.anime.id === animeId);
   const addGuess = (newGuess: Guess) => setGuesses([...guesses, newGuess])
 
@@ -61,9 +59,14 @@ function App() {
 
   const resetGuesses = () => setGuesses([]);
 
+  const giveUp = () => {
+    setIsGameOver(true);
+    setShowResults(true)
+  }
+
   const correctGuesses = guesses.filter(guess => guess.isCorrect);
 
-  // want the guesses to wrap to the bottom when screen gets narrows
+  // want the guesses to wrap to the bottom when screen gets narrower
   return (
     <div className="h-screen w-full box-border m-0 p-0">
       <QueryClientProvider client={client}>
@@ -75,9 +78,19 @@ function App() {
             addGuess={addGuess}
             isGameOver={isGameOver}
           />
-          <Guesses guessesLeft={guessesLeft} resetGuesses={resetGuesses} setIsGameOver={setIsGameOver} />
-          {isGameOver && <button onClick={() => setShowResults(true)}>See results</button>}
-          {showResults && <Results numberOfClues={numberOfClues} guesses={guesses} onClose={() => setShowResults(false)}/>}
+          <Guesses
+            guessesLeft={guessesLeft}
+            onGiveUp={giveUp}
+            onReset={resetGuesses}
+          />
+          {isGameOver &&
+            <button onClick={() => setShowResults(true)}>See results</button>}
+          {showResults &&
+            <Results
+              numberOfClues={numberOfClues}
+              guesses={guesses}
+              onClose={() => setShowResults(false)}
+            />}
         </div>
       </QueryClientProvider>
     </div>

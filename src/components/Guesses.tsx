@@ -2,21 +2,11 @@ import { FC } from "react"
 
 type GuessesProps = {
     guessesLeft: number;
-    resetGuesses: Function;
-    setIsGameOver: Function;
+    onReset: () => void;
+    onGiveUp: () => void;
 }
 
-export const Guesses: FC<GuessesProps> = ({guessesLeft, resetGuesses, setIsGameOver}) => {
-
-    const onReset = () => {
-        resetGuesses();
-        setIsGameOver(false);
-    }
-
-    const onGiveUp = () => {
-        setIsGameOver(true)
-    }
-
+export const Guesses: FC<GuessesProps> = ({guessesLeft, onReset, onGiveUp}) => {
     const buttonClass = "border-2 p-2";
 
     return (

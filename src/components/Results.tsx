@@ -33,6 +33,7 @@ const Results: FC<ResultsProps> = ({ numberOfClues, guesses, onClose }) => {
     }
 
     return <Popup onClose={onClose}>
+        <h1>Results!</h1>
         {`${numberCorrectGuesses}/${numberGuesses} correct`}
         <br />
         <div style={{ whiteSpace: "pre-wrap" }} className="text-2xl">
