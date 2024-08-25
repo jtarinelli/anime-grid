@@ -63,6 +63,7 @@ advanced functionality
     - oldies
     - manga
     - no sequels/second+ seasons mode
+    - all voice actors >:)
     - make game mode react context to make it easy to change stuff hehe
 - results
     - share/download grid image
