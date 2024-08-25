@@ -1,12 +1,12 @@
 import { FC } from "react";
 import { Guess } from "../App";
 
-interface GameOverProps {
+interface ResultsProps {
     numberOfClues: number;
     guesses: Guess[];
 }
 
-const GameOver: FC<GameOverProps> = ({ numberOfClues, guesses }) => {
+const Results: FC<ResultsProps> = ({ numberOfClues, guesses }) => {
     let resultGrid = "";
 
     for (let row = 1; row < (numberOfClues / 2) + 1; row ++) {
@@ -21,9 +21,21 @@ const GameOver: FC<GameOverProps> = ({ numberOfClues, guesses }) => {
         resultGrid = resultGrid.concat('\n');
     }
 
+    const numberGuesses = guesses.length;
+    const numberCorrectGuesses = guesses.filter(guess => guess.isCorrect).length;
+
+    const onCopy = () => {
+        navigator.clipboard.writeText(resultGrid);
+        // apparently this won't always work so should prob have fallback/error handling
+    }
+
     return <div style={{whiteSpace: "pre-wrap"}}>
+        {`${numberGuesses}/${numberCorrectGuesses} correct`}
+        <br/>
         {resultGrid}
+        <br/>
+        <button onClick={onCopy} className="border-2 p-2">Copy</button>
     </div>
 }
 
-export default GameOver;
+export default Results;
