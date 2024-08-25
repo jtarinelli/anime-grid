@@ -48,7 +48,7 @@ const Cell: FC<CellProps> = ({
                     cellCoordinates={coordinates}
                     clues={clues}
                     setShowSearch={setShowSearch}
-                    addGuess={addGuess}
+                    onMakeGuess={addGuess}
                     isAlreadyGuessed={isAlreadyGuessed}
                 />
                 : null}

@@ -11,10 +11,10 @@ type SearchProps = {
     clues: Clue[];
     setShowSearch: Function;
     isAlreadyGuessed: (animeId: number) => boolean;
-    addGuess: (newGuess: Guess) => void;
+    onMakeGuess: (newGuess: Guess) => void;
 }
 
-const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, addGuess, isAlreadyGuessed }) => {
+const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMakeGuess, isAlreadyGuessed }) => {
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [selection, setSelection] = useState<Anime | null>(null); // maybe should be ref
 
@@ -48,7 +48,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, addGue
         if (selection) {
             if (!isAlreadyGuessed(selection.id)) {
                 const isCorrectGuess = await checkGuess(selection.id, clues);
-                addGuess({ anime: selection, isCorrect: isCorrectGuess, cellCoordinates });
+                onMakeGuess({ anime: selection, isCorrect: isCorrectGuess, cellCoordinates });
                 if (isCorrectGuess) {
                     setShowSearch(false);
                 } else {
