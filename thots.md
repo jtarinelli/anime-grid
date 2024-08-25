@@ -13,7 +13,9 @@ anime version of movie grid
     - give them different difficulty/specificness ratings to calibrate the difficulty
         - VAs/studios = more specific, formats = less specific
         - or just based on number of anime on anilist that qualify
-    - add field to clue types for other types they can't be combined with (ex movie or ghibli/ep count, )
+    - add field to clue types for other types they can't be combined with (ex movie or ghibli/ep count, studios/voice actors and release year)
+    - just put clues into two groups, can put ones that can't be combined into the same group
+        - might make it more repetitive, some clues can't be combined with themselves so can't put in both groups, but could still be combined with others in the same group (ex studio)
 - could make dub and sub version hehe
 - probably filter out some formats, just do tv/movies?
 - need to mitigate and/or handle rate limits
@@ -61,6 +63,7 @@ advanced functionality
     - oldies
     - manga
     - no sequels/second+ seasons mode
+    - make game mode react context to make it easy to change stuff hehe
 - results
     - share/download grid image
     - see percentage of people that did each guess

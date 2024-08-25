@@ -4,6 +4,7 @@ import { Clue, ClueQueryInfo } from "./types";
 import checkClueAgainstData from "./checkAgainstData";
 import clueQueries from "./clueQueries";
 
+// group together first page of paginated query with other queries?
 export const checkGuess = async (guessId: number, clues: Clue[]): Promise<boolean> => {
     if (clues.every(clue => !clueQueries[clue.type].isPaginated)) {
         const batchedQuery = buildBatchedAnimeInfoQuery(clues.map(clue => clueQueries[clue.type]), guessId);
