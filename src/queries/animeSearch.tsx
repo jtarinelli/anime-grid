@@ -1,5 +1,6 @@
-import { makeGraphQlQuery } from "./graphQlQuery";
+import { graphql } from "../gql/gql";
 
+// replace with generated type?
 export type Anime = {
   id: number;
   title: {
@@ -8,15 +9,7 @@ export type Anime = {
   }
 }
 
-type AnimeSearchResponse = {
-  data: {
-    Page: {
-      media: Anime[]
-    }
-  }
-}
-
-const query = `query anime_search($searchTerm: String!) {
+export const animeSearchQuery = graphql(`query anime_search($searchTerm: String!) {
   Page(page: 1, perPage: 5) {
     media(type: ANIME, search: $searchTerm) {
       id
@@ -27,12 +20,4 @@ const query = `query anime_search($searchTerm: String!) {
     }
   }
 }
-`
-
-export const animeSearchQuery = async (searchTerm: string): Promise<AnimeSearchResponse | null> => {
-  if (searchTerm === "") {
-    return null;
-  }
-
-    return makeGraphQlQuery(query, { searchTerm })
-}
+`)

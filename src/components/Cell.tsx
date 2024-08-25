@@ -5,6 +5,7 @@ import { Clue } from "../clues/types";
 import { useQuery } from "@tanstack/react-query";
 import { animePosterQuery } from "../queries/animePoster";
 import { CellCoordinates, Guess } from "../App";
+import request from "graphql-request";
 
 type CellProps = {
     coordinates: CellCoordinates;
@@ -29,7 +30,11 @@ const Cell: FC<CellProps> = ({
 
     const { data } = useQuery({
         queryKey: ['poster', correctedlyGuessedAnime?.id],
-        queryFn: () => animePosterQuery(correctedlyGuessedAnime?.id)
+        queryFn: async () => request(
+            import.meta.env.VITE_ANILIST_GRAPHQL_URL,
+            animePosterQuery,
+            { id: correctedlyGuessedAnime?.id ?? 0 } // how to handle undefined case? :/
+        )
     });
 
     // prob add loading thing for image
@@ -40,8 +45,8 @@ const Cell: FC<CellProps> = ({
             className={`h-full w-full min-w-0 border-2 ${(!correctedlyGuessedAnime && !isGameOver) && 'hover:bg-slate-100'}`}
             onClick={onClick}
         >
-            {correctedlyGuessedAnime && data ?
-                <img src={data.data.Media.coverImage.large} alt={correctedlyGuessedAnime.title.romaji} className="w-full h-full"></img>
+            {correctedlyGuessedAnime && data?.Media?.coverImage?.large ?
+                <img src={data.Media.coverImage.large} alt={correctedlyGuessedAnime.title.romaji} className="w-full h-full"></img>
                 : null}
             {(showSearch && !isGameOver) ?
                 <Search

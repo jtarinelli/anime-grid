@@ -1,10 +1,11 @@
 import { FC, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Anime, animeSearchQuery } from "../queries/animeSearch";
 import debounce from "lodash/debounce";
 import { checkGuess } from "../clues/checkGuess";
 import { Clue } from "../clues/types";
 import { CellCoordinates, Guess } from "../App";
+import request from "graphql-request";
+import { Anime, animeSearchQuery } from "../queries/animeSearch";
 
 type SearchProps = {
     cellCoordinates: CellCoordinates;
@@ -20,8 +21,14 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
 
     const { data } = useQuery({
         queryKey: ['search', searchTerm],
-        queryFn: () => animeSearchQuery(searchTerm)
+        queryFn: async () => request(
+            import.meta.env.VITE_ANILIST_GRAPHQL_URL,
+            animeSearchQuery,
+            { searchTerm }
+        )
     });
+
+    console.log(data);
 
     const onClose = (event: any) => {
         event.stopPropagation();
@@ -35,7 +42,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
     const onSelect = (event: any) => {
         if (data) {
             const romajiTitle = event.target.value;
-            const guess = data.data.Page.media.find(anime => anime.title.romaji === romajiTitle);
+            const guess = data?.Page?.media?.find(anime => anime?.title?.romaji === romajiTitle);
             if (!guess) {
                 setSelection(null);
                 return;
@@ -76,9 +83,9 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                 onInput={onSelect}
                 className="border-2"
             />
-            {data && (<datalist id={uniqueId}>
-                {data.data.Page.media.map((anime: any) =>
-                    <option value={anime.title.romaji} key={anime.id}>{anime.title.english}</option>
+            {data?.Page?.media && (<datalist id={uniqueId}>
+                {data.Page.media.map((anime) =>
+                    <option value={anime?.title?.romaji} key={anime?.id}>{anime?.title?.english}</option>
                 )}
             </datalist>)}
             <button onClick={onSubmit} className="border-2 hover:bg-slate-200">Guess</button>

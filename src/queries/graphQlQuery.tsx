@@ -1,5 +1,5 @@
-export const makeGraphQlQuery = async (query: string, variables: object) => {
-    const response = await fetch('https://graphql.anilist.co', {
+export const makeGraphQlQuery = async (query: any, variables: object) => {
+    const response = await fetch(import.meta.env.VITE_ANILIST_GRAPHQL_URL, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

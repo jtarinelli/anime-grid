@@ -20,6 +20,11 @@ anime version of movie grid
 - probably filter out some formats, just do tv/movies?
 - need to mitigate and/or handle rate limits
     - maybe change the search to have to finish typing and press enter instead of auto loading? :/
+- do fancy graphql things
+    - type stuff with graph code gen + graphql request
+        - should the generated types be committed? : /
+    - graphql request lets you batch queries
+    - react fragments? for building the info queries?
 
 clue ideas
 - vas
@@ -64,6 +69,7 @@ advanced functionality
     - manga
     - no sequels/second+ seasons mode
     - all voice actors >:)
+        - find a way to avoid duplicated paginated requests tho
     - make game mode react context to make it easy to change stuff hehe
 - results
     - share/download grid image
