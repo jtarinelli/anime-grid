@@ -23,7 +23,6 @@ const Results: FC<ResultsProps> = ({ numberOfClues, guesses, onClose }) => {
         resultGrid = resultGrid.concat('\n');
     }
 
-    const numberGuesses = guesses.length;
     const numberCorrectGuesses = guesses.filter(guess => guess.isCorrect).length;
 
     const onCopy = () => {
@@ -34,7 +33,7 @@ const Results: FC<ResultsProps> = ({ numberOfClues, guesses, onClose }) => {
 
     return <Popup onClose={onClose}>
         <h1>Results!</h1>
-        {`${numberCorrectGuesses}/${numberGuesses} correct`}
+        {`${numberCorrectGuesses}/${(numberOfClues / 2) ** 2} correct`}
         <br />
         <div style={{ whiteSpace: "pre-wrap" }} className="text-2xl">
             {resultGrid}
