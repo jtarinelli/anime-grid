@@ -5,7 +5,8 @@ import clueOptions from "./clueOptions";
 const generateClues = (number: number, halfVoiceActors: boolean): Clue[] => {
     const clues: Clue[] = [];
 
-    let clueTypeOptions = Object.values(ClueType).filter(value => value && typeof value === "number");
+    let clueTypeOptions = Object.values(ClueType).filter(value => typeof value === "number");
+    console.log(clueTypeOptions)
 
     for (let i = 0; i < number; i++) {
         let type: ClueType;
