@@ -30,7 +30,7 @@ const Results: FC<ResultsProps> = ({ numberOfClues, guesses }) => {
     }
 
     return <div style={{whiteSpace: "pre-wrap"}}>
-        {`${numberGuesses}/${numberCorrectGuesses} correct`}
+        {`${numberCorrectGuesses}/${numberGuesses} correct`}
         <br/>
         {resultGrid}
         <br/>
