@@ -33,8 +33,9 @@ const Cell: FC<CellProps> = ({
         queryFn: async () => request(
             import.meta.env.VITE_ANILIST_GRAPHQL_URL,
             animePosterQuery,
-            { id: correctedlyGuessedAnime?.id ?? 0 } // how to handle undefined case? :/
-        )
+            { id: correctedlyGuessedAnime?.id ?? 0 },
+        ),
+        enabled: correctedlyGuessedAnime?.id !== undefined,
     });
 
     // prob add loading thing for image

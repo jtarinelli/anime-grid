@@ -25,7 +25,8 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
             import.meta.env.VITE_ANILIST_GRAPHQL_URL,
             animeSearchQuery,
             { searchTerm }
-        )
+        ),
+        enabled: searchTerm !== "",
     });
 
     console.log(data);
