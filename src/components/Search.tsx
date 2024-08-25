@@ -76,11 +76,11 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                 onInput={onSelect}
                 className="border-2"
             />
-            {data ? (<datalist id={uniqueId}>
+            {data && (<datalist id={uniqueId}>
                 {data.data.Page.media.map((anime: any) =>
                     <option value={anime.title.romaji} key={anime.id}>{anime.title.english}</option>
                 )}
-            </datalist>) : null}
+            </datalist>)}
             <button onClick={onSubmit} className="border-2 hover:bg-slate-200">Guess</button>
         </div>
     )
