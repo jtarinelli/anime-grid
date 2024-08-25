@@ -1,12 +1,14 @@
 import { FC } from "react";
 import { Guess } from "../App";
+import Popup from "./Popup";
 
 interface ResultsProps {
     numberOfClues: number;
     guesses: Guess[];
+    onClose: () => void;
 }
 
-const Results: FC<ResultsProps> = ({ numberOfClues, guesses }) => {
+const Results: FC<ResultsProps> = ({ numberOfClues, guesses, onClose }) => {
     let resultGrid = "";
 
     for (let row = 1; row < (numberOfClues / 2) + 1; row++) {
@@ -30,7 +32,7 @@ const Results: FC<ResultsProps> = ({ numberOfClues, guesses }) => {
         // apparently this won't always work so should prob have fallback/error handling
     }
 
-    return <div>
+    return <Popup onClose={onClose}>
         {`${numberCorrectGuesses}/${numberGuesses} correct`}
         <br />
         <div style={{ whiteSpace: "pre-wrap" }} className="text-2xl">
@@ -38,7 +40,7 @@ const Results: FC<ResultsProps> = ({ numberOfClues, guesses }) => {
         </div>
         <br />
         <button onClick={onCopy} className="border-2 p-2">Copy</button>
-    </div>
+    </Popup>
 }
 
 export default Results;

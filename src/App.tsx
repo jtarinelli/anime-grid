@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Guesses } from './components/Guesses';
 import { Anime } from './queries/animeSearch';
 import generateClues from './clues/generateClues';
+import Results from './components/Results';
 
 const client = new QueryClient();
 
@@ -25,8 +26,10 @@ const client = new QueryClient();
   },
 ];
  */
+const cluesPerSide = 3;
+const numberOfClues = cluesPerSide * 2;
 
-const clues = generateClues(6, true);
+const clues = generateClues(numberOfClues, false);
 
 export type CellCoordinates = {
   row: number;
@@ -42,6 +45,7 @@ export type Guess = {
 function App() {
   const [guesses, setGuesses] = useState<Guess[]>([]);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
+  const [showResults, setShowResults] = useState<boolean>(false);
 
   // is it better to define these here for use by children, 
   // or just pass guesses/setGuesses and have them use directly?
@@ -52,6 +56,7 @@ function App() {
 
   if (!isGameOver && guessesLeft === 0) {
     setIsGameOver(true);
+    setShowResults(true);
   }
 
   const resetGuesses = () => setGuesses([]);
@@ -71,6 +76,8 @@ function App() {
             isGameOver={isGameOver}
           />
           <Guesses guessesLeft={guessesLeft} resetGuesses={resetGuesses} setIsGameOver={setIsGameOver} />
+          {isGameOver && <button onClick={() => setShowResults(true)}>See results</button>}
+          {showResults && <Results numberOfClues={numberOfClues} guesses={guesses} onClose={() => setShowResults(false)}/>}
         </div>
       </QueryClientProvider>
     </div>
