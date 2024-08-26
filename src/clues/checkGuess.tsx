@@ -14,6 +14,7 @@ const getClueResults = (clues: Clue[], queryData: any) => {
     }, new Map<Clue, boolean>)
 }
 
+// somehow make this a hook? so can make requests with tanstack query and cache them
 export const checkGuess = async (guessId: number, clues: Clue[]): Promise<boolean> => {
     const cluesQueries = clues.map(clue => clueQueries[clue.type]);
     
