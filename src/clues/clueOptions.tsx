@@ -44,6 +44,12 @@ const clueOptions: Record<ClueType, any[]> = {
         "Miyuki Sawashiro",
         "Takehito Koyasu",
         "Natsuki Hanae",
+        "Hiroshi Kamiya",
+        "Rie Takahashi",
+        "Nobuhiko Okamoto",
+        "Aoi Yuuki",
+        "Yoshitsugu Matsuoka",
+        "Junichi Suwabe",
     ],
     [ClueType.YEAR]: [
         { max: 2020 },
