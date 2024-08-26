@@ -29,7 +29,7 @@ const client = new QueryClient();
 const cluesPerSide = 3;
 const numberOfClues = cluesPerSide * 2;
 
-const clues = generateClues(numberOfClues, false);
+const clues = generateClues(numberOfClues, true);
 
 export type CellCoordinates = {
   row: number;
@@ -57,7 +57,10 @@ function App() {
     setShowResults(true);
   }
 
-  const resetGuesses = () => setGuesses([]);
+  const reset = () => {
+    setGuesses([]);
+    setIsGameOver(false);
+  };
 
   const giveUp = () => {
     setIsGameOver(true);
@@ -81,7 +84,7 @@ function App() {
           <Guesses
             guessesLeft={guessesLeft}
             onGiveUp={giveUp}
-            onReset={resetGuesses}
+            onReset={reset}
           />
           {isGameOver &&
             <button onClick={() => setShowResults(true)}>See results</button>}
