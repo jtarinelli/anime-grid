@@ -29,8 +29,6 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
         enabled: searchTerm !== "",
     });
 
-    console.log(data);
-
     const onClose = (event: any) => {
         event.stopPropagation();
         setShowSearch(false);
