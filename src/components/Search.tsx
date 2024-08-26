@@ -83,7 +83,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                 className="border-2"
             />
             {data?.Page?.media && (<datalist id={uniqueId}>
-                {data.Page.media.map((anime) =>
+                {data.Page.media.filter(anime => !!anime).map((anime) =>
                     <option value={anime?.title?.romaji} key={anime?.id}>{anime?.title?.english}</option>
                 )}
             </datalist>)}
