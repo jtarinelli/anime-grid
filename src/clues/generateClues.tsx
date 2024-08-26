@@ -11,6 +11,8 @@ const generateClues = (number: number, halfVoiceActors: boolean): Clue[] => {
         let type: ClueType;
         if (halfVoiceActors && (i >= number / 2)) {
             type = ClueType.VOICE_ACTOR;
+        } else if (halfVoiceActors && (i < number / 2)) {
+            type = sample(clueTypeOptions.filter(option => option !== ClueType.VOICE_ACTOR));
         } else {
             type = sample(clueTypeOptions);
         }
