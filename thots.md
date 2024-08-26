@@ -20,6 +20,7 @@ anime version of movie grid
 - probably filter out some formats, just do tv/movies?
 - need to mitigate and/or handle rate limits
     - maybe change the search to have to finish typing and press enter instead of auto loading? :/
+    - response headers have rate limit/requests left info, use that?
 - do fancy graphql things
     - type stuff with graph code gen + graphql request
         - should the generated types be committed? : /
