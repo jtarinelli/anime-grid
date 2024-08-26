@@ -1,75 +1,121 @@
+import { graphql } from "../gql/gql";
 import { ClueType, ClueQueryInfo } from "./types";
 
 // idk if this should stay here or go into queries
 // think here at least for now, if adding a new clue type want to just go to this folder
-const clueQueries: Record<ClueType, ClueQueryInfo> = {
+// is there a point in using the graphql codegen fragments when not using it to make the requests...?
+export const clueQueries: Record<ClueType, ClueQueryInfo> = {
   [ClueType.SOURCE]: {
-    fields: `source`,
+    fragment: graphql(`
+      fragment Source on Media {
+        source
+      }
+      `),
+    fragmentName: 'Source',
     isPaginated: false,
   },
   [ClueType.GENRE]: {
-    fields: `genres`,
+    fragment: graphql(`
+      fragment Genres on Media {
+        genres
+      }
+      `),
+    fragmentName: 'Genres',
     isPaginated: false,
   },
   [ClueType.STUDIO]: {
-    fields: `studios(sort: NAME, isMain: true) {
+    fragment: graphql(`
+      fragment Studios on Media {
+        studios(sort: NAME, isMain: true) {
             nodes {
-              name
+                name
+              }
             }
-          }`,
+          }
+    `),
+    fragmentName: 'Studios',
     isPaginated: false,
   },
   [ClueType.YEAR]: {
-    fields: `seasonYear`,
+    fragment: graphql(`
+      fragment Year on Media {
+        seasonYear
+      }
+      `),
+    fragmentName: 'Year',
     isPaginated: false,
   },
   [ClueType.EPISODES]: {
-    fields: `episodes`,
+    fragment: graphql(`
+      fragment Episodes on Media {
+        episodes
+      }
+      `),
+    fragmentName: 'Episodes',
     isPaginated: false,
   },
   [ClueType.FORMAT]: {
-    fields: `format`,
+    fragment: graphql(`
+      fragment Format on Media {
+        format
+      }
+      `),
+    fragmentName: 'Format',
     isPaginated: false,
   },
   [ClueType.WORDS_IN_TITLE]: {
-    fields: `title {
-            english
-            romaji
-            }`,
+    fragment: graphql(`
+      fragment Title on Media {
+        title {
+          english
+          romaji
+          }
+        }
+            `),
+    fragmentName: 'Title',
     isPaginated: false,
   },
   [ClueType.TAG]: {
-    fields: `tags {
-      name
-      category
-      rank
-      isMediaSpoiler
-    }`,
+    fragment: graphql(`
+      fragment Tags on Media {
+        tags {
+          name
+          category
+          rank
+          isMediaSpoiler
+        }
+      }
+      `),
+    fragmentName: 'Tags',
     isPaginated: false,
   },
   [ClueType.VOICE_ACTOR]: {
-    // idk if perPage needs to be a variable too, dep on what the diff paginated things are ig
     // how to get rid of node? don't need character name????
     // can only pick 1 role, ideally would want main and supporting but guess we're getting EVERYONE
-    fields: `characters(sort: RELEVANCE, page: $page, perPage: 50) {
-            edges {
-              voiceActors(language: JAPANESE, sort: RELEVANCE) {
-                name {
-                  full
+    fragment: graphql(`
+      fragment Characters on Media {
+        characters(sort: RELEVANCE, page: $page, perPage: 25) {
+              edges {
+                voiceActors(language: JAPANESE, sort: RELEVANCE) {
+                  name {
+                    full
+                  }
+                }
+                node {
+                  name {
+                    full
+                  }
                 }
               }
-              node {
-                name {
-                  full
-                }
+              pageInfo {
+                hasNextPage
               }
             }
-            pageInfo {
-              hasNextPage
-            }
-          }`,
+      }
+            `),
+    fragmentName: 'Characters',
     isPaginated: true,
-    getHasNextPage: (queryData: any) => queryData.data.Media.characters.pageInfo.hasNextPage,
+    getHasNextPage: (queryData: any) => queryData.Media.characters.pageInfo.hasNextPage,
   }
 }
 

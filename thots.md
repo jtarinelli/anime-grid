@@ -25,6 +25,11 @@ anime version of movie grid
         - should the generated types be committed? : /
     - graphql request lets you batch queries
     - react fragments? for building the info queries?
+    - can't do both graphql code gen and dynamically building queries with string templates
+        - option 1: use directives and combine all fragments into one big anime info query
+        - option 2: make each fragment its own query and batch them together
+        - option 3: throw out graphql codegen and use string templates at least for info query
+        - option 4: make custom thingy to generate query based off clue type enum
 
 clue ideas
 - vas

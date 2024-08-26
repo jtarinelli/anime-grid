@@ -1,62 +1,74 @@
-import { buildAnimeInfoQuery, buildBatchedAnimeInfoQuery, buildPaginatedAnimeInfoQuery } from "../queries/animeInfo";
-import { makeGraphQlQuery } from "../queries/graphQlQuery";
-import { Clue, ClueQueryInfo } from "./types";
+import { animeInfoQuery, getAnimeInfoClueDirectiveVariables } from "../queries/animeInfo";
+import { Clue } from "./types";
 import checkClueAgainstData from "./checkAgainstData";
 import clueQueries from "./clueQueries";
+import request from "graphql-request";
 
-// group together first page of paginated query with other queries?
+const isCluePaginated = (clue: Clue) => {
+    return clueQueries[clue.type].isPaginated;
+}
+
+const getClueResults = (clues: Clue[], queryData: any) => {
+    return clues.reduce((result: Map<Clue, boolean>, clue: Clue) => {
+        return result.set(clue, checkClueAgainstData(clue, queryData))
+    }, new Map<Clue, boolean>)
+}
+
 export const checkGuess = async (guessId: number, clues: Clue[]): Promise<boolean> => {
-    if (clues.every(clue => !clueQueries[clue.type].isPaginated)) {
-        const batchedQuery = buildBatchedAnimeInfoQuery(clues.map(clue => clueQueries[clue.type]), guessId);
-        const batchedData = await makeGraphQlQuery(batchedQuery.query, batchedQuery.variables);
-        return checkBatchedClues(clues, batchedData);
+    const cluesQueries = clues.map(clue => clueQueries[clue.type]);
+    
+    const initialVariables = {
+        id: guessId,
+        page: 1,
+        ...getAnimeInfoClueDirectiveVariables(cluesQueries)
     }
 
-    for (const clue of clues) {
-        const clueCorrect = await checkClue(guessId, clue);
-        if (!clueCorrect) {
+    const initialData = await request(import.meta.env.VITE_ANILIST_GRAPHQL_URL, animeInfoQuery, initialVariables);
+    const initialResults = getClueResults(clues, initialData);
+
+    const unpaginatedResults = Array.from(initialResults.entries()).filter(([clue, _]) => !isCluePaginated(clue));
+    
+    const allCluesCorrect = Array.from(initialResults.values()).every(isCorrect => isCorrect);
+    const allCluesUnpaginated = unpaginatedResults.length === clues.length;
+    const someUnpaginatedClueIncorrect = unpaginatedResults.some(([_, isCorrect]) => !isCorrect);
+
+    if (allCluesCorrect) {
+        return true;
+    } else if (someUnpaginatedClueIncorrect || allCluesUnpaginated) {
+        return false;
+     }
+
+    const paginatedResults = new Map(Array.from(initialResults.entries()).filter(([clue, _]) => isCluePaginated(clue)));
+    const paginatedQueries = cluesQueries.filter(query => query.isPaginated);
+    const paginatedClues = clues.filter(clue => isCluePaginated(clue));
+
+    let page = 1;
+    while (!Array.from(paginatedResults.values()).every(isCorrect => isCorrect)) {
+        page += 1;
+         
+        const nthPageVariables = {
+            id: guessId,
+            page,
+            ...getAnimeInfoClueDirectiveVariables(paginatedQueries)
+        };
+
+        const nthPageData = await request(import.meta.env.VITE_ANILIST_GRAPHQL_URL, animeInfoQuery, nthPageVariables);
+        const nthPageResults = getClueResults(paginatedClues, nthPageData);
+
+        let incorrectGuess = false;
+
+        paginatedClues.forEach(clue => {
+            if (!clueQueries[clue.type].getHasNextPage!(nthPageData) && !nthPageResults.get(clue)) {
+                incorrectGuess = true;
+            }
+            paginatedResults.set(clue, (paginatedResults.get(clue) ?? false) || (nthPageResults.get(clue) ?? false));
+        })
+
+        if (incorrectGuess) {
             return false;
         }
     }
     return true;
-}
-
-const checkClue = async (guessId: number, clue: Clue): Promise<boolean> => {
-    const clueQueryInfo = clueQueries[clue.type];
-
-    if (clueQueryInfo.isPaginated) {
-        return await checkPaginatedClue(clue, guessId, clueQueryInfo);
-    }
-
-    // can do better with library I think
-    const query = buildAnimeInfoQuery(clueQueryInfo, guessId)
-
-    const queryData = await makeGraphQlQuery(query.query, query.variables);
-
-    return checkClueAgainstData(clue, queryData);
-}
-
-const checkBatchedClues = (clues: Clue[], queryData: any) => {
-    return clues.every(clue => checkClueAgainstData(clue, queryData));
-}
-
-const checkPaginatedClue = async (clue: Clue, guessId: number, clueQueryInfo: ClueQueryInfo): Promise<boolean> => {
-    let hasNextPage = true;
-    let currentPage = 1;
-
-    while (hasNextPage) {
-        const nthPageQuery = buildPaginatedAnimeInfoQuery(clueQueryInfo, guessId, currentPage);
-        const nthPageData = await makeGraphQlQuery(nthPageQuery.query, nthPageQuery.variables);
-        const isCorrectGuess = checkClueAgainstData(clue, nthPageData);
-
-        if (isCorrectGuess) {
-            return true;
-        }
-
-        hasNextPage = clueQueryInfo.getHasNextPage ? clueQueryInfo.getHasNextPage(nthPageData) : false;
-        currentPage += 1;
-    }
-    return false;
 }
 
 export default checkGuess;

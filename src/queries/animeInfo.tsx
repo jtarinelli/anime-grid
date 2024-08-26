@@ -1,41 +1,32 @@
+import { gql } from "graphql-request"
+import clueQueries from "../clues/clueQueries"
 import { ClueQueryInfo } from "../clues/types"
+import { print } from 'graphql';
 
-export const buildAnimeInfoQuery = (clueQueryInfo: ClueQueryInfo, id: number) => {
-  return {
-    query: `query anime_info($id: Int!) {
-        Media(id: $id) {
-          ${clueQueryInfo.fields}
-        }
-      }`,
-    variables: {
-      id,
-    }
-  }
-}
+const fragments = Object.values(clueQueries).map(query => print(query.fragment)).join('\n\n');
 
-export const buildBatchedAnimeInfoQuery = (clueQueriesInfo: ClueQueryInfo[], id: number) => {
-  return {
-    query: `query anime_info($id: Int!) {
+const fragmentNames = Object.values(clueQueries).map(query => query.fragmentName);
+
+const fragmentParameters = fragmentNames.map(fragmentName =>
+  `$${fragmentName.toLowerCase()}: Boolean!`).join(', ');
+
+const fragmentsWithDirectives = fragmentNames.map(fragmentName =>
+  `...${fragmentName} @include(if: $${fragmentName.toLowerCase()})`).join('\n')
+
+export const animeInfoQuery = gql`
+  query anime_info($id: Int!, $page: Int!, ${fragmentParameters}) {
     Media(id: $id) {
-      ${clueQueriesInfo.map(queryInfo => queryInfo.fields).join("\r\n")}
-    }
-  }`,
-    variables: {
-      id,
+      ${fragmentsWithDirectives}
     }
   }
-}
 
-export const buildPaginatedAnimeInfoQuery = (clueQueryInfo: ClueQueryInfo, id: number, page: number) => {
-  return {
-    query: `query anime_info($id: Int!, $page: Int!) {
-        Media(id: $id) {
-          ${clueQueryInfo.fields}
-        }
-      }`,
-    variables: {
-      id,
-      page,
-    }
-  }
+  ${fragments}
+  `;
+
+export const getAnimeInfoClueDirectiveVariables = (cluesToInclude: ClueQueryInfo[]) => {
+  return fragmentNames.reduce((variables: Record<string, boolean>, fragment: string) => {
+    variables[fragment.toLowerCase()] =
+      cluesToInclude.some(includedClue => includedClue.fragmentName === fragment);
+    return variables;
+  }, {});
 }

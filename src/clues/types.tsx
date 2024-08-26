@@ -1,3 +1,5 @@
+import { DocumentNode } from "graphql";
+
 export enum ClueType {
     VOICE_ACTOR,
     STUDIO,
@@ -16,7 +18,8 @@ export interface Clue {
 }
 
 export type ClueQueryInfo = {
-    fields: string;
+    fragment: DocumentNode;
+    fragmentName: string;
     isPaginated: boolean;
     getHasNextPage?: Function;
 }

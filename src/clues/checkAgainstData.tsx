@@ -2,7 +2,7 @@ import { Clue, ClueType } from "./types";
 
 const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
     const { type, data } = clue;
-    const animeData = guessData.data.Media;
+    const animeData = guessData.Media;
 
     switch (type) {
         case ClueType.GENRE:
