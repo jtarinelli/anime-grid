@@ -47,7 +47,7 @@ function App() {
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [showResults, setShowResults] = useState<boolean>(false);
 
-  const isAlreadyGuessed = (animeId: number) => guesses.some(guess => guess.anime.id === animeId);
+  const isAlreadyGuessed = (animeId: number) => guesses.some(guess => guess.isCorrect && guess.anime.id === animeId);
   const addGuess = (newGuess: Guess) => setGuesses([...guesses, newGuess])
 
   const guessesLeft = ((clues.length / 2) ** 2) - guesses.length;
