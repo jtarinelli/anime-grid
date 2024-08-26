@@ -6,7 +6,13 @@ import { Anime } from './queries/animeSearch';
 import generateClues from './clues/generateClues';
 import Results from './components/Results';
 
-const client = new QueryClient();
+const client = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    }
+  }
+});
 
 /* const clues = [
   {
