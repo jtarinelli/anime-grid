@@ -6,6 +6,7 @@ import { Clue } from "../clues/types";
 import { CellCoordinates, Guess } from "../App";
 import request from "graphql-request";
 import { Anime, animeSearchQuery } from "../queries/animeSearch";
+import { buttonClass } from "../classes";
 
 type SearchProps = {
     cellCoordinates: CellCoordinates;
@@ -73,8 +74,8 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
     // need to make list/datalist id unique across searches for it to work
     // although should probably just change the search to be a popup instead of in the box cause its weird
     return (
-        <div className="h-full p-1 flex flex-col justify-evenly bg-slate-100">
-            <button onClick={onClose} className="border-2 hover:bg-slate-200" >X</button>
+        <div className="h-full p-1 flex flex-col justify-evenly bg-slate-200">
+            <button onClick={onClose} className={buttonClass} >X</button>
             <input
                 type="text"
                 list={uniqueId}
@@ -87,7 +88,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                     <option value={anime?.title?.romaji} key={anime?.id}>{anime?.title?.english}</option>
                 )}
             </datalist>)}
-            <button onClick={onSubmit} className="border-2 hover:bg-slate-200">Guess</button>
+            <button onClick={onSubmit} className={buttonClass + " border-2"}>Guess</button>
         </div>
     )
 }

@@ -43,7 +43,7 @@ const Cell: FC<CellProps> = ({
     // would like background-image cover but they're not background images...
     return (
         <div
-            className={`h-full w-full min-w-0 border-2 p-0 ${(!correctedlyGuessedAnime && !isGameOver) && 'hover:bg-slate-100'}`}
+            className={`h-full w-full min-w-0 p-0 bg-slate-100 ${(!correctedlyGuessedAnime && !isGameOver) && 'hover:bg-slate-200'}`}
             onClick={onClick}
         >
             {correctedlyGuessedAnime && data?.Media?.coverImage?.large ?

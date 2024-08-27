@@ -1,4 +1,5 @@
 import { FC } from "react"
+import { buttonClass } from "../classes";
 
 type GuessesProps = {
     guessesLeft: number;
@@ -7,8 +8,6 @@ type GuessesProps = {
 }
 
 export const Guesses: FC<GuessesProps> = ({guessesLeft, onReset, onGiveUp}) => {
-    const buttonClass = "border-2 p-2";
-
     return (
         <div className="m-10 text-center">
             {guessesLeft} guesses left!!! 

@@ -1,6 +1,7 @@
 import { FC } from "react";
 import { Guess } from "../App";
 import Popup from "./Popup";
+import { buttonClass } from "../classes";
 
 interface ResultsProps {
     numberOfClues: number;
@@ -33,14 +34,14 @@ const Results: FC<ResultsProps> = ({ numberOfClues, guesses, onClose }) => {
 
     // have different kaomoji depending on how well you did lul
     return <Popup onClose={onClose}>
-        <h1>Results (/≧▽≦)/</h1>
+        <h1 className="text-lg">Results (/≧▽≦)/</h1>
         {`${numberCorrectGuesses}/${(numberOfClues / 2) ** 2} correct`}
         <br />
-        <div style={{ whiteSpace: "pre-wrap" }} className="text-2xl">
+        <div style={{ whiteSpace: "pre-wrap" }} className="text-2xl p-8">
             {resultGrid}
         </div>
         <br />
-        <button onClick={onCopy} className="border-2 p-2">Copy</button>
+        <button onClick={onCopy} className={buttonClass}>Copy</button>
     </Popup>
 }
 

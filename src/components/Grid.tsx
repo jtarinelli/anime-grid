@@ -54,7 +54,7 @@ const Grid: FC<GridProps> = ({ correctGuesses, clues, isAlreadyGuessed, addGuess
     }
 
     // text/rem gets big on small screens so labels make the rest of the grid shrink
-    const threeByThreeGrid = `h-full md:aspect-[230/300] grid grid-cols-[5rem_repeat(2,_1fr)] grid-rows-[3rem_repeat(2,_1fr)] gap-2 place-items-center text-center`;
+    const threeByThreeGrid = `w-full md:h-full md:w-auto aspect-[230/300] grid grid-cols-[5rem_repeat(2,_1fr)] grid-rows-[3rem_repeat(2,_1fr)] gap-2 place-items-center text-center`;
     const fourByFourGrid = `w-full md:h-full md:w-auto aspect-[230/300] grid grid-cols-[5rem_repeat(3,_1fr)] grid-rows-[3rem_repeat(3,_1fr)] gap-2 place-items-center text-center`;
 
     return (

@@ -5,6 +5,7 @@ import { Guesses } from './components/Guesses';
 import { Anime } from './queries/animeSearch';
 import generateClues from './clues/generateClues';
 import Results from './components/Results';
+import { buttonClass } from './classes';
 
 const client = new QueryClient({
   defaultOptions: {
@@ -93,7 +94,7 @@ function App() {
             onReset={reset}
           />
           {isGameOver &&
-            <button onClick={() => setShowResults(true)}>See results</button>}
+            <button onClick={() => setShowResults(true)} className={buttonClass}>See results</button>}
           {showResults &&
             <Results
               numberOfClues={numberOfClues}
