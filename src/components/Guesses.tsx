@@ -13,9 +13,9 @@ export const Guesses: FC<GuessesProps> = ({guessesLeft, onReset, onGiveUp}) => {
         <div className="m-10 text-center">
             {guessesLeft} guesses left!!! 
             <br/><br/>
-            <button onClick={onReset} className={buttonClass}>Reset (teehee)</button>
+            <button onClick={onReset} className={buttonClass}>Reset (*/ω＼*)</button>
             <br/><br/>
-            <button onClick={onGiveUp} className={buttonClass}>Give up :(</button>
+            <button onClick={onGiveUp} className={buttonClass}>Give up (；′⌒`) </button>
         </div>
     )
 }

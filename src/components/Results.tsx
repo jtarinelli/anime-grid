@@ -31,8 +31,9 @@ const Results: FC<ResultsProps> = ({ numberOfClues, guesses, onClose }) => {
         // apparently this won't always work so should prob have fallback/error handling
     }
 
+    // have different kaomoji depending on how well you did lul
     return <Popup onClose={onClose}>
-        <h1>Results!</h1>
+        <h1>Results (/≧▽≦)/</h1>
         {`${numberCorrectGuesses}/${(numberOfClues / 2) ** 2} correct`}
         <br />
         <div style={{ whiteSpace: "pre-wrap" }} className="text-2xl">
