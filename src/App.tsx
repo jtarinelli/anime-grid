@@ -79,7 +79,7 @@ function App() {
   return (
     <div className="h-screen w-full box-border m-0 p-0">
       <QueryClientProvider client={client}>
-        <div className="h-full min-w-50% flex justify-center items-center p-10">
+        <div className="h-full min-w-50% md:flex justify-center items-center p-10">
           <Grid
             correctGuesses={correctGuesses}
             clues={clues}
