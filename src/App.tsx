@@ -36,7 +36,7 @@ const client = new QueryClient({
 const cluesPerSide = 3;
 const numberOfClues = cluesPerSide * 2;
 
-const clues = generateClues(numberOfClues, true);
+const clues = generateClues(cluesPerSide, false);
 
 export type CellCoordinates = {
   row: number;
