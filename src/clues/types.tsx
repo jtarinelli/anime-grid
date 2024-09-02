@@ -14,8 +14,16 @@ export enum ClueType {
 
 export interface Clue {
     type: ClueType,
-    data?: any, // idk what to call this but just like the VA name/year/boolean maybe. diff depending on type
+    data?: ClueOption, // idk what to call this but just like the VA name/year/boolean maybe. diff depending on type
 }
+
+export interface ClueOption {
+    value: any;
+    noGo?: {
+        type: ClueType;
+        value: any;
+    }
+};
 
 export type ClueQueryInfo = {
     fragment: DocumentNode;
