@@ -7,6 +7,8 @@ import { CellCoordinates, Guess } from "../App";
 import request from "graphql-request";
 import { Anime, animeSearchQuery } from "../queries/animeSearch";
 import { buttonClass } from "../classes";
+import Popup from "./Popup";
+import getClueString from "../clues/getClueString";
 
 type SearchProps = {
     cellCoordinates: CellCoordinates;
@@ -59,8 +61,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                 if (isCorrectGuess) {
                     setShowSearch(false);
                 } else {
-                    setSelection(null);
-                    setSearchTerm("");
+                    setShowSearch(false);
                 }
             }
         }
@@ -69,13 +70,13 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
     const uniqueId = `search-${JSON.stringify(cellCoordinates)}`;
 
     // sometimes the request returns data but dropdown doesn't show up? why?
-
     // might look nicer/be easier to do own thing instead of datalist
     // need to make list/datalist id unique across searches for it to work
-    // although should probably just change the search to be a popup instead of in the box cause its weird
     return (
-        <div className="h-full p-1 flex flex-col justify-evenly bg-slate-200">
-            <button onClick={onClose} className={buttonClass} >X</button>
+        <Popup onClose={onClose}>
+        <div className="h-full p-1 flex flex-col justify-evenly">
+            <h2 className='text-lg'>{`${clues.map(clue => getClueString(clue)).join(' x ')}`}</h2>
+            <br />
             <input
                 type="text"
                 list={uniqueId}
@@ -83,6 +84,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                 onInput={onSelect}
                 className="border-2"
             />
+            <br/>
             {data?.Page?.media && (<datalist id={uniqueId}>
                 {data.Page.media.filter(anime => !!anime).map((anime) =>
                     <option value={anime?.title?.romaji} key={anime?.id}>{anime?.title?.english}</option>
@@ -90,6 +92,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
             </datalist>)}
             <button onClick={onSubmit} className={buttonClass + " border-2"}>Guess</button>
         </div>
+        </Popup>
     )
 }
 

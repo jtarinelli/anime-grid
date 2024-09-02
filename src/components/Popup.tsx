@@ -2,7 +2,7 @@ import { FC } from "react";
 
 interface PopupProps {
     children: any;
-    onClose: () => void;
+    onClose: (event?: any) => void;
 }
 
 const Popup: FC<PopupProps> = ({ children, onClose }) => {
