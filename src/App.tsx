@@ -17,7 +17,7 @@ const client = new QueryClient({
 const cluesPerSide = 3;
 const numberOfClues = cluesPerSide * 2;
 
-const clues = generateClues(cluesPerSide, Mode.ALL_VOICE_ACTORS);
+const clues = generateClues(cluesPerSide, Mode.HALF_VOICE_ACTORS);
 
 export type CellCoordinates = {
   row: number;

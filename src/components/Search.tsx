@@ -83,6 +83,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                 onChange={onType}
                 onInput={onSelect}
                 className="border-2"
+                autoFocus
             />
             <br/>
             {data?.Page?.media && (<datalist id={uniqueId}>

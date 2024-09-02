@@ -12,7 +12,7 @@ type GuessesProps = {
 export const Guesses: FC<GuessesProps> = ({guessesLeft, isGameOver, onReset, onGiveUp, onShowResults}) => {
     return (
         <div className="m-10 text-center">
-            {guessesLeft} guesses left!!! 
+            {isGameOver? 0 : guessesLeft} guesses left!!! 
             <br/><br/>
             <button onClick={onReset} className={buttonClass}>Reset (*/ω＼*)</button>
             <br/><br/>

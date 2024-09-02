@@ -29,7 +29,7 @@ interface Template {
 const clueTypeOptions = Object.values(ClueType).filter(value => typeof value === "number");
 
 export enum Mode {
-    NORMAL,
+    ALL_RANDOM,
     HALF_VOICE_ACTORS,
     ALL_VOICE_ACTORS,
 }
@@ -47,7 +47,7 @@ const generateClues = (cluesPerSide: number, mode: Mode): Clue[] => {
     let side2;
 
     switch(mode) {
-        case Mode.NORMAL:
+        case Mode.ALL_RANDOM:
             side1 = generateSide(cluesPerSide);
             side2 = generateSide(cluesPerSide, side1);
             break;
