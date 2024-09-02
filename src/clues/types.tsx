@@ -23,6 +23,10 @@ export interface ClueOption {
         type: ClueType;
         value: any;
     }[]
+    yearsActive?: {
+        min?: number;
+        max?: number;
+    }
 };
 
 export type ClueQueryInfo = {

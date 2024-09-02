@@ -40,13 +40,13 @@ const generateClues = (cluesPerSide: number, mode: Mode): Clue[] => {
 
     for (let i = 0; i < cluesPerSide; i++) {
         allVoiceActorsTemplate.push({ type: [ClueType.VOICE_ACTOR] })
-        noVoiceActorsTemplate.push({ type: clueTypeOptions.filter(option => option !== ClueType.VOICE_ACTOR)})
+        noVoiceActorsTemplate.push({ type: clueTypeOptions.filter(option => option !== ClueType.VOICE_ACTOR) })
     }
 
     let side1;
     let side2;
 
-    switch(mode) {
+    switch (mode) {
         case Mode.ALL_RANDOM:
             side1 = generateSide(cluesPerSide);
             side2 = generateSide(cluesPerSide, side1);
@@ -60,7 +60,7 @@ const generateClues = (cluesPerSide: number, mode: Mode): Clue[] => {
             side2 = generateSide(cluesPerSide, side1, allVoiceActorsTemplate);
             break;
     }
-  
+
     return [...side1, ...side2];
 }
 
@@ -84,15 +84,19 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
 
         let clueType: ClueType = sample(options);
         let clueValue: ClueOption = sample(clueOptions[clueType]);
-        let duplicatesPreviousClue = previouslySelectedClues.some(previousClue => previousClue.type === clueType && isEqual(previousClue.data, clueValue.value))
-        let isPreviousSideNoGo = previousSide?.some(previousClue => clueValue.noGos?.some(nogo => nogo.type === previousClue.type && isEqual(nogo.value, previousClue.data))) ?? false;
 
-        while (duplicatesPreviousClue || isPreviousSideNoGo) {
+        let duplicatesPreviousClue = getDuplicatesPreviousClue(previouslySelectedClues, clueType, clueValue)
+        let isPreviousSideNoGo = getIsPreviousSideNoGo(clueValue, previousSide);
+        let isInvalidByYear = getIsInvalidByYear(clueType, clueValue, previousSide);
+
+        while (duplicatesPreviousClue || isPreviousSideNoGo || isInvalidByYear) {
+            console.log('invalid clue :(');
             clueType = sample(options);
             clueValue = sample(clueOptions[clueType]);
 
-            duplicatesPreviousClue = previouslySelectedClues.some(previousClue => previousClue.type === clueType && isEqual(previousClue.data, clueValue.value))
-            isPreviousSideNoGo = previousSide?.some(previousClue => clueValue.noGos?.some(nogo => nogo.type === previousClue.type && isEqual(nogo.value, previousClue.data))) ?? false;
+            duplicatesPreviousClue = getDuplicatesPreviousClue(previouslySelectedClues, clueType, clueValue);
+            isPreviousSideNoGo = getIsPreviousSideNoGo(clueValue, previousSide);
+            isInvalidByYear = getIsInvalidByYear(clueType, clueValue, previousSide);
         }
 
         clues.push({ type: clueType, data: clueValue.value })
@@ -100,6 +104,57 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
     }
 
     return clues;
+
+    function getIsPreviousSideNoGo(clueValue: ClueOption, previousSide?: Clue[]) {
+        return previousSide?.some(previousClue => clueValue.noGos?.some(nogo => nogo.type === previousClue.type && isEqual(nogo.value, previousClue.data))) ?? false;
+    }
+
+    function getDuplicatesPreviousClue(previouslySelectedClues: Clue[], clueType: ClueType, clueValue: ClueOption) {
+        return previouslySelectedClues.some(previousClue => previousClue.type === clueType && isEqual(previousClue.data, clueValue.value));
+    }
+
+    // if there aren't a lot of valid options sometimes this makes a quasi-infinite loop : /
+    // might not be an issue often but also might want to use this to filter options to only valid ones
+    // instead of just generating a new random selections
+    function getIsInvalidByYear(clueType: ClueType, clueValue: ClueOption, previousSide?: Clue[]) {
+        if (clueType === ClueType.YEAR) {
+            return previousSide?.some(previousClue => {
+                if (!previousClue.data?.yearsActive) {
+                    return false;
+                }
+                return areRangesNonOverlapping(previousClue.data.yearsActive, clueValue.value)
+            })
+        } else if (clueValue.yearsActive) {
+            return previousSide?.some(previousClue => {
+                if (previousClue.data?.yearsActive) {
+                    return areRangesNonOverlapping(previousClue.data.yearsActive, clueValue.yearsActive)
+                }
+                if (previousClue.type === ClueType.YEAR) {
+                    // type of previousClue.data is lying : ( sort that out
+                    return areRangesNonOverlapping(previousClue.data as any, clueValue.yearsActive)
+                }
+                return false;
+            })
+        }
+        return false;
+    }
+
+    function areRangesNonOverlapping(range1?: { min?: number, max?: number }, range2?: { min?: number, max?: number }) {
+        if (!range1 || !range2) {
+            return false;
+        }
+        if (range1.min && range2.max) {
+            if (range1.min > range2.max) {
+                return true;
+            }
+        }
+        if (range1.max && range2.min) {
+            if (range1.max < range2.min) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 export default generateClues;
