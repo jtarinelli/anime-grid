@@ -2,8 +2,8 @@ import { ClueOption, ClueType } from "./types";
 
 const clueOptions: Record<ClueType, ClueOption[]> = {
     [ClueType.EPISODES]: [
-        { value: { max: 13 } },
-        { value: { min: 20 } },
+        { value: { max: 13 }, noGos: [{ type: ClueType.FORMAT, value: "MOVIE" }, { type: ClueType.STUDIO, value: "Studio Ghibli" }] },
+        { value: { min: 20 }, noGos: [{ type: ClueType.FORMAT, value: "MOVIE" }, { type: ClueType.STUDIO, value: "Studio Ghibli" }] },
     ],
     [ClueType.GENRE]: [
         { value: "Action", },
@@ -23,7 +23,7 @@ const clueOptions: Record<ClueType, ClueOption[]> = {
         { value: "MADHOUSE", },
         { value: "MAPPA", },
         { value: "Shaft", },
-        { value: "Studio Ghibli", }, // only make movies can't be combined with episode counts, also doesn't use voice actors much
+        { value: "Studio Ghibli", },
         { value: "Gainax", },
         { value: "A-1 Pictures", },
         { value: "P.A. Works", },
@@ -65,13 +65,13 @@ const clueOptions: Record<ClueType, ClueOption[]> = {
         { value: { max: 3 }, },
     ],
     [ClueType.TAG]: [
-        { value: "Shoujo", }, // demographics are based off manga magazines mostly so don't go with original
-        { value: "Shounen", },
-        { value: "Josei", },
-        { value: "Seinen", },
+        { value: "Shoujo", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }] },
+        { value: "Shounen", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }] },
+        { value: "Josei", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }] },
+        { value: "Seinen", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }] },
     ],
     [ClueType.FORMAT]: [
-        { value: "MOVIE", }, // can't be combined with episode counts, unless want to count as 1 ep
+        { value: "MOVIE", },
     ],
     [ClueType.SOURCE]: [
         { value: "ORIGINAL", },

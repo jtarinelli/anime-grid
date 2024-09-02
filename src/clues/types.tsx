@@ -19,10 +19,10 @@ export interface Clue {
 
 export interface ClueOption {
     value: any;
-    noGo?: {
+    noGos?: {
         type: ClueType;
         value: any;
-    }
+    }[]
 };
 
 export type ClueQueryInfo = {

@@ -1,4 +1,5 @@
 import sample from "lodash/sample";
+import isEqual from "lodash/isEqual";
 import { Clue, ClueOption, ClueType } from "./types";
 import clueOptions from "./clueOptions";
 
@@ -62,15 +63,15 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
 
         let clueType: ClueType = sample(options);
         let clueValue: ClueOption = sample(clueOptions[clueType]);
-        let duplicatesPreviousClue = previouslySelectedClues.some(previousClue => previousClue.type === clueType && previousClue.data === clueValue.value)
-        let isPreviousSideNoGo = previousSide?.some(previousClue => previousClue.type === clueValue.noGo?.type && previousClue.data === clueValue.noGo.value) ?? false;
+        let duplicatesPreviousClue = previouslySelectedClues.some(previousClue => previousClue.type === clueType && isEqual(previousClue.data, clueValue.value))
+        let isPreviousSideNoGo = previousSide?.some(previousClue => clueValue.noGos?.some(nogo => nogo.type === previousClue.type && isEqual(nogo.value, previousClue.data))) ?? false;
 
         while (duplicatesPreviousClue || isPreviousSideNoGo) {
             clueType = sample(options);
             clueValue = sample(clueOptions[clueType]);
 
-            duplicatesPreviousClue = previouslySelectedClues.some(previousClue => previousClue.type === clueType && previousClue.data === clueValue.value)
-            isPreviousSideNoGo = previousSide?.some(previousClue => previousClue.type === clueValue.noGo?.type && previousClue.data === clueValue.noGo.value) ?? false;
+            duplicatesPreviousClue = previouslySelectedClues.some(previousClue => previousClue.type === clueType && isEqual(previousClue.data, clueValue.value))
+            isPreviousSideNoGo = previousSide?.some(previousClue => clueValue.noGos?.some(nogo => nogo.type === previousClue.type && isEqual(nogo.value, previousClue.data))) ?? false;
         }
 
         clues.push({ type: clueType, data: clueValue.value })
