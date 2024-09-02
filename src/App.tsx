@@ -3,9 +3,8 @@ import Grid from './components/Grid'
 import { useState } from 'react';
 import { Guesses } from './components/Guesses';
 import { Anime } from './queries/animeSearch';
-import generateClues from './clues/generateClues';
+import generateClues, { Mode } from './clues/generateClues';
 import Results from './components/Results';
-import { buttonClass } from './classes';
 
 const client = new QueryClient({
   defaultOptions: {
@@ -18,7 +17,7 @@ const client = new QueryClient({
 const cluesPerSide = 3;
 const numberOfClues = cluesPerSide * 2;
 
-const clues = generateClues(cluesPerSide, false);
+const clues = generateClues(cluesPerSide, Mode.ALL_VOICE_ACTORS);
 
 export type CellCoordinates = {
   row: number;

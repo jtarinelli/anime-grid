@@ -28,18 +28,39 @@ interface Template {
 
 const clueTypeOptions = Object.values(ClueType).filter(value => typeof value === "number");
 
-const generateClues = (cluesPerSide: number, halfVoiceActors: boolean): Clue[] => {
-    const halfVoiceActorsTemplate = [];
+export enum Mode {
+    NORMAL,
+    HALF_VOICE_ACTORS,
+    ALL_VOICE_ACTORS,
+}
+
+const generateClues = (cluesPerSide: number, mode: Mode): Clue[] => {
+    const allVoiceActorsTemplate = [];
     const noVoiceActorsTemplate = [];
 
     for (let i = 0; i < cluesPerSide; i++) {
-        halfVoiceActorsTemplate.push({ type: [ClueType.VOICE_ACTOR] })
+        allVoiceActorsTemplate.push({ type: [ClueType.VOICE_ACTOR] })
         noVoiceActorsTemplate.push({ type: clueTypeOptions.filter(option => option !== ClueType.VOICE_ACTOR)})
     }
 
-    const side1 = halfVoiceActors ? generateSide(cluesPerSide, [], noVoiceActorsTemplate) : generateSide(cluesPerSide);
-    const side2 = halfVoiceActors ? generateSide(cluesPerSide, side1, halfVoiceActorsTemplate) : generateSide(cluesPerSide, side1);
+    let side1;
+    let side2;
 
+    switch(mode) {
+        case Mode.NORMAL:
+            side1 = generateSide(cluesPerSide);
+            side2 = generateSide(cluesPerSide, side1);
+            break;
+        case Mode.HALF_VOICE_ACTORS:
+            side1 = generateSide(cluesPerSide, [], noVoiceActorsTemplate);
+            side2 = generateSide(cluesPerSide, side1, allVoiceActorsTemplate);
+            break;
+        case Mode.ALL_VOICE_ACTORS:
+            side1 = generateSide(cluesPerSide, [], allVoiceActorsTemplate);
+            side2 = generateSide(cluesPerSide, side1, allVoiceActorsTemplate);
+            break;
+    }
+  
     return [...side1, ...side2];
 }
 
