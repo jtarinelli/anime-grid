@@ -14,8 +14,8 @@ const Results: FC<ResultsProps> = ({ numberOfClues, guesses, onClose }) => {
 
     for (let row = 1; row < (numberOfClues / 2) + 1; row++) {
         for (let col = 1; col < (numberOfClues / 2) + 1; col++) {
-            const guess = guesses.find(guess => guess.cellCoordinates.row === row && guess.cellCoordinates.col === col);
-            if (guess?.isCorrect) {
+            const correctGuess = guesses.find(guess => guess.cellCoordinates.row === row && guess.cellCoordinates.col === col && guess.isCorrect);
+            if (correctGuess !== undefined) {
                 resultGrid = resultGrid.concat('🟩')
             } else {
                 resultGrid = resultGrid.concat('🟥')
