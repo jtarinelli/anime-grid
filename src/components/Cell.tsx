@@ -38,8 +38,7 @@ const Cell: FC<CellProps> = ({
         enabled: correctedlyGuessedAnime?.id !== undefined,
     });
 
-    // prob add loading thing for image
-    // images don't fit nice in the cells (get squished horizontally but don't expand either)
+    // images get stretched sometimes
     // would like background-image cover but they're not background images...
     return (
         <div

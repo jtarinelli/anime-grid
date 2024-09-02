@@ -15,24 +15,6 @@ const client = new QueryClient({
   }
 });
 
-/* const clues = [
-  {
-    type: ClueType.GENRE,
-    data: "Sports",
-  },
-  {
-    type: ClueType.STUDIO,
-    data: "Kyoto Animation",
-  },
-  {
-    type: ClueType.VOICE_ACTOR,
-    data: "Yoshimasa Hosoya",
-  },
-  {
-    type: ClueType.MOVIE,
-  },
-];
- */
 const cluesPerSide = 3;
 const numberOfClues = cluesPerSide * 2;
 
@@ -76,7 +58,6 @@ function App() {
 
   const correctGuesses = guesses.filter(guess => guess.isCorrect);
 
-  // want the guesses to wrap to the bottom when screen gets narrower
   return (
     <div className="h-screen w-full box-border m-0 p-0">
       <QueryClientProvider client={client}>

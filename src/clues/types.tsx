@@ -14,7 +14,7 @@ export enum ClueType {
 
 export interface Clue {
     type: ClueType,
-    data?: ClueOption, // idk what to call this but just like the VA name/year/boolean maybe. diff depending on type
+    data?: ClueOption, // don't really like nested data.value
 }
 
 export interface ClueOption {
