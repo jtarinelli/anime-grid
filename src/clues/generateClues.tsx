@@ -99,8 +99,7 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
             isInvalidByYear = getIsInvalidByYear(clueType, clueValue, previousSide);
         }
 
-        clues.push({ type: clueType, data: clueValue.value })
-
+        clues.push({ type: clueType, data: clueValue })
     }
 
     return clues;

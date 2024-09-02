@@ -10,12 +10,12 @@ const getClueString = (clue: Clue): string => {
         case ClueType.STUDIO:
         case ClueType.GENRE:
         case ClueType.TAG:
-            return clue.data;
+            return clue.data?.value;
         case ClueType.SOURCE:
         case ClueType.FORMAT:
-            return getSentenceCaseString(clue.data);
+            return getSentenceCaseString(clue.data?.value);
         case ClueType.YEAR: {
-            const { min, max } = clue.data;
+            const { min, max } = clue.data?.value;
             if (min && max) {
                 return `Started between ${min} and ${max}`;
             } else if (min) {
@@ -24,7 +24,7 @@ const getClueString = (clue: Clue): string => {
             return `Started before ${max}`
         }
         case ClueType.EPISODES: {
-            const { min, max } = clue.data;
+            const { min, max } = clue.data?.value;
             if (!min) {
                 return `${max} or less episodes`;
             } else if (!max) {
@@ -34,7 +34,7 @@ const getClueString = (clue: Clue): string => {
             }
         }
         case ClueType.WORDS_IN_TITLE: {
-            const { number, min, max } = clue.data;
+            const { number, min, max } = clue.data?.value;
 
             if (number) {
                 return `${number} word${number !== 1 ? 's' : ''} in title`
