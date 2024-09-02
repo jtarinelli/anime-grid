@@ -19,9 +19,9 @@ const getClueString = (clue: Clue): string => {
             if (min && max) {
                 return `Started between ${min} and ${max}`;
             } else if (min) {
-                return `Started after ${min}`;
+                return `Started ${min} or later`;
             }
-            return `Started before ${max}`
+            return `Started ${max} or before`
         }
         case ClueType.EPISODES: {
             const { min, max } = clue.data?.value;

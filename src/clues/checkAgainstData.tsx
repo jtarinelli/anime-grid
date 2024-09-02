@@ -19,11 +19,11 @@ const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
             const { min, max } = data;
             // feel like this logic could be simplified
             if (min && max) {
-                return animeData.seasonYear > min && animeData.seasonYear < max;
+                return animeData.seasonYear >= min && animeData.seasonYear <= max;
             } else if (min) {
-                return animeData.seasonYear > min
+                return animeData.seasonYear >= min
             }
-            return animeData.seasonYear < max;
+            return animeData.seasonYear <= max;
         }
         case ClueType.EPISODES: {
             const { min, max } = data;
