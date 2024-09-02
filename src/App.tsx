@@ -71,11 +71,11 @@ function App() {
           />
           <Guesses
             guessesLeft={guessesLeft}
+            isGameOver={isGameOver}
             onGiveUp={giveUp}
             onReset={reset}
+            onShowResults={() => setShowResults(true)}
           />
-          {isGameOver &&
-            <button onClick={() => setShowResults(true)} className={buttonClass}>See results</button>}
           {showResults &&
             <Results
               numberOfClues={numberOfClues}
