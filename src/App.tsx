@@ -78,7 +78,7 @@ function App() {
           {showResults &&
             <Results
               numberOfClues={numberOfClues}
-              guesses={guesses}
+              correctGuesses={correctGuesses}
               onClose={() => setShowResults(false)}
             />}
         </div>
