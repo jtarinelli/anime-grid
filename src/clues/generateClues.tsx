@@ -85,8 +85,8 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
         let clueType: ClueType = sample(options);
         let clueValue: ClueOption = sample(clueOptions[clueType]);
 
-        let duplicatesPreviousClue = getDuplicatesPreviousClue(previouslySelectedClues, clueType, clueValue)
-        let isPreviousSideNoGo = getIsPreviousSideNoGo(clueValue, previousSide);
+        let duplicatesPreviousClue = getDuplicatesPreviousClue(clueType, clueValue, previouslySelectedClues)
+        let isPreviousSideNoGo = getIsPreviousSideNoGo(clueType, clueValue, previousSide);
         let isInvalidByYear = getIsInvalidByYear(clueType, clueValue, previousSide);
 
         while (duplicatesPreviousClue || isPreviousSideNoGo || isInvalidByYear) {
@@ -94,8 +94,8 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
             clueType = sample(options);
             clueValue = sample(clueOptions[clueType]);
 
-            duplicatesPreviousClue = getDuplicatesPreviousClue(previouslySelectedClues, clueType, clueValue);
-            isPreviousSideNoGo = getIsPreviousSideNoGo(clueValue, previousSide);
+            duplicatesPreviousClue = getDuplicatesPreviousClue(clueType, clueValue, previouslySelectedClues);
+            isPreviousSideNoGo = getIsPreviousSideNoGo(clueType, clueValue, previousSide);
             isInvalidByYear = getIsInvalidByYear(clueType, clueValue, previousSide);
         }
 
@@ -104,11 +104,13 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
 
     return clues;
 
-    function getIsPreviousSideNoGo(clueValue: ClueOption, previousSide?: Clue[]) {
-        return previousSide?.some(previousClue => clueValue.noGos?.some(nogo => nogo.type === previousClue.type && isEqual(nogo.value, previousClue.data?.value))) ?? false;
+    function getIsPreviousSideNoGo(clueType: ClueType, clueValue: ClueOption, previousSide?: Clue[]) {
+        const newClueHasNoGo = previousSide?.some(previousClue => clueValue.noGos?.some(nogo => nogo.type === previousClue.type && isEqual(nogo.value, previousClue.data?.value))) ?? false;
+        const previousClueHasNoGo = previousSide?.some(previousClue => previousClue.data?.noGos?.some(nogo => nogo.type === clueType && isEqual(nogo.value, clueValue.value))) ?? false;
+        return newClueHasNoGo || previousClueHasNoGo;
     }
 
-    function getDuplicatesPreviousClue(previouslySelectedClues: Clue[], clueType: ClueType, clueValue: ClueOption) {
+    function getDuplicatesPreviousClue(clueType: ClueType, clueValue: ClueOption, previouslySelectedClues: Clue[]) {
         return previouslySelectedClues.some(previousClue => previousClue.type === clueType && isEqual(previousClue.data?.value, clueValue.value));
     }
 
