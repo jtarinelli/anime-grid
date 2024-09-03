@@ -105,11 +105,11 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
     return clues;
 
     function getIsPreviousSideNoGo(clueValue: ClueOption, previousSide?: Clue[]) {
-        return previousSide?.some(previousClue => clueValue.noGos?.some(nogo => nogo.type === previousClue.type && isEqual(nogo.value, previousClue.data))) ?? false;
+        return previousSide?.some(previousClue => clueValue.noGos?.some(nogo => nogo.type === previousClue.type && isEqual(nogo.value, previousClue.data?.value))) ?? false;
     }
 
     function getDuplicatesPreviousClue(previouslySelectedClues: Clue[], clueType: ClueType, clueValue: ClueOption) {
-        return previouslySelectedClues.some(previousClue => previousClue.type === clueType && isEqual(previousClue.data, clueValue.value));
+        return previouslySelectedClues.some(previousClue => previousClue.type === clueType && isEqual(previousClue.data?.value, clueValue.value));
     }
 
     // if there aren't a lot of valid options sometimes this makes a quasi-infinite loop : /
@@ -130,7 +130,7 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
                 }
                 if (previousClue.type === ClueType.YEAR) {
                     // type of previousClue.data is lying : ( sort that out
-                    return areRangesNonOverlapping(previousClue.data as any, clueValue.yearsActive)
+                    return areRangesNonOverlapping(previousClue.data?.value as any, clueValue.yearsActive)
                 }
                 return false;
             })
