@@ -131,8 +131,7 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
                     return areRangesNonOverlapping(previousClue.data.yearsActive, clueValue.yearsActive)
                 }
                 if (previousClue.type === ClueType.YEAR) {
-                    // type of previousClue.data is lying : ( sort that out
-                    return areRangesNonOverlapping(previousClue.data?.value as any, clueValue.yearsActive)
+                    return areRangesNonOverlapping(previousClue.data?.value, clueValue.yearsActive)
                 }
                 return false;
             })
