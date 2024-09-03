@@ -83,10 +83,10 @@ const clueOptions: Record<ClueType, ClueOption[]> = {
         { value: { max: 3 }, },
     ],
     [ClueType.TAG]: [
-        { value: "Shoujo", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }] },
-        { value: "Shounen", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }] },
-        { value: "Josei", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }] },
-        { value: "Seinen", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }] },
+        { value: "Shoujo", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shounen" },{ type: ClueType.TAG, value: "Seinen" }, { type: ClueType.TAG, value: "Josei" }, ] },
+        { value: "Shounen", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shoujo" },{ type: ClueType.TAG, value: "Seinen" }, { type: ClueType.TAG, value: "Josei" },] },
+        { value: "Josei", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shounen" },{ type: ClueType.TAG, value: "Seinen" }, { type: ClueType.TAG, value: "Shoujo" },] },
+        { value: "Seinen", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shounen" },{ type: ClueType.TAG, value: "Shoujo" }, { type: ClueType.TAG, value: "Josei" },] },
     ],
     [ClueType.FORMAT]: [
         { value: "MOVIE", },
