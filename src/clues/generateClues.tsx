@@ -106,8 +106,8 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
     return clues;
 
     function getIsPreviousSideNoGo(clueType: ClueType, clueValue: ClueOption, previousSide?: Clue[]) {
-        const newClueHasNoGo = previousSide?.some(previousClue => clueValue.noGos?.some(nogo => nogo.type === previousClue.type && isEqual(nogo.value, previousClue.data?.value))) ?? false;
-        const previousClueHasNoGo = previousSide?.some(previousClue => previousClue.data?.noGos?.some(nogo => nogo.type === clueType && isEqual(nogo.value, clueValue.value))) ?? false;
+        const newClueHasNoGo = previousSide?.some(previousClue => clueValue.noGos?.some(nogo => nogo.type === previousClue.type && (nogo.value === undefined || isEqual(nogo.value, previousClue.data?.value)))) ?? false;
+        const previousClueHasNoGo = previousSide?.some(previousClue => previousClue.data?.noGos?.some(nogo => nogo.type === clueType && (nogo.value === undefined || isEqual(nogo.value, clueValue.value)))) ?? false;
         return newClueHasNoGo || previousClueHasNoGo;
     }
 

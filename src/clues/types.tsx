@@ -22,7 +22,7 @@ export interface ClueOption {
     value: any;
     noGos?: {
         type: ClueType;
-        value: any;
+        value?: any;
     }[]
     yearsActive?: {
         min?: number;

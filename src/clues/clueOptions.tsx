@@ -2,8 +2,8 @@ import { ClueOption, ClueType } from "./types";
 
 const clueOptions: Record<ClueType, ClueOption[]> = {
     [ClueType.EPISODES]: [
-        { value: { max: 13 }, noGos: [{ type: ClueType.FORMAT, value: "MOVIE" }, { type: ClueType.STUDIO, value: "Studio Ghibli" }] },
-        { value: { min: 20 }, noGos: [{ type: ClueType.FORMAT, value: "MOVIE" }, { type: ClueType.STUDIO, value: "Studio Ghibli" }] },
+        { value: { max: 13 } },
+        { value: { min: 20 } },
     ],
     [ClueType.GENRE]: [
         { value: "Action", },
@@ -16,19 +16,19 @@ const clueOptions: Record<ClueType, ClueOption[]> = {
         { value: "Music", },
     ],
     [ClueType.STUDIO]: [
-        { value: "Trigger", yearsActive: { min: 2012 } },
-        { value: "Production I.G", yearsActive: { min: 1987 } },
-        { value: "bones", yearsActive: { min: 2000 } },
-        { value: "Kyoto Animation", yearsActive: { min: 2003 } },
-        { value: "MADHOUSE", yearsActive: { min: 1973 } },
-        { value: "MAPPA", yearsActive: { min: 2012 } },
-        { value: "Shaft", yearsActive: { min: 1995 } },
-        { value: "Studio Ghibli", yearsActive: { min: 1986 } },
-        { value: "Gainax", yearsActive: { min: 1981, max: 2015 } },
-        { value: "A-1 Pictures", yearsActive: { min: 2006 } },
-        { value: "P.A. Works", yearsActive: { min: 2008 } },
-        { value: "Sunrise", yearsActive: { min: 1972 }},
-        { value: "Toei Animation", yearsActive: { min: 1957 } },
+        { value: "Trigger", yearsActive: { min: 2012 }, noGos: [{ type: ClueType.STUDIO }] },
+        { value: "Production I.G", yearsActive: { min: 1987 }, noGos: [{ type: ClueType.STUDIO }] },
+        { value: "bones", yearsActive: { min: 2000 }, noGos: [{ type: ClueType.STUDIO }] },
+        { value: "Kyoto Animation", yearsActive: { min: 2003 }, noGos: [{ type: ClueType.STUDIO }] },
+        { value: "MADHOUSE", yearsActive: { min: 1973 }, noGos: [{ type: ClueType.STUDIO }] },
+        { value: "MAPPA", yearsActive: { min: 2012 }, noGos: [{ type: ClueType.STUDIO }] },
+        { value: "Shaft", yearsActive: { min: 1995 }, noGos: [{ type: ClueType.STUDIO }] },
+        { value: "Studio Ghibli", yearsActive: { min: 1986 }, noGos: [{ type: ClueType.STUDIO }, { type: ClueType.EPISODES }] },
+        { value: "Gainax", yearsActive: { min: 1981, max: 2015 }, noGos: [{ type: ClueType.STUDIO }] },
+        { value: "A-1 Pictures", yearsActive: { min: 2006 }, noGos: [{ type: ClueType.STUDIO }] },
+        { value: "P.A. Works", yearsActive: { min: 2008 }, noGos: [{ type: ClueType.STUDIO }] },
+        { value: "Sunrise", yearsActive: { min: 1972 }, noGos: [{ type: ClueType.STUDIO }] },
+        { value: "Toei Animation", yearsActive: { min: 1957 }, noGos: [{ type: ClueType.STUDIO }] },
     ],
     [ClueType.VOICE_ACTOR]: [
         { value: "Yuuki Kaji", yearsActive: { min: 2004 } },
@@ -74,8 +74,7 @@ const clueOptions: Record<ClueType, ClueOption[]> = {
     [ClueType.YEAR]: [
         { value: { max: 2020 }, },
         { value: { max: 2010 }, },
-        { value: { max: 2000 }, }, // this will not work with most popular voice actors...
-        // also some studios (mappa, trigger are new)
+        { value: { max: 2000 }, },
         { value: { min: 2010 }, },
     ],
     [ClueType.WORDS_IN_TITLE]: [
@@ -95,7 +94,7 @@ const clueOptions: Record<ClueType, ClueOption[]> = {
         { value: "Seinen", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shounen" },{ type: ClueType.TAG, value: "Shoujo" }, { type: ClueType.TAG, value: "Josei" },] },
     ],
     [ClueType.FORMAT]: [
-        { value: "MOVIE", },
+        { value: "MOVIE", noGos: [{ type: ClueType.EPISODES }] },
     ],
     [ClueType.SOURCE]: [
         { value: "ORIGINAL", },
