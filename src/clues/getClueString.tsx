@@ -43,6 +43,11 @@ const getClueString = (clue: Clue): string => {
             } else {
                 return `${max} or less words in title`
             }
+        } 
+        case ClueType.FIRST_LETTER: {
+            const { min, max } = clue.data?.value;
+
+            return `First letter of title between ${min} and ${max}`
         }
         default:
             throw Error("Bad clue type! CRINGE!!!")

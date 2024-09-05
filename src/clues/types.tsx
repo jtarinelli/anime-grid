@@ -10,6 +10,7 @@ export enum ClueType {
     FORMAT,
     WORDS_IN_TITLE,
     TAG,
+    FIRST_LETTER,
 }
 
 export interface Clue {

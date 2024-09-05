@@ -68,7 +68,8 @@ const clueOptions: Record<ClueType, ClueOption[]> = {
         { value: "Romi Park", yearsActive: { min: 1997 } },
         { value: "Jouji Nakata", yearsActive: { min: 1988 } },
         { value: "Akio Ootsuka", yearsActive: { min: 1988 } },
-        { value: "Shinichirou Miki", yearsActive: { min: 1989 } }
+        { value: "Shinichirou Miki", yearsActive: { min: 1989 } },
+        { value: "Hikaru Midorikawa", yearsActive: { min: 1988 } }
     ],
     [ClueType.YEAR]: [
         { value: { max: 2020 }, },
@@ -81,6 +82,11 @@ const clueOptions: Record<ClueType, ClueOption[]> = {
         { value: { number: 1 }, },
         { value: { min: 3 }, },
         { value: { max: 3 }, },
+    ],
+    [ClueType.FIRST_LETTER]: [
+        { value: { min: 'A', max: 'I'}},
+        { value: { min: 'J', max: 'Q'}},
+        { value: { min: 'R', max: 'Z'}},
     ],
     [ClueType.TAG]: [
         { value: "Shoujo", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shounen" },{ type: ClueType.TAG, value: "Seinen" }, { type: ClueType.TAG, value: "Josei" }, ] },

@@ -13,6 +13,7 @@ const clueSpecificity: Record<ClueType, Specificity> = {
     [ClueType.EPISODES]: Specificity.LOW,
     [ClueType.FORMAT]: Specificity.LOW,
     [ClueType.WORDS_IN_TITLE]: Specificity.LOW,
+    [ClueType.FIRST_LETTER]: Specificity.LOW,
     [ClueType.GENRE]: Specificity.MEDIUM,
     [ClueType.SOURCE]: Specificity.MEDIUM,
     [ClueType.TAG]: Specificity.MEDIUM,

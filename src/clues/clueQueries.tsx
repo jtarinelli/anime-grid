@@ -63,6 +63,18 @@ export const clueQueries: Record<ClueType, ClueQueryInfo> = {
     fragmentName: 'Format',
     isPaginated: false,
   },
+  [ClueType.FIRST_LETTER]: {
+    fragment: graphql(`
+      fragment Title on Media {
+        title {
+          english
+          romaji
+          }
+        }
+            `),
+    fragmentName: 'Title',
+    isPaginated: false,
+  },
   [ClueType.WORDS_IN_TITLE]: {
     fragment: graphql(`
       fragment Title on Media {

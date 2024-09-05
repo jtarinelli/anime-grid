@@ -2,10 +2,12 @@ import { gql } from "graphql-request"
 import clueQueries from "../clues/clueQueries"
 import { ClueQueryInfo } from "../clues/types"
 import { print } from 'graphql';
+import uniqBy from 'lodash/uniqBy';
 
-const fragments = Object.values(clueQueries).map(query => print(query.fragment)).join('\n\n');
+const uniqueQueries = uniqBy(Object.values(clueQueries), 'fragmentName');
 
-const fragmentNames = Object.values(clueQueries).map(query => query.fragmentName);
+const fragments = uniqueQueries.map(query => print(query.fragment)).join('\n\n');
+const fragmentNames = uniqueQueries.map(query => query.fragmentName);
 
 const fragmentParameters = fragmentNames.map(fragmentName =>
   `$${fragmentName.toLowerCase()}: Boolean!`).join(', ');
