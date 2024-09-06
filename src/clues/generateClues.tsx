@@ -33,15 +33,18 @@ export enum Mode {
     ALL_RANDOM,
     HALF_VOICE_ACTORS,
     ALL_VOICE_ACTORS,
+    BABY
 }
 
 const generateClues = (cluesPerSide: number, mode: Mode): Clue[] => {
     const allVoiceActorsTemplate = [];
     const noVoiceActorsTemplate = [];
+    const babyTemplate = [];
 
     for (let i = 0; i < cluesPerSide; i++) {
         allVoiceActorsTemplate.push({ type: [ClueType.VOICE_ACTOR] })
         noVoiceActorsTemplate.push({ type: clueTypeOptions.filter(option => option !== ClueType.VOICE_ACTOR) })
+        babyTemplate.push({specificity: [Specificity.LOW, Specificity.MEDIUM]})
     }
 
     let side1;
@@ -59,6 +62,10 @@ const generateClues = (cluesPerSide: number, mode: Mode): Clue[] => {
         case Mode.ALL_VOICE_ACTORS:
             side1 = generateSide(cluesPerSide, [], allVoiceActorsTemplate);
             side2 = generateSide(cluesPerSide, side1, allVoiceActorsTemplate);
+            break;
+        case Mode.BABY:
+            side1 = generateSide(cluesPerSide, [], babyTemplate);
+            side2 = generateSide(cluesPerSide, side1, babyTemplate);
             break;
     }
 
