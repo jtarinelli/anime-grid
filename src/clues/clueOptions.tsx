@@ -2,8 +2,8 @@ import { ClueOption, ClueType } from "./types";
 
 const clueOptions: Record<ClueType, ClueOption[]> = {
     [ClueType.EPISODES]: [
-        { value: { max: 13 } },
-        { value: { min: 20 } },
+        { value: { max: 13 }, noGos: [{ type: ClueType.EPISODES }] },
+        { value: { min: 20 }, noGos: [{ type: ClueType.EPISODES }] },
     ],
     [ClueType.GENRE]: [
         { value: "Action", },
@@ -72,20 +72,20 @@ const clueOptions: Record<ClueType, ClueOption[]> = {
         { value: "Hikaru Midorikawa", yearsActive: { min: 1988 } }
     ],
     [ClueType.YEAR]: [
-        { value: { max: 2020 }, },
-        { value: { max: 2010 }, },
-        { value: { max: 2000 }, },
-        { value: { min: 2010 }, },
+        { value: { max: 2020 }, noGos: [{ type: ClueType.YEAR }] },
+        { value: { max: 2010 }, noGos: [{ type: ClueType.YEAR }] },
+        { value: { max: 2000 }, noGos: [{ type: ClueType.YEAR }] },
+        { value: { min: 2010 }, noGos: [{ type: ClueType.YEAR }] },
     ],
     [ClueType.WORDS_IN_TITLE]: [
-        { value: { number: 1 }, },
-        { value: { min: 3 }, },
-        { value: { max: 3 }, },
+        { value: { number: 1 }, noGos: [{ type: ClueType.WORDS_IN_TITLE }] },
+        { value: { min: 3 }, noGos: [{ type: ClueType.WORDS_IN_TITLE }] },
+        { value: { max: 3 }, noGos: [{ type: ClueType.WORDS_IN_TITLE }] },
     ],
     [ClueType.FIRST_LETTER]: [
-        { value: { min: 'A', max: 'I'}},
-        { value: { min: 'J', max: 'Q'}},
-        { value: { min: 'R', max: 'Z'}},
+        { value: { min: 'A', max: 'I'}, noGos: [{ type: ClueType.FIRST_LETTER }] },
+        { value: { min: 'J', max: 'Q'}, noGos: [{ type: ClueType.FIRST_LETTER }] },
+        { value: { min: 'R', max: 'Z'}, noGos: [{ type: ClueType.FIRST_LETTER }] },
     ],
     [ClueType.TAG]: [
         { value: "Shoujo", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shounen" },{ type: ClueType.TAG, value: "Seinen" }, { type: ClueType.TAG, value: "Josei" }, ] },
