@@ -5,6 +5,7 @@ import { Guesses } from './components/Guesses';
 import { Anime } from './queries/animeSearch';
 import generateClues, { Mode } from './clues/generateClues';
 import Results from './components/Results';
+import Menu from './components/Menu';
 
 const client = new QueryClient({
   defaultOptions: {
@@ -17,7 +18,7 @@ const client = new QueryClient({
 const cluesPerSide = 3;
 const numberOfClues = cluesPerSide * 2;
 
-const clues = generateClues(cluesPerSide, Mode.HALF_VOICE_ACTORS);
+const clues = generateClues(cluesPerSide, Mode.ALL_RANDOM);
 
 export type CellCoordinates = {
   row: number;
@@ -58,9 +59,10 @@ function App() {
   const correctGuesses = guesses.filter(guess => guess.isCorrect);
 
   return (
-    <div className="h-screen w-full box-border m-0 p-0">
+    <div className="h-screen w-full md:flex box-border m-0 p-0">
       <QueryClientProvider client={client}>
-        <div className="h-full min-w-50% md:flex justify-center items-center p-10">
+        <Menu />
+        <div className="h-full w-full md:flex justify-center items-center">
           <Grid
             correctGuesses={correctGuesses}
             clues={clues}
