@@ -17,7 +17,7 @@ const getClueString = (clue: Clue): string => {
         case ClueType.YEAR: {
             const { min, max } = clue.data?.value;
             if (min && max) {
-                return `Started between ${min} and ${max}`;
+                return `Started ${min}-${max}`;
             } else if (min) {
                 return `Started ${min} or later`;
             }

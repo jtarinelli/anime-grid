@@ -14,6 +14,9 @@ const clueOptions: Record<ClueType, ClueOption[]> = {
         { value: "Fantasy", },
         { value: "Comedy", },
         { value: "Music", },
+        { value: "Sci-Fi", },
+        { value: "Mystery", },
+        { value: "Thriller", },
     ],
     [ClueType.STUDIO]: [
         { value: "Trigger", yearsActive: { min: 2012 }, noGos: [{ type: ClueType.STUDIO }] },
@@ -72,10 +75,10 @@ const clueOptions: Record<ClueType, ClueOption[]> = {
         { value: "Hikaru Midorikawa", yearsActive: { min: 1988 } }
     ],
     [ClueType.YEAR]: [
-        { value: { max: 2020 }, noGos: [{ type: ClueType.YEAR }] },
-        { value: { max: 2010 }, noGos: [{ type: ClueType.YEAR }] },
         { value: { max: 2000 }, noGos: [{ type: ClueType.YEAR }] },
-        { value: { min: 2010 }, noGos: [{ type: ClueType.YEAR }] },
+        { value: { min: 2000, max: 2010 }, noGos: [{ type: ClueType.YEAR }] },
+        { value: { min: 2010, max: 2020 }, noGos: [{ type: ClueType.YEAR }] },
+        { value: { min: 2020 }, noGos: [{ type: ClueType.YEAR }] },
     ],
     [ClueType.WORDS_IN_TITLE]: [
         { value: { number: 1 }, noGos: [{ type: ClueType.WORDS_IN_TITLE }] },
