@@ -7,9 +7,10 @@ import { Guess } from "../App";
 
 interface GameProps {
     clues: Clue[];
+    visible: boolean;
 }
 
-const Game: FC<GameProps> = ({clues}) =>  {
+const Game: FC<GameProps> = ({ clues, visible }) =>  {
     const [guesses, setGuesses] = useState<Guess[]>([]);
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
     const [showResults, setShowResults] = useState<boolean>(false);
@@ -36,7 +37,7 @@ const Game: FC<GameProps> = ({clues}) =>  {
 
     const correctGuesses = guesses.filter(guess => guess.isCorrect);
 
-    return (<>
+    return visible && (<>
         <Grid
             correctGuesses={correctGuesses}
             clues={clues}

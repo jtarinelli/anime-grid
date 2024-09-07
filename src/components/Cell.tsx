@@ -36,6 +36,7 @@ const Cell: FC<CellProps> = ({
             { id: correctedlyGuessedAnime?.id ?? 0 },
         ),
         enabled: correctedlyGuessedAnime?.id !== undefined,
+        staleTime: Infinity,
     });
 
     // images get stretched sometimes

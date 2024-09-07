@@ -1,29 +1,43 @@
 import { FC, useState } from "react";
 import { Rules } from "./Rules";
+import { Mode } from "../clues/generateClues";
 
-const Menu: FC = () => {
+interface MenuProps {
+    mode: Mode,
+    onUpdateMode: (mode: Mode) => void;
+}
+
+const Menu: FC<MenuProps> = ({ mode, onUpdateMode }) => {
     const [showRules, setShowRules] = useState<boolean>(false);
     const [showGameModes, setShowGameModes] = useState<boolean>(false);
 
-    // make the game mode say current mode (mode: normal) 
-    // (is it clear that it's changable tho? need lil dropdown symbol?)
+    const modeOptions = [
+        { name: 'Normal', type: Mode.HALF_VOICE_ACTORS },
+        { name: 'Baby', type: Mode.BABY },
+        { name: 'Voice actors', type: Mode.ALL_VOICE_ACTORS },
+        { name: 'Random', type: Mode.ALL_RANDOM },
+    ]
+
+    const currentModeName = modeOptions.find(option => option.type === mode)?.name;
+
     return <>
-        <div className='md:h-full md:place-self-start p-6 md:p-8 bg-slate-100'>
+        <div className='md:h-full md:place-self-start md:min-w-40 bg-slate-100'>
             <ul className='flex md:flex-col justify-evenly align-bottom'>
-                <li><h1 className='text-lg md:mb-10'>Anime Grid</h1></li>
-                <li className='md:mb-4'><a onClick={() => setShowRules(true)} className="cursor-pointer">Rules</a></li>
-                <li className='md:mb-4 md:hidden'><a onClick={() => setShowGameModes(!showGameModes)}>Mode: Normal v</a>
-                <ul className={`absolute${!showGameModes ? ' hidden' : ''} bg-slate-100 p-4 border-2 mt-2`}>
-                    <li className='mb-2'>Normal</li>
-                    {/* <li className='mb-2'>Voice actors</li>
-                    <li className=''>Random</li> */}
-                </ul>
+                <li><h1 className='text-lg p-4'>Anime Grid</h1></li>
+                <li className='p-4'><a onClick={() => setShowRules(true)} className="cursor-pointer">Rules</a></li>
+                <li className='p-4 md:hidden'><a onClick={() => setShowGameModes(!showGameModes)}>Mode: {currentModeName} v</a>
+                    <ul className={`absolute${!showGameModes ? ' hidden' : ''} bg-slate-100 p-4 border-2 mt-2`}>
+                        {modeOptions.map(option =>
+                            <li className='mb-2'><a onClick={() => onUpdateMode(option.type)} className="cursor-pointer">{option.name}</a></li>
+                        )}
+                    </ul>
                 </li>
                 <ul className={`hidden md:block`}>
-                    <li className='mb-4'>Mode:</li>
-                    <li className='mb-4'>Normal</li>
-                    {/* <li className='mb-4'>Voice actors</li>
-                    <li className='mb-4'>Random</li> */}
+                    <li className='ps-4'>---</li>
+                    <li className='p-4'>Mode:</li>
+                    {modeOptions.map(option =>
+                        <li className={`p-4 ${option.type === mode ? 'bg-slate-200' : ''}`}><a onClick={() => onUpdateMode(option.type)} className="cursor-pointer">{option.name}</a></li>
+                    )}
                 </ul>
             </ul>
         </div>
