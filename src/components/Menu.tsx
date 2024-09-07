@@ -2,6 +2,13 @@ import { FC, useState } from "react";
 import { Rules } from "./Rules";
 import { Mode } from "../clues/generateClues";
 
+export const modeOptions = [
+    { name: 'Normal', type: Mode.HALF_VOICE_ACTORS },
+    { name: 'Baby', type: Mode.BABY },
+    { name: 'Voice actors', type: Mode.ALL_VOICE_ACTORS },
+    { name: 'Random', type: Mode.ALL_RANDOM },
+  ]
+
 interface MenuProps {
     mode: Mode,
     onUpdateMode: (mode: Mode) => void;
@@ -10,13 +17,6 @@ interface MenuProps {
 const Menu: FC<MenuProps> = ({ mode, onUpdateMode }) => {
     const [showRules, setShowRules] = useState<boolean>(false);
     const [showGameModes, setShowGameModes] = useState<boolean>(false);
-
-    const modeOptions = [
-        { name: 'Normal', type: Mode.HALF_VOICE_ACTORS },
-        { name: 'Baby', type: Mode.BABY },
-        { name: 'Voice actors', type: Mode.ALL_VOICE_ACTORS },
-        { name: 'Random', type: Mode.ALL_RANDOM },
-    ]
 
     const currentModeName = modeOptions.find(option => option.type === mode)?.name;
 

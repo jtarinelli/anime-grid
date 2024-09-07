@@ -4,8 +4,8 @@ import { Anime } from "../queries/animeSearch";
 import { Clue } from "../clues/types";
 import { useQuery } from "@tanstack/react-query";
 import { animePosterQuery } from "../queries/animePoster";
-import { CellCoordinates, Guess } from "../App";
 import request from "graphql-request";
+import { CellCoordinates, Guess } from "./Game";
 
 type CellProps = {
     coordinates: CellCoordinates;

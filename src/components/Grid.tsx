@@ -2,7 +2,7 @@ import { FC } from "react"
 import Cell from "./Cell";
 import { Clue } from "../clues/types";
 import getClueString from "../clues/getClueString";
-import { CellCoordinates, Guess } from "../App";
+import { Guess, CellCoordinates } from "./Game";
 
 type GridProps = {
     correctGuesses: Guess[];

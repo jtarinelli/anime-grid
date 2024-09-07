@@ -3,12 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import debounce from "lodash/debounce";
 import { checkGuess } from "../clues/checkGuess";
 import { Clue } from "../clues/types";
-import { CellCoordinates, Guess } from "../App";
 import request from "graphql-request";
 import { Anime, animeSearchQuery } from "../queries/animeSearch";
 import { buttonClass } from "../classes";
 import Popup from "./Popup";
 import getClueString from "../clues/getClueString";
+import { CellCoordinates, Guess } from "./Game";
 
 type SearchProps = {
     cellCoordinates: CellCoordinates;

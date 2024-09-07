@@ -3,14 +3,28 @@ import Grid from "./Grid";
 import { Guesses } from "./Guesses";
 import Results from "./Results";
 import { Clue } from "../clues/types";
-import { Guess } from "../App";
+import { Mode } from "../clues/generateClues";
+import { Anime } from "../queries/animeSearch";
+
+export type CellCoordinates = {
+    row: number;
+    col: number;
+  }
+  
+  export type Guess = {
+    anime: Anime;
+    isCorrect: boolean;
+    cellCoordinates: CellCoordinates;
+  }
+  
 
 interface GameProps {
+    mode: Mode;
     clues: Clue[];
     visible: boolean;
 }
 
-const Game: FC<GameProps> = ({ clues, visible }) =>  {
+const Game: FC<GameProps> = ({ mode, clues, visible }) =>  {
     const [guesses, setGuesses] = useState<Guess[]>([]);
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
     const [showResults, setShowResults] = useState<boolean>(false);
@@ -54,6 +68,7 @@ const Game: FC<GameProps> = ({ clues, visible }) =>  {
         />
         {showResults &&
             <Results
+                mode={mode}
                 numberOfClues={clues.length}
                 correctGuesses={correctGuesses}
                 onClose={() => setShowResults(false)}

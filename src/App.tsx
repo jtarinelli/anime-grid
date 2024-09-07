@@ -15,18 +15,6 @@ const client = new QueryClient({
 
 const cluesPerSide = 3;
 
-export type CellCoordinates = {
-  row: number;
-  col: number;
-}
-
-export type Guess = {
-  anime: Anime;
-  isCorrect: boolean;
-  cellCoordinates: CellCoordinates;
-}
-
-
 const clues = {
   [Mode.HALF_VOICE_ACTORS]: generateClues(cluesPerSide, Mode.HALF_VOICE_ACTORS),
   [Mode.BABY]: generateClues(cluesPerSide, Mode.BABY),
@@ -43,10 +31,10 @@ function App() {
       <QueryClientProvider client={client}>
         <Menu mode={mode} onUpdateMode={(mode: Mode) => setMode(mode)} />
         <div className="h-full w-full md:flex justify-center items-center">
-          <Game clues={clues[Mode.HALF_VOICE_ACTORS]} visible={mode === Mode.HALF_VOICE_ACTORS} />
-          <Game clues={clues[Mode.BABY]} visible={mode === Mode.BABY} />
-          <Game clues={clues[Mode.ALL_VOICE_ACTORS]} visible={mode === Mode.ALL_VOICE_ACTORS} />
-          <Game clues={clues[Mode.ALL_RANDOM]} visible={mode === Mode.ALL_RANDOM} />
+          <Game mode={mode} clues={clues[Mode.HALF_VOICE_ACTORS]} visible={mode === Mode.HALF_VOICE_ACTORS} />
+          <Game mode={mode} clues={clues[Mode.BABY]} visible={mode === Mode.BABY} />
+          <Game mode={mode} clues={clues[Mode.ALL_VOICE_ACTORS]} visible={mode === Mode.ALL_VOICE_ACTORS} />
+          <Game mode={mode} clues={clues[Mode.ALL_RANDOM]} visible={mode === Mode.ALL_RANDOM} />
         </div>
       </QueryClientProvider>
     </div>
