@@ -22,21 +22,30 @@ const Menu: FC<MenuProps> = ({ mode, onUpdateMode }) => {
 
     return <>
         <div className='md:h-full md:place-self-start md:min-w-40 bg-slate-100'>
-            <ul className='flex md:flex-col justify-evenly align-bottom'>
+            <ul className='flex md:flex-col justify-evenly align-items-center'>
                 <li><h1 className='text-lg md:text-xl p-4 md:p-6'>Anime Grid</h1></li>
-                <a onClick={() => setShowRules(true)} className="cursor-pointer"><li className='p-4 hover:bg-slate-200'>Rules</li></a>
-                <li className='p-4 md:hidden'><a onClick={() => setShowGameModes(!showGameModes)}>Mode: {currentModeName} v</a>
-                    <ul className={`absolute${!showGameModes ? ' hidden' : ''} bg-slate-100 border-2 mt-2`}>
-                        {modeOptions.map(option =>
-                            <a onClick={() => onUpdateMode(option.type)} className="cursor-pointer"><li className='p-4 hover:bg-slate-200'>{option.name}</li></a>
-                        )}
-                    </ul>
-                </li>
+                <a onClick={() => setShowRules(true)} className="cursor-pointer">
+                    <li className='p-4 h-full hover:bg-slate-200'>Rules</li>
+                </a>
+                <a onClick={() => setShowGameModes(!showGameModes)}>
+                    <li className='p-4 h-full hover:bg-slate-200 md:hidden'>Mode: {currentModeName}
+                        <ul className={`absolute${!showGameModes ? ' hidden' : ''} bg-slate-100 border-2 mt-2`}>
+                            {modeOptions.map(option =>
+                                <a onClick={() => onUpdateMode(option.type)} className="cursor-pointer">
+                                    <li className='p-4 hover:bg-slate-200'>{option.name}</li>
+                                </a>
+                            )}
+                        </ul>
+                    </li>
+                </a>
                 <ul className={`hidden md:block`}>
                     <li className='ps-4'>---</li>
-                    <li className='p-4'>Mode:</li>
                     {modeOptions.map(option =>
-                        <a onClick={() => onUpdateMode(option.type)} className="cursor-pointer"><li className={`p-4 hover:bg-slate-200 ${option.type === mode ? 'bg-slate-200' : ''}`}>{option.name}</li></a>
+                        <a onClick={() => onUpdateMode(option.type)} className="cursor-pointer">
+                            <li className={`p-4 hover:bg-slate-200 ${option.type === mode ? 'bg-slate-200' : ''}`}>
+                                {option.name}
+                            </li>
+                        </a>
                     )}
                 </ul>
             </ul>
