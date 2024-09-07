@@ -37,6 +37,7 @@ const clues = {
 function App() {
   const [mode, setMode] = useState<Mode>(Mode.HALF_VOICE_ACTORS);
 
+  // TODO: figure out how to map Games instead of code duplication
   return (
     <div className="h-screen w-full md:flex box-border m-0 p-0">
       <QueryClientProvider client={client}>

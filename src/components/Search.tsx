@@ -74,25 +74,25 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
     // need to make list/datalist id unique across searches for it to work
     return (
         <Popup onClose={onClose}>
-        <div className="h-full p-1 flex flex-col justify-evenly">
-            <h2 className='text-lg'>{`${clues.map(clue => getClueString(clue)).join(' x ')}`}</h2>
-            <br />
-            <input
-                type="text"
-                list={uniqueId}
-                onChange={onType}
-                onInput={onSelect}
-                className="border-2"
-                autoFocus
-            />
+            <div className="h-full p-1 flex flex-col justify-evenly">
+                <h2 className='text-lg'>{`${clues.map(clue => getClueString(clue)).join(' x ')}`}</h2>
+                <br />
+                <input
+                    type="text"
+                    list={uniqueId}
+                    onChange={onType}
+                    onInput={onSelect}
+                    className="border-2 p-2"
+                    autoFocus
+                />
             <br/>
             {data?.Page?.media && (<datalist id={uniqueId}>
-                {data.Page.media.filter(anime => !!anime).map((anime) =>
-                    <option value={anime?.title?.romaji} key={anime?.id}>{anime?.title?.english}</option>
-                )}
+                        {data.Page.media.filter(anime => !!anime).map((anime) =>
+                            <option value={anime?.title?.romaji} key={anime?.id}>{anime?.title?.english}</option>
+                        )}
             </datalist>)}
             <button onClick={onSubmit} className={buttonClass + " border-2"}>Guess</button>
-        </div>
+            </div>
         </Popup>
     )
 }

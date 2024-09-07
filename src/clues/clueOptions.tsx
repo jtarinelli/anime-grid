@@ -23,7 +23,7 @@ const clueOptions: Record<ClueType, ClueOption[]> = {
         { value: "MADHOUSE", yearsActive: { min: 1973 }, noGos: [{ type: ClueType.STUDIO }] },
         { value: "MAPPA", yearsActive: { min: 2012 }, noGos: [{ type: ClueType.STUDIO }] },
         { value: "Shaft", yearsActive: { min: 1995 }, noGos: [{ type: ClueType.STUDIO }] },
-        { value: "Studio Ghibli", yearsActive: { min: 1986 }, noGos: [{ type: ClueType.STUDIO }, { type: ClueType.EPISODES }] },
+        { value: "Studio Ghibli", yearsActive: { min: 1986 }, noGos: [{ type: ClueType.STUDIO }, { type: ClueType.EPISODES }, { type: ClueType.VOICE_ACTOR }] },
         { value: "Gainax", yearsActive: { min: 1981, max: 2015 }, noGos: [{ type: ClueType.STUDIO }] },
         { value: "A-1 Pictures", yearsActive: { min: 2006 }, noGos: [{ type: ClueType.STUDIO }] },
         { value: "P.A. Works", yearsActive: { min: 2008 }, noGos: [{ type: ClueType.STUDIO }] },
