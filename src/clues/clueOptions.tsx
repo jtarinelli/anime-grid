@@ -95,6 +95,8 @@ const clueOptions: Record<ClueType, ClueOption[]> = {
         { value: "Shounen", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shoujo" },{ type: ClueType.TAG, value: "Seinen" }, { type: ClueType.TAG, value: "Josei" },] },
         { value: "Josei", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shounen" },{ type: ClueType.TAG, value: "Seinen" }, { type: ClueType.TAG, value: "Shoujo" },] },
         { value: "Seinen", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shounen" },{ type: ClueType.TAG, value: "Shoujo" }, { type: ClueType.TAG, value: "Josei" },] },
+        { value: "Female Protagonist", noGos: [{ type: ClueType.TAG, value: "Male Protagonist" }] },
+        { value: "Male Protagonist", noGos: [{ type: ClueType.TAG, value: "Female Protagonist" }] },
     ],
     [ClueType.FORMAT]: [
         { value: "MOVIE", noGos: [{ type: ClueType.EPISODES }] },
