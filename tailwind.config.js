@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       screens: {
-        ver: { raw: "(max-aspect-ratio: 23/30)" },
-        hor: { raw: "(min-aspect-ratio: 23/30)" },
+        ver: { raw: "(max-aspect-ratio: 11/9)" },
+        hor: { raw: "(min-aspect-ratio: 11/9)" },
       },
     },
     colors: {
