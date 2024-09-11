@@ -6,7 +6,7 @@ interface ButtonProps  {
 }
 
 const Button: FC<ButtonProps> = ({ label, onClick }) => {
-    return <button onClick={onClick} className="bg-accent-300 hover:bg-accent-200 p-2 px-4">{label}</button>
+    return <button onClick={onClick} className="bg-accent-500 hover:bg-accent-200 p-2 px-4">{label}</button>
 }
 
 export default Button
