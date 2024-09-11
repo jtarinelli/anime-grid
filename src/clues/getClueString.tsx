@@ -9,10 +9,10 @@ const getClueString = (clue: Clue): string => {
         case ClueType.VOICE_ACTOR:
         case ClueType.STUDIO:
         case ClueType.GENRE:
-        case ClueType.TAG:
             return clue.data?.value;
         case ClueType.SOURCE:
         case ClueType.FORMAT:
+        case ClueType.TAG:
             return getSentenceCaseString(clue.data?.value);
         case ClueType.YEAR: {
             const { min, max } = clue.data?.value;
@@ -43,7 +43,7 @@ const getClueString = (clue: Clue): string => {
             } else {
                 return `${max} or less words in title`
             }
-        } 
+        }
         case ClueType.FIRST_LETTER: {
             const { min, max } = clue.data?.value;
 
