@@ -21,18 +21,18 @@ const Menu: FC<MenuProps> = ({ mode, onUpdateMode }) => {
     const currentModeName = modeOptions.find(option => option.type === mode)?.name;
 
     return <>
-        <div className='md:h-full md:place-self-start md:min-w-40 bg-slate-100'>
+        <div className='md:h-full md:place-self-start md:min-w-60 bg-accent-300'>
             <ul className='flex md:flex-col justify-evenly align-items-center'>
-                <li><h1 className='text-lg md:text-xl p-4 md:p-6'>Anime Grid</h1></li>
+                <li><h1 className='text-lg md:text-xl p-4 md:p-6 text-center font-medium'>Anime Grid</h1></li>
                 <a onClick={() => setShowRules(true)} className="cursor-pointer">
-                    <li className='p-4 h-full hover:bg-slate-200'>Rules</li>
+                    <li className='p-4 h-full hover:bg-accent-200'>Rules</li>
                 </a>
                 <a onClick={() => setShowGameModes(!showGameModes)}>
-                    <li className='p-4 h-full hover:bg-slate-200 md:hidden'>Mode: {currentModeName}
-                        <ul className={`absolute${!showGameModes ? ' hidden' : ''} bg-slate-100 border-2 mt-2`}>
+                    <li className='p-4 h-full hover:bg-accent-200 md:hidden'>Mode: {currentModeName}
+                        <ul className={`absolute${!showGameModes ? ' hidden' : ''} bg-accent-300 border-2 mt-2`}>
                             {modeOptions.map(option =>
                                 <a onClick={() => onUpdateMode(option.type)} className="cursor-pointer">
-                                    <li className='p-4 hover:bg-slate-200'>{option.name}</li>
+                                    <li className='p-4 hover:bg-accent-200'>{option.name}</li>
                                 </a>
                             )}
                         </ul>
@@ -42,7 +42,7 @@ const Menu: FC<MenuProps> = ({ mode, onUpdateMode }) => {
                     <li className='ps-4'>---</li>
                     {modeOptions.map(option =>
                         <a onClick={() => onUpdateMode(option.type)} className="cursor-pointer">
-                            <li className={`p-4 hover:bg-slate-200 ${option.type === mode ? 'bg-slate-200' : ''}`}>
+                            <li className={`p-4 hover:bg-accent-200 ${option.type === mode ? 'bg-accent-400' : ''}`}>
                                 {option.name}
                             </li>
                         </a>

@@ -4386,7 +4386,7 @@ export type UserOptions = {
   displayAdultContent?: Maybe<Scalars['Boolean']['output']>;
   /** Notification options */
   notificationOptions?: Maybe<Array<Maybe<NotificationOption>>>;
-  /** Profile highlight color (blue, purple, pink, orange, red, green, gray) */
+  /** Profile highlight color (blue, purple, pink, orange, red, green, neutral) */
   profileColor?: Maybe<Scalars['String']['output']>;
   /** Whether the user only allow messages from users they follow */
   restrictMessagesToFollowing?: Maybe<Scalars['Boolean']['output']>;

@@ -33,7 +33,7 @@ const Grid: FC<GridProps> = ({ correctGuesses, clues, isAlreadyGuessed, addGuess
             if (col === 0 && row === 0) {
                 cells.push(<div key={key}></div>)
             } else if (row === 0) {
-                cells.push(<div key={key} className="text-sm">{getClueString(clues[horizontalClueIndex])}</div>);
+                cells.push(<div key={key} className="text-sm ">{getClueString(clues[horizontalClueIndex])}</div>);
             } else if (col === 0) {
                 cells.push(<div key={key} className="text-sm">{getClueString(clues[verticalClueIndex])}</div>);
             } else {

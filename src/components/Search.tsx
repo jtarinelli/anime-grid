@@ -82,16 +82,16 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                     list={uniqueId}
                     onChange={onType}
                     onInput={onSelect}
-                    className="border-2 p-2"
+                    className="border-2 border-neutral-300 p-2 bg-background"
                     autoFocus
                 />
-            <br/>
-            {data?.Page?.media && (<datalist id={uniqueId}>
-                        {data.Page.media.filter(anime => !!anime).map((anime) =>
-                            <option value={anime?.title?.romaji} key={anime?.id}>{anime?.title?.english}</option>
-                        )}
-            </datalist>)}
-            <button onClick={onSubmit} className={buttonClass + " border-2"}>Guess</button>
+                <br />
+                {data?.Page?.media && (<datalist id={uniqueId}>
+                    {data.Page.media.filter(anime => !!anime).map((anime) =>
+                        <option value={anime?.title?.romaji} key={anime?.id}>{anime?.title?.english}</option>
+                    )}
+                </datalist>)}
+                <button onClick={onSubmit} className={buttonClass}>Guess</button>
             </div>
         </Popup>
     )
