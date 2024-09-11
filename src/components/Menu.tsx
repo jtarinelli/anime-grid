@@ -25,14 +25,14 @@ const Menu: FC<MenuProps> = ({ mode, onUpdateMode }) => {
             <ul className='flex md:flex-col justify-evenly align-items-center'>
                 <li><h1 className='text-lg md:text-xl p-4 md:p-6 text-center font-medium'>Anime Grid</h1></li>
                 <a onClick={() => setShowRules(true)} className="cursor-pointer">
-                    <li className='p-4 h-full hover:bg-accent-200'>Rules</li>
+                    <li className='p-4 h-full hover:bg-accent-400'>Rules</li>
                 </a>
                 <a onClick={() => setShowGameModes(!showGameModes)}>
-                    <li className='p-4 h-full hover:bg-accent-200 md:hidden'>Mode: {currentModeName}
+                    <li className='p-4 h-full hover:bg-accent-400 md:hidden'>Mode: {currentModeName}
                         <ul className={`absolute${!showGameModes ? ' hidden' : ''} bg-accent-500 mt-2`}>
                             {modeOptions.map(option =>
                                 <a onClick={() => onUpdateMode(option.type)} className="cursor-pointer">
-                                    <li className='p-4 hover:bg-accent-200'>{option.name}</li>
+                                    <li className='p-4 hover:bg-accent-400'>{option.name}</li>
                                 </a>
                             )}
                         </ul>
@@ -42,7 +42,7 @@ const Menu: FC<MenuProps> = ({ mode, onUpdateMode }) => {
                     <li className='ps-4'>---</li>
                     {modeOptions.map(option =>
                         <a onClick={() => onUpdateMode(option.type)} className="cursor-pointer">
-                            <li className={`p-4 hover:bg-accent-200 ${option.type === mode ? 'bg-accent-700' : ''}`}>
+                            <li className={`p-4 hover:bg-accent-400 ${option.type === mode ? 'bg-accent-600' : ''}`}>
                                 {option.name}
                             </li>
                         </a>
