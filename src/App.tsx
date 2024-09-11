@@ -27,10 +27,10 @@ function App() {
 
   // TODO: figure out how to map Games instead of code duplication
   return (
-    <div className="h-screen w-full md:flex box-border m-0 p-0">
+    <div className="h-screen w-full hor:flex box-border m-0 p-0">
       <QueryClientProvider client={client}>
         <Menu mode={mode} onUpdateMode={(mode: Mode) => setMode(mode)} />
-        <div className="h-full w-full md:flex justify-center items-center">
+        <div className="h-full w-full hor:flex justify-center items-center">
           <Game mode={mode} clues={clues[Mode.HALF_VOICE_ACTORS]} visible={mode === Mode.HALF_VOICE_ACTORS} />
           <Game mode={mode} clues={clues[Mode.BABY]} visible={mode === Mode.BABY} />
           <Game mode={mode} clues={clues[Mode.ALL_VOICE_ACTORS]} visible={mode === Mode.ALL_VOICE_ACTORS} />

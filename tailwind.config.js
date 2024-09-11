@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      screens: {
+        ver: { raw: "(max-aspect-ratio: 23/30)" },
+        hor: { raw: "(min-aspect-ratio: 23/30)" },
+      },
+    },
     colors: {
       background: "#F7F9F9",
       text: "#12130F",
