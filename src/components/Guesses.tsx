@@ -13,8 +13,8 @@ export const Guesses: FC<GuessesProps> = ({ guessesLeft, isGameOver, onReset, on
     return (
         <>
             <div className="p-10 text-center">
-                {isGameOver ? 0 : guessesLeft} guesses left!!!
-                <br /><br />
+                <h2 className='text-lg'>{isGameOver ? 0 : guessesLeft} guesses left!!!</h2>
+                <br />
                 <Button label="Reset (*/ω＼*)" onClick={onReset} />
                 <br /><br />
                 {!isGameOver &&
