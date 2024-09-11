@@ -5,10 +5,10 @@ import { checkGuess } from "../clues/checkGuess";
 import { Clue } from "../clues/types";
 import request from "graphql-request";
 import { Anime, animeSearchQuery } from "../queries/animeSearch";
-import { buttonClass } from "../classes";
 import Popup from "./Popup";
 import getClueString from "../clues/getClueString";
 import { CellCoordinates, Guess } from "./Game";
+import Button from "./Button";
 
 type SearchProps = {
     cellCoordinates: CellCoordinates;
@@ -91,7 +91,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                         <option value={anime?.title?.romaji} key={anime?.id}>{anime?.title?.english}</option>
                     )}
                 </datalist>)}
-                <button onClick={onSubmit} className={buttonClass}>Guess</button>
+                <Button label="Guess" onClick={onSubmit} />
             </div>
         </Popup>
     )

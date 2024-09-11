@@ -1,5 +1,5 @@
 import { FC } from "react"
-import { buttonClass } from "../classes";
+import Button from "./Button";
 
 type GuessesProps = {
     guessesLeft: number;
@@ -15,12 +15,12 @@ export const Guesses: FC<GuessesProps> = ({ guessesLeft, isGameOver, onReset, on
             <div className="p-10 text-center">
                 {isGameOver ? 0 : guessesLeft} guesses left!!!
                 <br /><br />
-                <button onClick={onReset} className={buttonClass}>Reset (*/ω＼*)</button>
+                <Button label="Reset (*/ω＼*)" onClick={onReset} />
                 <br /><br />
                 {!isGameOver &&
-                    <button onClick={onGiveUp} className={buttonClass}>Give up (；′⌒`) </button>}
+                <Button label="Give up (；′⌒`)" onClick={onGiveUp} />}
                 {isGameOver &&
-                    <button onClick={() => onShowResults()} className={buttonClass}>See results ⓛωⓛ</button>}
+                 <Button label="See results ⓛωⓛ" onClick={() => onShowResults()} />}
             </div>
         </>
     )

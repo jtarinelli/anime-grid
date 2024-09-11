@@ -42,7 +42,7 @@ const Menu: FC<MenuProps> = ({ mode, onUpdateMode }) => {
                     <li className='ps-4'>---</li>
                     {modeOptions.map(option =>
                         <a onClick={() => onUpdateMode(option.type)} className="cursor-pointer">
-                            <li className={`p-4 hover:bg-accent-200 ${option.type === mode ? 'bg-accent-400' : ''}`}>
+                            <li className={`p-4 hover:bg-accent-200 ${option.type === mode ? 'bg-accent-200' : ''}`}>
                                 {option.name}
                             </li>
                         </a>

@@ -1,9 +1,9 @@
 import { FC } from "react";
 import Popup from "./Popup";
-import { buttonClass } from "../classes";
 import { Mode } from "../clues/generateClues";
 import { Guess } from "./Game";
 import { modeOptions } from "./Menu";
+import Button from "./Button";
 
 interface ResultsProps {
     mode: Mode;
@@ -59,7 +59,7 @@ const Results: FC<ResultsProps> = ({ mode, numberOfClues, correctGuesses, onClos
             {resultGrid}
         </div>
         <br />
-        <button onClick={onCopy} className={buttonClass}>Copy</button>
+        <Button label="Copy" onClick={onCopy} />
     </Popup>
 }
 
