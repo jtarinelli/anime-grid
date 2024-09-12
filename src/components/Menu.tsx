@@ -27,10 +27,10 @@ const Menu: FC<MenuProps> = ({ mode, onUpdateMode }) => {
                     <h1 className='text-xl hor:text-3xl p-4 hor:p-6 text-center font-medium'>Anime Grid</h1>
                 </li>
                 <a onClick={() => setShowRules(true)} className="cursor-pointer" key='rules'>
-                    <li className='p-4 h-full hover:bg-accent-400'>Rules</li>
+                    <li className='p-4 h-full flex items-center hover:bg-accent-400'>Rules</li>
                 </a>
                 <a onClick={() => setShowGameModes(!showGameModes)} key="mobile-modes">
-                    <li className='p-4 h-full hover:bg-accent-400 hor:hidden'>Mode: {currentModeName}
+                    <li className='p-4 h-full flex items-center hover:bg-accent-400 hor:hidden'>Mode: {currentModeName}
                         <ul className={`absolute${!showGameModes ? ' hidden' : ''} bg-accent-300 mt-4 -ml-4`}>
                             {modeOptions.map(option =>
                                 <a onClick={() => onUpdateMode(option.type)} className="cursor-pointer" key={option.type}>
