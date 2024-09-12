@@ -4,7 +4,7 @@ import { Mode } from "../clues/generateClues";
 
 export const modeOptions = [
     { name: 'Normal', type: Mode.HALF_VOICE_ACTORS },
-    { name: 'Baby', type: Mode.BABY },
+    { name: 'Easy', type: Mode.BABY },
     { name: 'Voice actors', type: Mode.ALL_VOICE_ACTORS },
     { name: 'Random', type: Mode.ALL_RANDOM },
   ]
