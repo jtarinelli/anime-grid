@@ -103,7 +103,7 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
         let tries = 0;
 
         while (duplicatesPreviousClue || isPreviousSideNoGo || isInvalidByYear) {
-            console.log('invalid clue :(');
+            //console.log('invalid clue :(');
             if (valueOptions[clueType] && valueOptions[clueType].length) {
                 valueOptions[clueType] = valueOptions[clueType].filter(value => !isEqual(value, clueValue));
                 if (valueOptions[clueType].length === 0) {
