@@ -49,7 +49,8 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                 setSelection(null);
                 return;
             }
-            setSelection(guess)
+            // fix casting maybe teehee
+            setSelection(guess as Anime)
         }
     };
 
@@ -88,7 +89,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                 <br />
                 {data?.Page?.media && (<datalist id={uniqueId}>
                     {data.Page.media.filter(anime => !!anime).map((anime) =>
-                        <option value={anime?.title?.romaji} key={anime?.id}>{anime?.title?.english}</option>
+                        <option value={anime?.title?.romaji ?? ''} key={anime?.id}>{anime?.title?.english}</option>
                     )}
                 </datalist>)}
                 <Button label="Guess" onClick={onSubmit} />

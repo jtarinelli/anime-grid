@@ -9,8 +9,8 @@ type GuessesProps = {
     onShowResults: () => void;
 }
 
-export const Guesses: FC<GuessesProps> = ({ guessesLeft, isGameOver, onReset, onGiveUp, onShowResults }) => {
-    const resetKaomoji = "(*/ω＼*)";
+export const Guesses: FC<GuessesProps> = ({ guessesLeft, isGameOver, onGiveUp, onShowResults }) => {
+    //const resetKaomoji = "(*/ω＼*)";
     return (
         <>
             <div className="p-10 text-center">

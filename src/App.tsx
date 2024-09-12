@@ -1,5 +1,4 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Anime } from './queries/animeSearch';
 import generateClues, { Mode } from './clues/generateClues';
 import Menu from './components/Menu';
 import Game from './components/Game';

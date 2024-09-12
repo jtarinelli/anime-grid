@@ -1,22 +1,22 @@
 import { Clue, ClueType } from "./types";
 
 const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
-    const { type, data: { value } } = clue;
+    const clueValue = clue.data?.value;
     const animeData = guessData.Media;
 
-    switch (type) {
+    switch (clue.type) {
         case ClueType.GENRE:
-            return animeData.genres.includes(value)
+            return animeData.genres.includes(clueValue)
         case ClueType.SOURCE:
-            return animeData.source === value;
+            return animeData.source === clueValue;
         case ClueType.FORMAT:
-            return animeData.format === value;
+            return animeData.format === clueValue;
         case ClueType.STUDIO:
-            return animeData.studios.nodes.some((node: any) => node.name === value);
+            return animeData.studios.nodes.some((node: any) => node.name === clueValue);
         case ClueType.VOICE_ACTOR:
-            return animeData.characters.edges.some((edge: any) => edge.voiceActors.some((voiceActor: any) => voiceActor.name.full === value))
+            return animeData.characters.edges.some((edge: any) => edge.voiceActors.some((voiceActor: any) => voiceActor.name.full === clueValue))
         case ClueType.YEAR: {
-            const { min, max } = value;
+            const { min, max } = clueValue;
             // feel like this logic could be simplified
             if (min && max) {
                 return animeData.seasonYear >= min && animeData.seasonYear <= max;
@@ -26,7 +26,7 @@ const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
             return animeData.seasonYear <= max;
         }
         case ClueType.EPISODES: {
-            const { min, max } = value;
+            const { min, max } = clueValue;
             // feel like this logic could be simplified
             if (min && max) {
                 return animeData.episodes >= min && animeData.episodes <= max;
@@ -36,7 +36,7 @@ const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
             return animeData.episodes <= max;
         }
         case ClueType.WORDS_IN_TITLE: {
-            const { number, min, max } = value;
+            const { number, min, max } = clueValue;
 
             const romajiTitleLength = animeData.title.romaji.split(" ").length;
             const hasEnglishTitle = animeData.title.english != null;
@@ -51,7 +51,7 @@ const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
             }
         }
         case ClueType.FIRST_LETTER: {
-            const { min, max } = value;
+            const { min, max } = clueValue;
             const firstLetterRomaji = animeData.title.romaji.charAt(0).toUpperCase();
             const hasEnglishTitle = animeData.title.english != null;
             const firstLetterEnglish = animeData.title.english?.charAt(0).toUpperCase();
@@ -60,7 +60,7 @@ const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
         }
         case ClueType.TAG:
             // might also want to add tag rank filter idk
-            return animeData.tags.filter((tag: any) => !tag.isMediaSpoiler).some((tag: any) => tag.name === value);
+            return animeData.tags.filter((tag: any) => !tag.isMediaSpoiler).some((tag: any) => tag.name === clueValue);
         default:
             throw new Error("Bad clue type! CRINGE!!!")
     }

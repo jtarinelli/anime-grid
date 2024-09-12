@@ -44,7 +44,7 @@ const generateClues = (cluesPerSide: number, mode: Mode): Clue[] => {
     for (let i = 0; i < cluesPerSide; i++) {
         allVoiceActorsTemplate.push({ type: [ClueType.VOICE_ACTOR] })
         noVoiceActorsTemplate.push({ type: clueTypeOptions.filter(option => option !== ClueType.VOICE_ACTOR) })
-        babyTemplate.push({specificity: [Specificity.LOW, Specificity.MEDIUM]})
+        babyTemplate.push({ specificity: [Specificity.LOW, Specificity.MEDIUM] })
     }
 
     let side1;
@@ -77,7 +77,7 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
 
     for (let i = 0; i < length; i++) {
         let typeOptions = [...clueTypeOptions];
-        let valueOptions = {...clueOptions};
+        let valueOptions = { ...clueOptions };
 
         if (template) {
             const thisTemplate = template[i];
@@ -91,8 +91,10 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
 
         const previouslySelectedClues = [...clues, ...previousSide ?? []];
 
-        let clueType: ClueType = sample(typeOptions);
-        let clueValue: ClueOption = sample(valueOptions[clueType]);
+        // fix casting
+        // undefined because length of arrays is unknown
+        let clueType = sample(typeOptions) as ClueType;
+        let clueValue = sample(valueOptions[clueType]) as ClueOption;
 
         let duplicatesPreviousClue = getDuplicatesPreviousClue(clueType, clueValue, previouslySelectedClues)
         let isPreviousSideNoGo = getIsPreviousSideNoGo(clueType, clueValue, previousSide);
@@ -109,8 +111,8 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
                 }
             } else if (typeOptions.length) {
                 typeOptions = typeOptions.filter(type => type !== clueType);
-            } 
-            
+            }
+
             if (typeOptions.length === 0) {
                 throw new Error(`Bad clues, no valid options left ${JSON.stringify(previouslySelectedClues)}`)
             }
@@ -120,8 +122,10 @@ const generateSide = (length: number, previousSide?: Clue[], template?: Template
                 throw new Error(`Bad clues, too many tries ${JSON.stringify(previouslySelectedClues)}`);
             }
 
-            clueType = sample(typeOptions);
-            clueValue = sample(valueOptions[clueType]);
+            // fix casting
+            // undefined because length of arrays is unknown
+            clueType = sample(typeOptions) as ClueType;
+            clueValue = sample(valueOptions[clueType]) as ClueOption;
 
             duplicatesPreviousClue = getDuplicatesPreviousClue(clueType, clueValue, previouslySelectedClues);
             isPreviousSideNoGo = getIsPreviousSideNoGo(clueType, clueValue, previousSide);
