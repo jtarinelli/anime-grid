@@ -56,8 +56,8 @@ const generateClues = (cluesPerSide: number, mode: Mode): Clue[] => {
             side2 = generateSide(cluesPerSide, side1);
             break;
         case Mode.HALF_VOICE_ACTORS:
-            side1 = generateSide(cluesPerSide, [], noVoiceActorsTemplate);
-            side2 = generateSide(cluesPerSide, side1, allVoiceActorsTemplate);
+            side1 = generateSide(cluesPerSide, [], allVoiceActorsTemplate);
+            side2 = generateSide(cluesPerSide, side1, noVoiceActorsTemplate);
             break;
         case Mode.ALL_VOICE_ACTORS:
             side1 = generateSide(cluesPerSide, [], allVoiceActorsTemplate);
@@ -69,38 +69,59 @@ const generateClues = (cluesPerSide: number, mode: Mode): Clue[] => {
             break;
     }
 
-    return [...side1, ...side2];
+    return [...side2, ...side1];
 }
 
 const generateSide = (length: number, previousSide?: Clue[], template?: Template[]): Clue[] => {
-    const clues: Clue[] = [];
+    let clues: Clue[] = [];
 
     for (let i = 0; i < length; i++) {
-        let options = [...clueTypeOptions];
+        let typeOptions = [...clueTypeOptions];
+        let valueOptions = {...clueOptions};
 
         if (template) {
             const thisTemplate = template[i];
             if (thisTemplate.type !== undefined) {
-                options = options.filter(option => thisTemplate.type?.some(type => option === type));
+                typeOptions = typeOptions.filter(option => thisTemplate.type?.some(type => option === type));
             }
             if (thisTemplate.specificity !== undefined) {
-                options = options.filter(option => thisTemplate.specificity?.some(specificity => clueSpecificity[option] === specificity));
+                typeOptions = typeOptions.filter(option => thisTemplate.specificity?.some(specificity => clueSpecificity[option] === specificity));
             }
         }
 
         const previouslySelectedClues = [...clues, ...previousSide ?? []];
 
-        let clueType: ClueType = sample(options);
-        let clueValue: ClueOption = sample(clueOptions[clueType]);
+        let clueType: ClueType = sample(typeOptions);
+        let clueValue: ClueOption = sample(valueOptions[clueType]);
 
         let duplicatesPreviousClue = getDuplicatesPreviousClue(clueType, clueValue, previouslySelectedClues)
         let isPreviousSideNoGo = getIsPreviousSideNoGo(clueType, clueValue, previousSide);
         let isInvalidByYear = getIsInvalidByYear(clueType, clueValue, previousSide);
 
+        let tries = 0;
+
         while (duplicatesPreviousClue || isPreviousSideNoGo || isInvalidByYear) {
             console.log('invalid clue :(');
-            clueType = sample(options);
-            clueValue = sample(clueOptions[clueType]);
+            if (valueOptions[clueType] && valueOptions[clueType].length) {
+                valueOptions[clueType] = valueOptions[clueType].filter(value => !isEqual(value, clueValue));
+                if (valueOptions[clueType].length === 0) {
+                    typeOptions = typeOptions.filter(type => type !== clueType);
+                }
+            } else if (typeOptions.length) {
+                typeOptions = typeOptions.filter(type => type !== clueType);
+            } 
+            
+            if (typeOptions.length === 0) {
+                throw new Error(`Bad clues, no valid options left ${JSON.stringify(previouslySelectedClues)}`)
+            }
+
+            tries++;
+            if (tries > 50) {
+                throw new Error(`Bad clues, too many tries ${JSON.stringify(previouslySelectedClues)}`);
+            }
+
+            clueType = sample(typeOptions);
+            clueValue = sample(valueOptions[clueType]);
 
             duplicatesPreviousClue = getDuplicatesPreviousClue(clueType, clueValue, previouslySelectedClues);
             isPreviousSideNoGo = getIsPreviousSideNoGo(clueType, clueValue, previousSide);
