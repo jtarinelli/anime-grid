@@ -39,6 +39,8 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+        env:
+          VITE_ANILIST_GRAPHQL_URL: https://graphql.anilist.co
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
