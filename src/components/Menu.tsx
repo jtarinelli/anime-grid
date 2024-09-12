@@ -31,7 +31,7 @@ const Menu: FC<MenuProps> = ({ mode, onUpdateMode }) => {
                 </a>
                 <a onClick={() => setShowGameModes(!showGameModes)} key="mobile-modes">
                     <li className='p-4 h-full flex items-center hover:bg-accent-400 hor:hidden'>Mode: {currentModeName}
-                        <ul className={`absolute${!showGameModes ? ' hidden' : ''} bg-accent-300 mt-4 -ml-4`}>
+                        <ul className={`absolute${!showGameModes ? ' hidden' : ''} top-14 mt-1 bg-accent-300 -ml-4`}>
                             {modeOptions.map(option =>
                                 <a onClick={() => onUpdateMode(option.type)} className="cursor-pointer" key={option.type}>
                                     <li className='p-4 hover:bg-accent-400'>{option.name}</li>
