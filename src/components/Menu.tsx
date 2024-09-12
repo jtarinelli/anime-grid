@@ -23,11 +23,11 @@ const Menu: FC<MenuProps> = ({ mode, onUpdateMode }) => {
     return <>
         <div className='hor:h-full hor:place-self-start hor:min-w-60 bg-accent-300'>
             <ul className='flex hor:flex-col justify-evenly align-items-center'>
-                <li><h1 className='text-lg hor:text-xl p-4 hor:p-6 text-center font-medium'>Anime Grid</h1></li>
-                <a onClick={() => setShowRules(true)} className="cursor-pointer">
+                <li key='title'><h1 className='text-lg hor:text-xl p-4 hor:p-6 text-center font-medium'>Anime Grid</h1></li>
+                <a onClick={() => setShowRules(true)} className="cursor-pointer" key='rules'>
                     <li className='p-4 h-full hover:bg-accent-400'>Rules</li>
                 </a>
-                <a onClick={() => setShowGameModes(!showGameModes)}>
+                <a onClick={() => setShowGameModes(!showGameModes)} key="mobile-modes">
                     <li className='p-4 h-full hover:bg-accent-400 hor:hidden'>Mode: {currentModeName}
                         <ul className={`absolute${!showGameModes ? ' hidden' : ''} bg-accent-300 mt-4 -ml-4`}>
                             {modeOptions.map(option =>
@@ -38,10 +38,10 @@ const Menu: FC<MenuProps> = ({ mode, onUpdateMode }) => {
                         </ul>
                     </li>
                 </a>
-                <ul className={`hidden hor:block`}>
-                    <li className='ps-4'>---</li>
+                <ul className={`hidden hor:block`} key='desktop-modes'>
+                    <li className='ps-4' key="divider">---</li>
                     {modeOptions.map(option =>
-                        <a onClick={() => onUpdateMode(option.type)} className="cursor-pointer">
+                        <a onClick={() => onUpdateMode(option.type)} className="cursor-pointer" key={option.type}>
                             <li className={`p-4 hover:bg-accent-400 ${option.type === mode ? 'bg-accent-400' : ''}`}>
                                 {option.name}
                             </li>
