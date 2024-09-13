@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<!-- https://fonts.google.com/icons?selected=Material+Symbols+Sharp:grid_3x3:FILL@1;wght@400;GRAD@0;opsz@48&icon.query=grid&icon.style=Sharp&icon.size=300&icon.color=%23FF8811 -->
+
+<svg 
+   xmlns="http://www.w3.org/2000/svg" 
+   height="48px" 
+   width="48px" 
+   viewBox="0 -960 960 960" 
+   fill="#FF8811"
+   stroke="#FF8811"
+   stroke-width="30"
+   paint-order="stroke fill"
+   >
+   <path d="M333-160v-173H160v-60h173v-174H160v-60h173v-173h60v173h174v-173h60v173h173v60H627v174h173v60H627v173h-60v-173H393v173h-60Zm60-233h174v-174H393v174Z"/>
+</svg>
