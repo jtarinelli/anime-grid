@@ -41,7 +41,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
         );
 
         return data?.Page?.media?.filter(anime => !!anime)
-            .map((anime) => { return { value: anime?.id ?? '', label: `${anime?.title?.romaji}${anime.title?.english && anime.title.english !== anime.title.romaji ? `\n${anime.title.english}` : ''}` } }
+            .map((anime) => { return { value: anime?.id ?? '', label: `${anime?.title?.romaji}${anime.title?.english && anime.title.english?.toUpperCase() !== anime.title.romaji?.toUpperCase() ? `\n(${anime.title.english})` : ''}` } }
             )
     }
 
