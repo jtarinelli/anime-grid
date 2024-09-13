@@ -39,15 +39,15 @@ const getClueString = (clue: Clue): string => {
             if (number) {
                 return `${number} word${number !== 1 ? 's' : ''} in title`
             } else if (min) {
-                return `${min} or more words in title`
+                return `${min} or more word title`
             } else {
-                return `${max} or less words in title`
+                return `${max} or less word title`
             }
         }
         case ClueType.FIRST_LETTER: {
             const { min, max } = clue.data?.value;
 
-            return `First letter of title between ${min} and ${max}`
+            return `First letter between ${min} and ${max}`
         }
         default:
             throw Error("Bad clue type! CRINGE!!!")
