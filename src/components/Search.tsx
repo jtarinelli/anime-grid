@@ -77,22 +77,23 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                         cacheOptions
                         unstyled
                         placeholder='Search for something'
+                        menuPortalTarget={document.body}
                         classNames={{
                             control: () => 'relative border-2 border-neutral-300 p-2 bg-background',
-                            menu: () => 'absolute z-10 bg-background',
+                            menu: (state) => state.options.length > 0 ? 'absolute z-10 bg-background border-2 border-t-0 border-neutral-300' : '',
                             option: (state) => state.isFocused ? 'p-2 hover:bg-neutral-100 bg-neutral-200' : 'p-2 hover:bg-neutral-100',
+                            menuPortal: () => 'z-100',
                             noOptionsMessage: () => 'absolute bg-background',
                             loadingMessage: () => 'absolute bg-background',
                             placeholder: () => 'text-neutral-700',
                         }}
                         styles={{
-                            indicatorsContainer: (base) => ({
-                                ...base,
+                            indicatorsContainer: () => ({
                                 "svg": {
                                     // neutral-700
                                     fill: '#554C44',
                                 }
-                            })
+                            }),
                         }}
                     />
                     <br />
