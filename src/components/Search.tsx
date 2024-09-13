@@ -41,7 +41,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
         );
 
         return data?.Page?.media?.filter(anime => !!anime)
-            .map((anime) => { return { value: anime?.id ?? '', label: `${anime?.title?.romaji}${anime.title?.english && anime.title.english !== anime.title.romaji ? ` (${anime.title.english})` : ''}` } }
+            .map((anime) => { return { value: anime?.id ?? '', label: `${anime?.title?.romaji}${anime.title?.english && anime.title.english !== anime.title.romaji ? `\n${anime.title.english}` : ''}` } }
             )
     }
 
@@ -60,8 +60,8 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
     }
 
     const onChange = (option: any) => {
-        // idk if title is actually needed
-        setSelection({ id: option.value, title: { romaji: option.label, english: '' } });
+        const titles = option.label.split('\n');
+        setSelection({ id: option.value, title: { romaji: titles[0], english: titles[1] } });
     }
 
     return (
@@ -80,7 +80,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                         menuPortalTarget={document.body}
                         classNames={{
                             control: () => 'relative border-2 border-neutral-300 p-2 bg-background',
-                            menu: (state) => state.options.length > 0 ? 'absolute z-10 bg-background border-2 border-t-0 border-neutral-300' : '',
+                            menu: (state) => state.options.length > 0 ? 'absolute z-10 bg-background border-2 border-t-0 border-neutral-300 whitespace-pre-wrap' : '',
                             option: (state) => state.isFocused ? 'p-2 hover:bg-neutral-100 bg-neutral-200' : 'p-2 hover:bg-neutral-100',
                             menuPortal: () => 'z-100',
                             noOptionsMessage: () => 'absolute bg-background',

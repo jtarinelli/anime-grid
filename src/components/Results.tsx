@@ -55,7 +55,7 @@ const Results: FC<ResultsProps> = ({ mode, numberOfClues, correctGuesses, onClos
         <br />
         {kaomoji}
         <br />
-        <div style={{ whiteSpace: "pre-wrap" }} className="text-2xl p-8">
+        <div className="text-2xl p-8 whitespace-pre-wrap">
             {resultGrid}
         </div>
         <br />
