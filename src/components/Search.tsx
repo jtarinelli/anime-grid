@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import { checkGuess } from "../clues/checkGuess";
 import { Clue } from "../clues/types";
 import request from "graphql-request";
@@ -8,6 +8,7 @@ import getClueString from "../clues/getClueString";
 import { CellCoordinates, Guess } from "./Game";
 import Button from "./Button";
 import AsyncSelect from 'react-select/async';
+import { debounce } from "lodash";
 
 type SearchProps = {
     cellCoordinates: CellCoordinates;
@@ -25,12 +26,19 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
         setShowSearch(false);
     }
 
-    const loadOptions = async (searchTerm: string) => {
+    const loadOptions = useCallback(
+        debounce((searchTerm, callback) => {
+            getOptions(searchTerm).then((options) => callback(options));
+        }, 500),
+        []
+    );
+
+    const getOptions = async (searchTerm: string) => {
         const data = await request(
             import.meta.env.VITE_ANILIST_GRAPHQL_URL,
             animeSearchQuery,
             { searchTerm }
-        )
+        );
 
         return data?.Page?.media?.filter(anime => !!anime)
             .map((anime) => { return { value: anime?.id ?? '', label: `${anime?.title?.romaji}${anime.title?.english && anime.title.english !== anime.title.romaji ? ` (${anime.title.english})` : ''}` } }
