@@ -61,7 +61,8 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
 
     const onChange = (option: any) => {
         const titles = option.label.split('\n');
-        setSelection({ id: option.value, title: { romaji: titles[0], english: titles[1] } });
+        const englishTitle = titles[1] ? titles[1].substring(1, titles[1].length - 1) : '';
+        setSelection({ id: option.value, title: { romaji: titles[0], english: englishTitle } });
     }
 
     return (
