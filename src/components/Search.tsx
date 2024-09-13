@@ -69,12 +69,16 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
             <div className="h-full p-1 flex flex-col justify-evenly">
                 <h2 className='text-lg'>{`${clues.map(clue => getClueString(clue)).join(' x ')}`}</h2>
                 <br />
-                <AsyncSelect
-                    autoFocus
-                    loadOptions={loadOptions}
-                    onChange={onChange}
-                />
-                <Button label="Guess" onClick={onSubmit} />
+                <form onSubmit={(event: any) => { event.preventDefault(); onSubmit() }}>
+                    <AsyncSelect
+                        autoFocus
+                        loadOptions={loadOptions}
+                        onChange={onChange}
+                        cacheOptions
+                    />
+                    <br />
+                    <Button label="Guess" onClick={onSubmit} />
+                </form>
             </div>
         </Popup>
     )
