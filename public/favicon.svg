@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- works sans shows up when opening svg but not on favicon :( -->
+
+<!-- https://fonts.google.com/icons?selected=Material+Symbols+Sharp:grid_3x3:FILL@1;wght@400;GRAD@0;opsz@48&icon.query=grid&icon.style=Sharp&icon.size=300&icon.color=%23FF8811 -->
 
 <svg 
    xmlns="http://www.w3.org/2000/svg" 
@@ -13,43 +14,3 @@
    >
    <path d="M333-160v-173H160v-60h173v-174H160v-60h173v-173h60v173h174v-173h60v173h173v60H627v174h173v60H627v173h-60v-173H393v173h-60Zm60-233h174v-174H393v174Z"/>
 </svg>
-
-<!--
-<svg
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   version="1.0"
-   x="0.00000000"
-   y="0.00000000"
-   width="500.00000"
-   height="500.00000"
-   id="svg2">
-  <defs
-     id="defs4" >
-      <style type="text/css">
-         @import url('https://fonts.googleapis.com/css?family=Work+Sans:ital,wght@0,100..900;1,100..900');
-      </style>
-     </defs>
-  <g
-     id="layer1">
-     <text 
-      width="300"
-       height="300"
-       x="50"
-       y="450"
-       style="fill:#FF8811;font-size:500px;font-family:sans-serif;stroke:#FF8811;stroke-width:10"
-       >
-       ア
-       </text>
-     <text 
-      width="400"
-       height="400"
-       x="50"
-       y="400"
-       style="fill:#12130F;font-size:500px;font-family:'Work Sans'"
-       >
-       A
-       </text>
-  </g>
-</svg>
--->
