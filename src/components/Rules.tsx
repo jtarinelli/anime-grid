@@ -10,7 +10,6 @@ export const Rules: FC<RulesProps> = ({ onClose }) => {
         <ul className="list-disc list-inside text-left">
             <li className='mb-2'>Click on a cell to search for an anime that satisfies the clues for that row and column.</li>
             <li className='mb-2'>You get nine guesses total, including incorrect ones.</li>
-            <li className='mb-2'>Make sure you've selected your guess from the dropdown before guessing or it shan't work.</li>
             <li className='mb-2'>Correct guesses can't be reused.</li>
             <li className='mb-2'>Movies are considered incorrect guesses for clues about the number of episodes.</li>
             <li className='mb-2'>Words are only counted as separate if separated by a space, any other character like a dash doesn't count. For example "Mahou Shoujo Madoka★Magica" is considered three words.</li>
