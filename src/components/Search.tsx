@@ -71,10 +71,29 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                 <br />
                 <form onSubmit={(event: any) => { event.preventDefault(); onSubmit() }}>
                     <AsyncSelect
-                        autoFocus
                         loadOptions={loadOptions}
                         onChange={onChange}
+                        autoFocus
                         cacheOptions
+                        unstyled
+                        placeholder='Search for something'
+                        classNames={{
+                            control: () => 'relative border-2 border-neutral-300 p-2 bg-background',
+                            menu: () => 'absolute z-10 bg-background',
+                            option: (state) => state.isFocused ? 'p-2 hover:bg-neutral-100 bg-neutral-200' : 'p-2 hover:bg-neutral-100',
+                            noOptionsMessage: () => 'absolute bg-background',
+                            loadingMessage: () => 'absolute bg-background',
+                            placeholder: () => 'text-neutral-700',
+                        }}
+                        styles={{
+                            indicatorsContainer: (base) => ({
+                                ...base,
+                                "svg": {
+                                    // neutral-700
+                                    fill: '#554C44',
+                                }
+                            })
+                        }}
                     />
                     <br />
                     <Button label="Guess" onClick={onSubmit} />
