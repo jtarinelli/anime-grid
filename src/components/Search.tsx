@@ -60,9 +60,13 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
     }
 
     const onChange = (option: any) => {
-        const titles = option.label.split('\n');
-        const englishTitle = titles[1] ? titles[1].substring(1, titles[1].length - 1) : '';
-        setSelection({ id: option.value, title: { romaji: titles[0], english: englishTitle } });
+        if (option) {
+            const titles = option.label.split('\n');
+            const englishTitle = titles[1] ? titles[1].substring(1, titles[1].length - 1) : '';
+            setSelection({ id: option.value, title: { romaji: titles[0], english: englishTitle } });
+        } else {
+            setSelection(null);
+        }
     }
 
     return (
@@ -77,6 +81,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                         autoFocus
                         cacheOptions
                         unstyled
+                        isClearable
                         placeholder='Search for something'
                         menuPortalTarget={document.body}
                         classNames={{
@@ -95,6 +100,9 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                                     fill: '#554C44',
                                 }
                             }),
+                            dropdownIndicator: () => ({
+                                display: 'none',
+                            })
                         }}
                     />
                     <br />
