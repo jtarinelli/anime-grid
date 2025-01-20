@@ -3,7 +3,7 @@ import { voiceActors } from "./voiceActors";
 
 const clueOptions: Record<ClueType, ClueOption[]> = {
     [ClueType.EPISODES]: [
-        { value: { max: 13 }, noGos: [{ type: ClueType.EPISODES }] },
+        { value: { max: 13 }, description: "The series has no more than 13 episodes. Only TV anime count, no movies or specials.", noGos: [{ type: ClueType.EPISODES }] },
         { value: { min: 20 }, noGos: [{ type: ClueType.EPISODES }] },
     ],
     [ClueType.GENRE]: [
@@ -42,20 +42,20 @@ const clueOptions: Record<ClueType, ClueOption[]> = {
         { value: { min: 2020 }, noGos: [{ type: ClueType.YEAR }] },
     ],
     [ClueType.WORDS_IN_TITLE]: [
-        { value: { number: 1 }, noGos: [{ type: ClueType.WORDS_IN_TITLE }] },
-        { value: { min: 3 }, noGos: [{ type: ClueType.WORDS_IN_TITLE }] },
-        { value: { max: 3 }, noGos: [{ type: ClueType.WORDS_IN_TITLE }] },
+        { value: { number: 1 }, description: "The title has only one word. Words are only counted if they are separated by spaces, other separators like hyphens don't count.", noGos: [{ type: ClueType.WORDS_IN_TITLE }] },
+        { value: { min: 3 }, description: "The title has at least three words. Words are only counted if they are separated by spaces, other separators like hyphens don't count.", noGos: [{ type: ClueType.WORDS_IN_TITLE }] },
+        { value: { max: 3 }, description: "The title has three or less words. Words are only counted if they are separated by spaces, other separators like hyphens don't count.", noGos: [{ type: ClueType.WORDS_IN_TITLE }] },
     ],
     [ClueType.FIRST_LETTER]: [
-        { value: { min: 'A', max: 'I' }, noGos: [{ type: ClueType.FIRST_LETTER }] },
-        { value: { min: 'J', max: 'Q' }, noGos: [{ type: ClueType.FIRST_LETTER }] },
-        { value: { min: 'R', max: 'Z' }, noGos: [{ type: ClueType.FIRST_LETTER }] },
+        { value: { min: 'A', max: 'I' }, description: 'The first letter of the title is between A and I, inclusive. If there is an official English translation than it can also be used in addition to the romanized Japanese title.', noGos: [{ type: ClueType.FIRST_LETTER }] },
+        { value: { min: 'J', max: 'Q' }, description: 'The first letter of the title is between J and Q, inclusive. If there is an official English translation than it can also be used in addition to the romanized Japanese title.', noGos: [{ type: ClueType.FIRST_LETTER }] },
+        { value: { min: 'R', max: 'Z' }, description: 'The first letter of the title is between R and Z, inclusive. If there is an official English translation than it can also be used in addition to the romanized Japanese title.', noGos: [{ type: ClueType.FIRST_LETTER }] },
     ],
     [ClueType.TAG]: [
-        { value: "Shoujo", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shounen" }, { type: ClueType.TAG, value: "Seinen" }, { type: ClueType.TAG, value: "Josei" },] },
-        { value: "Shounen", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shoujo" }, { type: ClueType.TAG, value: "Seinen" }, { type: ClueType.TAG, value: "Josei" },] },
-        { value: "Josei", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shounen" }, { type: ClueType.TAG, value: "Seinen" }, { type: ClueType.TAG, value: "Shoujo" },] },
-        { value: "Seinen", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shounen" }, { type: ClueType.TAG, value: "Shoujo" }, { type: ClueType.TAG, value: "Josei" },] },
+        { value: "Shoujo", description: "Adapted from a shoujo manga magazine, ie one aimed at girls.", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shounen" }, { type: ClueType.TAG, value: "Seinen" }, { type: ClueType.TAG, value: "Josei" },] },
+        { value: "Shounen", description: "Adapted from a shounen manga magazine, ie one aimed at boys.", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shoujo" }, { type: ClueType.TAG, value: "Seinen" }, { type: ClueType.TAG, value: "Josei" },] },
+        { value: "Josei", description: "Adapted from a josei manga magazine, ie one aimed at women.", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shounen" }, { type: ClueType.TAG, value: "Seinen" }, { type: ClueType.TAG, value: "Shoujo" },] },
+        { value: "Seinen", description: "Adapted from a seinen manga magazine, ie one aimed at seinen.", noGos: [{ type: ClueType.SOURCE, value: "ORIGINAL" }, { type: ClueType.TAG, value: "Shounen" }, { type: ClueType.TAG, value: "Shoujo" }, { type: ClueType.TAG, value: "Josei" },] },
         { value: "Female Protagonist", noGos: [{ type: ClueType.TAG, value: "Male Protagonist" }] },
         { value: "Male Protagonist", noGos: [{ type: ClueType.TAG, value: "Female Protagonist" }] },
     ],
@@ -63,7 +63,7 @@ const clueOptions: Record<ClueType, ClueOption[]> = {
         { value: "MOVIE", noGos: [{ type: ClueType.EPISODES }] },
     ],
     [ClueType.SOURCE]: [
-        { value: "ORIGINAL", },
+        { value: "ORIGINAL", description: "An anime original, ie has no source material like a manga, book, or video game."},
     ],
 }
 

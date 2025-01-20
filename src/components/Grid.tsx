@@ -1,12 +1,12 @@
 import { FC } from "react"
 import Cell from "./Cell";
-import { Clue } from "../clues/types";
-import getClueString from "../clues/getClueString";
+import { Clue as ClueType} from "../clues/types";
 import { Guess, CellCoordinates } from "./Game";
+import Clue from "./Clue";
 
 type GridProps = {
     correctGuesses: Guess[];
-    clues: Clue[];
+    clues: ClueType[];
     isAlreadyGuessed: (animeId: number) => boolean;
     addGuess: (newGuess: Guess) => void;
     isGameOver: boolean;
@@ -33,9 +33,9 @@ const Grid: FC<GridProps> = ({ correctGuesses, clues, isAlreadyGuessed, addGuess
             if (col === 0 && row === 0) {
                 cells.push(<div key={key}></div>)
             } else if (row === 0) {
-                cells.push(<div className="text-sm md:text-base mt-auto" key={key}>{getClueString(clues[horizontalClueIndex])}</div>);
+                cells.push(<Clue clue={clues[horizontalClueIndex]} className="text-sm md:text-base mt-auto" key={key}/>);
             } else if (col === 0) {
-                cells.push(<div className="text-sm md:text-base" key={key}>{getClueString(clues[verticalClueIndex])}</div>);
+                cells.push(<Clue clue={clues[verticalClueIndex]} className="text-sm md:text-base" key={key} />);
             } else {
                 cells.push(
                     <Cell
