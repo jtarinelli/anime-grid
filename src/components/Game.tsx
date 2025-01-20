@@ -35,7 +35,7 @@ const Game: FC<GameProps> = ({ mode, /* clues, */ visible }) => {
         queryKey: [],
         queryFn: async () => {
             const response = await fetch(
-                'http://localhost:3000/game',
+                'http://localhost:3000/game/ALL_RANDOM',
             )
             return await response.json()
         },
