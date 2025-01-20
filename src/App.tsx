@@ -29,9 +29,9 @@ function App() {
       <QueryClientProvider client={client}>
         <Menu mode={selectedMode} onUpdateMode={(mode: Mode) => setSelectedMode(mode)} />
         <div className="h-full w-full hor:flex justify-center items-center">
-          {
-            Object.values(Mode).map(mode => <Game mode={selectedMode} clues={clues[Mode[mode]]} visible={selectedMode === mode} />)
-          }
+          {Object.values(Mode).map(mode =>
+            <Game mode={selectedMode} clues={clues[Mode[mode]]} visible={selectedMode === mode} key={mode}
+            />)}
         </div>
       </QueryClientProvider>
     </div>
