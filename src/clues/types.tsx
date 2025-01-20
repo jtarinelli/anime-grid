@@ -29,6 +29,7 @@ export interface ClueOption {
         min?: number;
         max?: number;
     }
+    description?: string;
 };
 
 export type ClueQueryInfo = {
