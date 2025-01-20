@@ -23,18 +23,16 @@ const cluesPerSide = 3;
 } */
 
 function App() {
-  const [mode, setMode] = useState<Mode>(Mode.HALF_VOICE_ACTORS);
+  const [selectedMode, setSelectedMode] = useState<Mode>(Mode.HALF_VOICE_ACTORS);
 
-  // TODO: figure out how to map Games instead of code duplication
   return (
     <div className="h-screen w-full hor:flex box-border m-0 p-0">
       <QueryClientProvider client={client}>
-        <Menu mode={mode} onUpdateMode={(mode: Mode) => setMode(mode)} />
+        <Menu mode={selectedMode} onUpdateMode={(mode: Mode) => setSelectedMode(mode)} />
         <div className="h-full w-full hor:flex justify-center items-center">
-          <Game mode={mode} visible={mode === Mode.HALF_VOICE_ACTORS} />
-          <Game mode={mode} visible={mode === Mode.BABY} />
-          <Game mode={mode} visible={mode === Mode.ALL_VOICE_ACTORS} />
-          <Game mode={mode} visible={mode === Mode.ALL_RANDOM} />
+          {Object.values(Mode).map(mode =>
+            <Game mode={selectedMode} /* clues={clues[Mode[mode]]} */ visible={selectedMode === mode} key={mode}
+            />)}
         </div>
       </QueryClientProvider>
     </div>
