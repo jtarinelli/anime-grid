@@ -35,7 +35,7 @@ const Game: FC<GameProps> = ({ mode, /* clues, */ visible }) => {
         queryKey: [],
         queryFn: async () => {
             const response = await fetch(
-                'http://localhost:3000/puzzle',
+                'http://localhost:3000/game',
             )
             return await response.json()
         },
