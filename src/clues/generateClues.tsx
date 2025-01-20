@@ -30,10 +30,10 @@ interface Template {
 const clueTypeOptions = Object.values(ClueType).filter(value => typeof value === "number");
 
 export enum Mode {
-    ALL_RANDOM,
-    HALF_VOICE_ACTORS,
-    ALL_VOICE_ACTORS,
-    BABY
+    ALL_RANDOM = "ALL_RANDOM",
+    HALF_VOICE_ACTORS = "HALF_VOICE_ACTORS",
+    ALL_VOICE_ACTORS = "ALL_VOICE_ACTORS",
+    BABY = "BABY",
 }
 
 const generateClues = (cluesPerSide: number, mode: Mode): Clue[] => {
