@@ -57,6 +57,7 @@ stacc
     - tables needed: clues (type, data), puzzles (clues, date?), guess (puzzle, guess, correct/incorrect)
         - do yearsactive and nogo also need to go into clues? or just generate a bunch of puzzles upfront based on existing json? and know that they're all already valid?
     - leave as much actual anilist querying as possible on the client to avoid hitting rate limit (search def)
+    - can put some common types in common folder wowee
 
 required operations
 - generate puzzle/clues
