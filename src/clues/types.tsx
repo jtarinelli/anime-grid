@@ -1,21 +1,22 @@
 import { DocumentNode } from "graphql";
 
 export enum ClueType {
-    VOICE_ACTOR,
-    STUDIO,
-    YEAR,
-    GENRE,
-    SOURCE,
-    EPISODES,
-    FORMAT,
-    WORDS_IN_TITLE,
-    TAG,
-    FIRST_LETTER,
+    VOICE_ACTOR = "VOICE_ACTOR",
+    STUDIO = "STUDIO",
+    YEAR = "YEAR",
+    GENRE = "GENRE",
+    SOURCE = "SOURCE",
+    EPISODES = "EPISODES",
+    FORMAT = "FORMAT",
+    WORDS_IN_TITLE = "WORDS_IN_TITLE",
+    TAG = "TAG",
+    FIRST_LETTER = "FIRST_LETTER",
 }
 
 export interface Clue {
     type: ClueType,
-    data?: ClueOption, // don't really like nested data.value
+    value: any,
+    //data?: ClueOption, // don't really like nested data.value
 }
 
 export interface ClueOption {

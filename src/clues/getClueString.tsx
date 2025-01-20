@@ -5,17 +5,18 @@ const getSentenceCaseString = (string: string) => {
 }
 
 const getClueString = (clue: Clue): string => {
+    const clueValue = clue.value;
     switch (clue.type) {
         case ClueType.VOICE_ACTOR:
         case ClueType.STUDIO:
         case ClueType.GENRE:
-            return clue.data?.value;
+            return clueValue;
         case ClueType.SOURCE:
         case ClueType.FORMAT:
         case ClueType.TAG:
-            return getSentenceCaseString(clue.data?.value);
+            return getSentenceCaseString(clueValue);
         case ClueType.YEAR: {
-            const { min, max } = clue.data?.value;
+            const { min, max } = clueValue;
             if (min && max) {
                 return `Started ${min}-${max}`;
             } else if (min) {
@@ -24,7 +25,7 @@ const getClueString = (clue: Clue): string => {
             return `Started ${max} or before`
         }
         case ClueType.EPISODES: {
-            const { min, max } = clue.data?.value;
+            const { min, max } = clueValue;
             if (!min) {
                 return `${max} or less episodes`;
             } else if (!max) {
@@ -34,18 +35,18 @@ const getClueString = (clue: Clue): string => {
             }
         }
         case ClueType.WORDS_IN_TITLE: {
-            const { number, min, max } = clue.data?.value;
+            const { min, max } = clueValue;
 
-            if (number) {
-                return `${number} word${number !== 1 ? 's' : ''} in title`
-            } else if (min) {
+             if (min) {
                 return `${min} or more word title`
-            } else {
+            } else if (max) {
                 return `${max} or less word title`
+            } else {
+                return `${clueValue} word${clueValue !== 1 ? 's' : ''} in title`
             }
         }
         case ClueType.FIRST_LETTER: {
-            const { min, max } = clue.data?.value;
+            const { min, max } = clueValue;
 
             return `First letter between ${min} and ${max}`
         }
