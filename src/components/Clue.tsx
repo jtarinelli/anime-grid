@@ -10,7 +10,7 @@ type ClueProps = {
 
 const Clue: FC<ClueProps> = ({ clue, className }) => {
     const [showDescription, setShowDescription] = useState(false);
-    const description = clue.data?.description;
+    const description = clue.description;
 
     return <>
         <div className={`${className} ${description ? 'cursor-pointer' : ''}`} onClick={() => setShowDescription(true)}>
