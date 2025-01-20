@@ -56,6 +56,7 @@ stacc
 - basic version of this def doesn't need a database, but to have a different daily puzzle for everyone and see stats on how many people guessed each thing like movie grid it is needed
     - tables needed: clues (type, data), puzzles (clues, date?), guess (puzzle, guess, correct/incorrect)
         - do yearsactive and nogo also need to go into clues? or just generate a bunch of puzzles upfront based on existing json? and know that they're all already valid?
+    - leave as much actual anilist querying as possible on the client to avoid hitting rate limit (search def)
 
 required operations
 - generate puzzle/clues
