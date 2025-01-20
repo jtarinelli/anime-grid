@@ -32,10 +32,10 @@ const Game: FC<GameProps> = ({ mode, /* clues, */ visible }) => {
     // should this data fetch happen here or a level up?
     // each game fetches its own puzzle data sooo...?
     const { data, isFetching } = useQuery({
-        queryKey: [],
+        queryKey: [mode],
         queryFn: async () => {
             const response = await fetch(
-                'http://localhost:3000/game/ALL_RANDOM',
+                `http://localhost:3000/game/${mode}`,
             )
             return await response.json()
         },
