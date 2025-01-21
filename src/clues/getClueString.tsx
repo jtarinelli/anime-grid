@@ -42,7 +42,7 @@ const getClueString = (clue: Clue): string => {
             } else if (max) {
                 return `${max} or less word title`
             } else {
-                return `${clueValue} word${clueValue !== 1 ? 's' : ''} in title`
+                return `${clueValue} word${clueValue !== '1' ? 's' : ''} in title`
             }
         }
         case ClueType.FIRST_LETTER: {
