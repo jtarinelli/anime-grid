@@ -36,14 +36,14 @@ const checkClueAgainstData = (clue: Clue, guessData: any): boolean => {
             return animeData.episodes <= max;
         }
         case ClueType.WORDS_IN_TITLE: {
-            const { number, min, max } = clueValue;
+            const { min, max } = clueValue;
 
             const romajiTitleLength = animeData.title.romaji.split(" ").length;
             const hasEnglishTitle = animeData.title.english != null;
             const englishTitleLength = animeData.title.english.split(" ").length;
 
-            if (number) {
-                return romajiTitleLength === number || (hasEnglishTitle && englishTitleLength === number);
+            if (!min && !max) {
+                return romajiTitleLength == clueValue || (hasEnglishTitle && englishTitleLength == clueValue);
             } else if (min) {
                 return romajiTitleLength >= min || (hasEnglishTitle && englishTitleLength >= min);
             } else {
