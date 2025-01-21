@@ -9,7 +9,7 @@ const getClueString = (clue: Clue): string => {
         case ClueType.VOICE_ACTOR:
         case ClueType.STUDIO:
         case ClueType.GENRE:
-            return clue.data?.value;
+            return getSentenceCaseString(clue.data?.value);
         case ClueType.SOURCE:
         case ClueType.FORMAT:
         case ClueType.TAG:
