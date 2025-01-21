@@ -9,9 +9,9 @@ const getClueString = (clue: Clue): string => {
     switch (clue.type) {
         case ClueType.VOICE_ACTOR:
         case ClueType.STUDIO:
-        case ClueType.GENRE:
             return clueValue;
         case ClueType.SOURCE:
+        case ClueType.GENRE:
         case ClueType.FORMAT:
         case ClueType.TAG:
             return getSentenceCaseString(clueValue);

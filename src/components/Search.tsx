@@ -106,7 +106,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
                         }}
                     />
                     <br />
-                    <Button label="Guess" onClick={onSubmit} />
+                    <Button label="Guess" type="submit" />
                 </form>
             </div>
         </Popup>
