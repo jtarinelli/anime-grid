@@ -17,7 +17,6 @@ export interface Clue {
     type: ClueType,
     value: any,
     description?: string,
-    //data?: ClueOption, // don't really like nested data.value
 }
 
 export interface ClueOption {

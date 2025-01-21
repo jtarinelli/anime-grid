@@ -2,9 +2,9 @@ import { FC, useState } from "react";
 import Grid from "./Grid";
 import { Guesses } from "./Guesses";
 import Results from "./Results";
-import { Mode } from "../clues/generateClues";
 import { Anime } from "../queries/animeSearch";
 import { useQuery } from "@tanstack/react-query";
+import { Mode } from "./Menu";
 
 export type CellCoordinates = {
     row: number;
@@ -17,10 +17,8 @@ export type Guess = {
     cellCoordinates: CellCoordinates;
 }
 
-
 interface GameProps {
     mode: Mode;
-    //clues: Clue[];
     visible: boolean;
 }
 
@@ -29,8 +27,6 @@ const Game: FC<GameProps> = ({ mode, /* clues, */ visible }) => {
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
     const [showResults, setShowResults] = useState<boolean>(false);
 
-    // should this data fetch happen here or a level up?
-    // each game fetches its own puzzle data sooo...?
     const { data, isFetching } = useQuery({
         queryKey: [mode],
         queryFn: async () => {

@@ -1,8 +1,7 @@
 import { FC } from "react";
 import Popup from "./Popup";
-import { Mode } from "../clues/generateClues";
 import { Guess } from "./Game";
-import { modeOptions } from "./Menu";
+import { Mode, modeOptions } from "./Menu";
 import Button from "./Button";
 
 interface ResultsProps {

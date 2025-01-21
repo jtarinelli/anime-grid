@@ -1,6 +1,12 @@
 import { FC, useState } from "react";
 import { Rules } from "./Rules";
-import { Mode } from "../clues/generateClues";
+
+export enum Mode {
+    ALL_RANDOM = "ALL_RANDOM",
+    HALF_VOICE_ACTORS = "HALF_VOICE_ACTORS",
+    ALL_VOICE_ACTORS = "ALL_VOICE_ACTORS",
+    BABY = "BABY",
+  }
 
 export const modeOptions = [
     { name: 'Normal', type: Mode.HALF_VOICE_ACTORS },
