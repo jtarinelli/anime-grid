@@ -5,7 +5,7 @@ import Results from "./Results";
 import { Anime } from "../queries/animeSearch";
 import { useQuery } from "@tanstack/react-query";
 import { Mode } from "./Menu";
-import { queryBackend } from "../queries/backend";
+import { getGame } from "../queries/backend";
 
 export type CellCoordinates = {
     row: number;
@@ -30,7 +30,7 @@ const Game: FC<GameProps> = ({ mode, /* clues, */ visible }) => {
 
     const { data, isFetching } = useQuery({
         queryKey: [mode],
-        queryFn: async () => queryBackend(`game/${mode}`),
+        queryFn: async () => getGame(mode),
         staleTime: Infinity,
     });
 

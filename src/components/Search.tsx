@@ -8,7 +8,7 @@ import { CellCoordinates, Guess } from "./Game";
 import Button from "./Button";
 import AsyncSelect from 'react-select/async';
 import { debounce } from "lodash";
-import { queryBackend } from "../queries/backend";
+import { sendGuess } from "../queries/backend";
 
 type SearchProps = {
     cellCoordinates: CellCoordinates;
@@ -48,11 +48,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
     const onSubmit = async () => {
         if (selection) {
             if (!isAlreadyGuessed(selection.id)) {
-                const isCorrectGuess = await queryBackend('guess', { 
-                    anime: selection.id,
-                    clue1: clues[0].id,
-                    clue2: clues[1].id,
-                 });
+                const isCorrectGuess = await sendGuess(selection, clues);
                 onMakeGuess({ anime: selection, isCorrect: isCorrectGuess, cellCoordinates });
                 if (isCorrectGuess) {
                     setShowSearch(false);
