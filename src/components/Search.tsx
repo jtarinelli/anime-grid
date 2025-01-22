@@ -1,5 +1,4 @@
 import { FC, useCallback, useState } from "react";
-import { checkGuess } from "../clues/checkGuess";
 import { Clue } from "../clues/types";
 import request from "graphql-request";
 import { Anime, animeSearchQuery } from "../queries/animeSearch";
@@ -9,6 +8,7 @@ import { CellCoordinates, Guess } from "./Game";
 import Button from "./Button";
 import AsyncSelect from 'react-select/async';
 import { debounce } from "lodash";
+import { queryBackend } from "../queries/backend";
 
 type SearchProps = {
     cellCoordinates: CellCoordinates;
@@ -48,7 +48,11 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
     const onSubmit = async () => {
         if (selection) {
             if (!isAlreadyGuessed(selection.id)) {
-                const isCorrectGuess = await checkGuess(selection.id, clues);
+                const isCorrectGuess = await queryBackend('guess', { 
+                    anime: selection.id,
+                    clue1: clues[0].id,
+                    clue2: clues[1].id,
+                 });
                 onMakeGuess({ anime: selection, isCorrect: isCorrectGuess, cellCoordinates });
                 if (isCorrectGuess) {
                     setShowSearch(false);

@@ -14,6 +14,7 @@ export enum ClueType {
 }
 
 export interface Clue {
+    id: number,
     type: ClueType,
     value: any,
     description?: string,
