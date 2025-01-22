@@ -5,6 +5,7 @@ import { Guess, CellCoordinates } from "./Game";
 import Clue from "./Clue";
 
 type GridProps = {
+    gameId: number;
     correctGuesses: Guess[];
     clues: ClueType[];
     isAlreadyGuessed: (animeId: number) => boolean;
@@ -13,7 +14,7 @@ type GridProps = {
 }
 
 // only works for 4 or 6 clues (2x2 or 3x3) cause of grid css
-const Grid: FC<GridProps> = ({ correctGuesses, clues, isAlreadyGuessed, addGuess, isGameOver }) => {
+const Grid: FC<GridProps> = ({ gameId, correctGuesses, clues, isAlreadyGuessed, addGuess, isGameOver }) => {
     const getAnimeForCell = (coordinates: CellCoordinates) =>
         correctGuesses.find(guess =>
             (guess.cellCoordinates.row === coordinates.row)
@@ -39,6 +40,7 @@ const Grid: FC<GridProps> = ({ correctGuesses, clues, isAlreadyGuessed, addGuess
             } else {
                 cells.push(
                     <Cell
+                        gameId={gameId}
                         coordinates={coordinates}
                         correctedlyGuessedAnime={getAnimeForCell(coordinates)}
                         clues={[clues[horizontalClueIndex], clues[verticalClueIndex]]}

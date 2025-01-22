@@ -20,9 +20,10 @@ export const getGame = async (mode: string) => {
     return queryBackend(`game/${mode}`)
 }
 
-export const sendGuess = async (anime: Anime, clues: Clue[]) => {
+export const sendGuess = async (anime: Anime, gameId: number, clues: Clue[]) => {
     return queryBackend('guess', {
         guessedAnimeId: anime.id,
+        gameId,
         clue1Id: clues[0].id,
         clue2Id: clues[1].id,
     })

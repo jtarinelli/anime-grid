@@ -11,6 +11,7 @@ import { debounce } from "lodash";
 import { sendGuess } from "../queries/backend";
 
 type SearchProps = {
+    gameId: number;
     cellCoordinates: CellCoordinates;
     clues: Clue[];
     setShowSearch: Function;
@@ -18,7 +19,7 @@ type SearchProps = {
     onMakeGuess: (newGuess: Guess) => void;
 }
 
-const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMakeGuess, isAlreadyGuessed }) => {
+const Search: FC<SearchProps> = ({ gameId, cellCoordinates, clues, setShowSearch, onMakeGuess, isAlreadyGuessed }) => {
     const [selection, setSelection] = useState<Anime | null>(null); // maybe should be ref
 
     const onClose = (event: any) => {
@@ -48,7 +49,7 @@ const Search: FC<SearchProps> = ({ cellCoordinates, clues, setShowSearch, onMake
     const onSubmit = async () => {
         if (selection) {
             if (!isAlreadyGuessed(selection.id)) {
-                const isCorrectGuess = await sendGuess(selection, clues);
+                const isCorrectGuess = await sendGuess(selection, gameId, clues);
                 onMakeGuess({ anime: selection, isCorrect: isCorrectGuess, cellCoordinates });
                 if (isCorrectGuess) {
                     setShowSearch(false);

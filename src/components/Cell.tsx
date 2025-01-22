@@ -8,6 +8,7 @@ import request from "graphql-request";
 import { CellCoordinates, Guess } from "./Game";
 
 type CellProps = {
+    gameId: number;
     coordinates: CellCoordinates;
     clues: Clue[];
     correctedlyGuessedAnime: Anime | null;
@@ -17,6 +18,7 @@ type CellProps = {
 }
 
 const Cell: FC<CellProps> = ({
+    gameId,
     coordinates,
     clues,
     correctedlyGuessedAnime,
@@ -51,6 +53,7 @@ const Cell: FC<CellProps> = ({
                 : null}
             {(showSearch && !isGameOver) ?
                 <Search
+                    gameId={gameId}
                     cellCoordinates={coordinates}
                     clues={clues}
                     setShowSearch={setShowSearch}

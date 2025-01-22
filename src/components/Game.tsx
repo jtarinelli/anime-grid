@@ -23,7 +23,7 @@ interface GameProps {
     visible: boolean;
 }
 
-const Game: FC<GameProps> = ({ mode, /* clues, */ visible }) => {
+const Game: FC<GameProps> = ({ mode, visible }) => {
     const [guesses, setGuesses] = useState<Guess[]>([]);
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
     const [showResults, setShowResults] = useState<boolean>(false);
@@ -35,7 +35,7 @@ const Game: FC<GameProps> = ({ mode, /* clues, */ visible }) => {
     });
 
     if (!isFetching) {
-        const clues = data;
+        const clues = data.clues;
 
         const isAlreadyGuessed = (animeId: number) => guesses.some(guess => guess.isCorrect && guess.anime.id === animeId);
         const addGuess = (newGuess: Guess) => setGuesses([...guesses, newGuess])
@@ -61,6 +61,7 @@ const Game: FC<GameProps> = ({ mode, /* clues, */ visible }) => {
 
         return visible && (<>
             <Grid
+                gameId={data.gameId}
                 correctGuesses={correctGuesses}
                 clues={clues}
                 isAlreadyGuessed={isAlreadyGuessed}
