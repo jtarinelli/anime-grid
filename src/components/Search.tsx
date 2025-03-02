@@ -42,7 +42,13 @@ const Search: FC<SearchProps> = ({ gameId, cellCoordinates, clues, setShowSearch
         );
 
         return data?.Page?.media?.filter(anime => !!anime)
-            .map((anime) => { return { value: anime?.id ?? '', label: `${anime?.title?.romaji}${anime.title?.english && anime.title.english?.toUpperCase() !== anime.title.romaji?.toUpperCase() ? `\n(${anime.title.english})` : ''}` } }
+            .map((anime) => {
+                const hasDifferentEnglishTitle = anime?.title?.english && anime.title.english?.toUpperCase() !== anime.title.romaji?.toUpperCase();
+                return {
+                    value: anime?.id ?? '',
+                    label: `${anime?.title?.romaji}${hasDifferentEnglishTitle ? `\n(${anime?.title?.english})` : ''}`
+                }
+            }
             )
     }
 
